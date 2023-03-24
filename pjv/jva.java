@@ -12,17 +12,5 @@ public class TreeImpl{
     }
     public Node createTree(int[] valuse){
         int middle= (valuse.length/2)+1;
-        NodeImpl rootNode= new NodeImpl();
-        rootNode.value = valuse[middle];
-
-        if(valuse.length>1){
-
-        }
-        return rootNode;
-    }
-
-    @Override
-    public Node getRoot() {
-        return null;
-    }
+        NodeImpl;
 }
