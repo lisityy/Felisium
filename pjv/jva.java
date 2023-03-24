@@ -6,6 +6,7 @@ public class TreeImpl{
         this.root=null;
     }
     @Override
+    int asdasdasd;
     public void setTree(int[] values) {
         this.root=createTree(values);
     }
