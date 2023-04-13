@@ -34,3 +34,4 @@ Pokud jeste neexistuje postupuj podle navodu pro vytvoreni vlastni branche vyse.
 >   Windows : Problem: je zapotrebi opakovane nastavovat SSH klic
 
 https://stackoverflow.com/questions/18404272/running-ssh-agent-when-starting-git-bash-on-windows
+ssssssssssss
