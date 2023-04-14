@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv;
+package main_pjv;
 
 import javax.swing.*;
 

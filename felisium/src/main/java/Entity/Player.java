@@ -1,15 +1,18 @@
-package Things;
+package Entity;
 
-import cz.cvut.fel.pjv.GamePannel;
-import cz.cvut.fel.pjv.KeyHandler;
+import main_pjv.GamePannel;
+import main_pjv.KeyHandler;
 
 import java.awt.*;
 
-public class Player extends Things{
+public class Player extends Entity {
 
     GamePannel gp;
     KeyHandler kh;
+    public int level;
+    public int armor;
     public Player(GamePannel gp, KeyHandler kh){
+        super();
         this.gp=gp;
         this.kh=kh;
         setDefultValues();

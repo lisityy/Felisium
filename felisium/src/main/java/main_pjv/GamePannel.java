@@ -1,6 +1,6 @@
-package cz.cvut.fel.pjv;
+package main_pjv;
 
-import Things.Player;
+import Entity.Player;
 
 import javax.swing.JPanel;
 import java.awt.*;
