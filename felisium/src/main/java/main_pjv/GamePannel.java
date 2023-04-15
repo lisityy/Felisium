@@ -18,16 +18,13 @@ public class GamePannel extends JPanel implements Runnable {
 
     int FPS=60;
     KeyHandler kh=new KeyHandler();
-// defult position fro player
-    int xPlayer=100;
-    int yPlayer=100;
-    int playerSpeed=4;
+
     Thread gameThread;
     Player player=new Player(this,kh);
 
+//    System.setProperty("sun.java2d.opengl", "true");
 
     public GamePannel(){
-        System.setProperty("sun.java2d.opengl", "true");
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -46,14 +43,14 @@ public class GamePannel extends JPanel implements Runnable {
         double nexDrowTime = System.nanoTime()+drawInterval;
 
         while(gameThread!=null){
-            long currentTime = System.nanoTime();
-
             update();
             repaint();
+
             try {
                 double remainingTime = nexDrowTime - System.nanoTime();
                 if(remainingTime<0) remainingTime=0;
                 Thread.sleep((long) remainingTime/1000000);
+
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
