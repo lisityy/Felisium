@@ -10,7 +10,7 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Felisium");
         // Add to window gp
-        GamePannel gamePanel= new GamePannel();
+        GamePannel gamePanel = new GamePannel();
         window.add(gamePanel);
 
         window.pack();

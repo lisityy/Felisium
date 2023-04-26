@@ -1,30 +1,70 @@
 package main_pjv;
 
 import Entity.Player;
+import background.TileManager;
 
 import javax.swing.JPanel;
 import java.awt.*;
 
 public class GamePannel extends JPanel implements Runnable {
     // SCREEN SETTINGS
-    final int originalTileSize = 16;
-    final int scale=3;
+    private final int originalTileSize = 16;
+    private final int scale = 3;
 
-    public final int tileSize=originalTileSize*scale;
-    final  int maxScreenCol=16;
-    final int maxScreenRow=12;
-    final int screenWidth=tileSize*maxScreenCol;
-    final int screenHeight = tileSize*maxScreenRow;
+    private final int tileSize = originalTileSize * scale;
+    private final int maxScreenCol = 16;
+    private final int maxScreenRow = 12;
+    private final int screenWidth = tileSize * maxScreenCol;
+    private final int screenHeight = tileSize * maxScreenRow;
 
-    int FPS=60;
-    KeyHandler kh=new KeyHandler();
+    //    WORLD SETTINGS
+    private final int maxWorldCol = 50;
+    private final int maxWorldRow = 50;
+    private final int maxWorldHigh = maxWorldRow * tileSize;
+    private final int maxWorldWidth = tileSize * maxWorldCol;
 
-    Thread gameThread;
-    Player player=new Player(this,kh);
+    private final int FPS = 60;
+    private final KeyHandler kh = new KeyHandler();
+
+    private final TileManager tManager = new TileManager(this);
+    private Thread gameThread;
+    public Player player = new Player(this, kh);
 
 //    System.setProperty("sun.java2d.opengl", "true");
 
-    public GamePannel(){
+    public int getMaxWorldCol() { return maxWorldCol;}
+
+    public int getMaxWorldRow() {return maxWorldRow;}
+
+    public int getMaxWorldHigh() {return maxWorldHigh;}
+
+    public int getMaxWorldWidth() {return maxWorldWidth;}
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public int getMaxScreenCol() {
+        return maxScreenCol;
+    }
+
+    public int getMaxScreenRow() {
+        return maxScreenRow;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public void setGameThread(Thread gameThread) {
+        this.gameThread = gameThread;
+    }
+
+    public GamePannel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -32,38 +72,41 @@ public class GamePannel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
-    public void startGameThread(){
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
     @Override
     public void run() {
-        double drawInterval = 1000000000/FPS;
-        double nexDrowTime = System.nanoTime()+drawInterval;
+        double drawInterval = (double) 1000000000 / FPS;
+        double nexDrowTime = System.nanoTime() + drawInterval;
 
-        while(gameThread!=null){
+        while (gameThread != null) {
             update();
             repaint();
 
             try {
                 double remainingTime = nexDrowTime - System.nanoTime();
-                if(remainingTime<0) remainingTime=0;
-                Thread.sleep((long) remainingTime/1000000);
+                if (remainingTime < 0) remainingTime = 0;
+                Thread.sleep((long) remainingTime / 1000000);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            nexDrowTime+=drawInterval;
+            nexDrowTime += drawInterval;
         }
     }
-    public  void update(){
-       player.update();
-    }
-    public  void paintComponent(Graphics g){
 
+    public void update() {
+        player.update();
+
+    }
+
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
+        tManager.draw(g2);
         player.draw(g2);
         g2.dispose();
     }
