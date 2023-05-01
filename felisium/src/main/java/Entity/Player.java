@@ -12,17 +12,12 @@ public class Player extends Entity {
 
     private final GamePannel gp;
     private final KeyHandler kh;
-    private int level;
-    private int armor;
+
     private final int xScreen, yScreen;
 
-    public int getxScreen() {
-        return xScreen;
-    }
+    public int getxScreen() {return xScreen;}
 
-    public int getyScreen() {
-        return yScreen;
-    }
+    public int getyScreen() {return yScreen;}
 
     public GamePannel getGp() {
         return gp;
@@ -32,35 +27,36 @@ public class Player extends Entity {
         return kh;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getArmor() {
-        return armor;
-    }
-
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
 
     public Player(GamePannel gp, KeyHandler kh) {
         super();
         this.gp = gp;
         this.kh = kh;
+
         this.xScreen= gp.getScreenWidth()/2 - (gp.getTileSize()/2);
-        this.yScreen=gp.getScreenHeight()/2;
+        this.yScreen=gp.getScreenHeight()/2 - (gp.getTileSize()/2);
+
+        this.hitBox = new Rectangle();
+//        this.hitBox.x=xScreen;
+//        this.hitBox.y=yScreen;
+//        this.hitBox.height=gp.getTileSize();
+//        this.hitBox.width=gp.getTileSize();
+        this.hitBox.x=8;
+        this.hitBox.y=28;
+        this.hitBox.height=20;
+        this.hitBox.width=32;
+
         setDefultValues();
         getPlayerImg();
     }
+    public void drawHitbox(Graphics g){
+        g.setColor(Color.red);
+        g.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
+    }
 
     public void setDefultValues() {
-        this.xWorld = gp.getTileSize()*23;
-        this.yWorld = gp.getTileSize()*21;
+        this.xWorld = gp.getTileSize()*21;
+        this.yWorld = gp.getTileSize()*23;
         this.speed = 4;
         this.direction = "up";
     }
@@ -72,7 +68,7 @@ public class Player extends Entity {
             down1 = ImageIO.read(getClass().getResourceAsStream("/players/cat_down_1.1.png"));
             down2 = ImageIO.read(getClass().getResourceAsStream("/players/cat_down_2.2.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_right_1.png"));
-            rigth2 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_right_2.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_right_2.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_left_1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_left_2.png"));
             sleep = ImageIO.read(getClass().getResourceAsStream("/players/cat_sleep.png"));
@@ -82,27 +78,31 @@ public class Player extends Entity {
     }
 
     public void update() {
+
         if (kh.isUpPressed()) {
             direction = "up";
-            yWorld-=speed;
-
         } else if (kh.isDownPressed()) {
             direction = "down";
-            yWorld+=speed;
         } else if (kh.isLeftPressed()) {
             direction = "left";
-            xWorld-=speed;
-
         } else if (kh.isRightPressed()) {
             direction = "right";
-            xWorld+=speed;
-
         } else {
             waitCounter++;
             if (waitCounter > 100) {
                 direction = "sleep";
             }
             return;
+        }
+        // CHECK TILE COLLISION
+        gp.getCheckerCollision().checkTile(this);
+        if(!collitionOn){
+            switch (direction) {
+                case "up" -> yWorld -= speed;
+                case "down" -> yWorld += speed;
+                case "left" -> xWorld -= speed;
+                case "right" -> xWorld += speed;
+            }
         }
         waitCounter = 0;
         spriteCounter++;
@@ -114,6 +114,7 @@ public class Player extends Entity {
             }
             spriteCounter = 0;
         }
+
     }
 
     public void draw(Graphics2D g2) {
@@ -122,12 +123,14 @@ public class Player extends Entity {
             case "up" -> spriteNum == 1 ? up1 : up2;
             case "down" -> spriteNum == 1 ? down1 : down2;
             case "left" -> spriteNum == 1 ? left1 : left2;
-            case "right" -> spriteNum == 1 ? right1 : rigth2;
+            case "right" -> spriteNum == 1 ? right1 : right2;
             case "sleep" -> sleep;
             default -> null;
         };
         g2.drawImage(img, xScreen, yScreen, gp.getTileSize(), gp.getTileSize(), null);
-
+        System.out.println("xW: "+this.xWorld);
+        System.out.println("yW "+this.yWorld);
+//        this.drawHitbox(g2);
     }
 
 }

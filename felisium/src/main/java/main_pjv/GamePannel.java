@@ -23,6 +23,8 @@ public class GamePannel extends JPanel implements Runnable {
     private final int maxWorldHigh = maxWorldRow * tileSize;
     private final int maxWorldWidth = tileSize * maxWorldCol;
 
+    private CheckerCollision checkerCollision = new CheckerCollision(this);
+
     private final int FPS = 60;
     private final KeyHandler kh = new KeyHandler();
 
@@ -30,7 +32,19 @@ public class GamePannel extends JPanel implements Runnable {
     private Thread gameThread;
     public Player player = new Player(this, kh);
 
-//    System.setProperty("sun.java2d.opengl", "true");
+    public int getOriginalTileSize() {return originalTileSize;}
+
+    public int getScale() {return scale;}
+
+    public int getFPS() {return FPS;}
+
+    public KeyHandler getKh() {return kh;}
+
+    public TileManager gettManager() {return tManager;}
+
+    public Thread getGameThread() {return gameThread;}
+
+    public Player getPlayer() {return player;}
 
     public int getMaxWorldCol() { return maxWorldCol;}
 
@@ -40,29 +54,17 @@ public class GamePannel extends JPanel implements Runnable {
 
     public int getMaxWorldWidth() {return maxWorldWidth;}
 
-    public int getTileSize() {
-        return tileSize;
-    }
+    public int getTileSize() {return tileSize;}
 
-    public int getMaxScreenCol() {
-        return maxScreenCol;
-    }
+    public int getMaxScreenCol() {return maxScreenCol;}
 
-    public int getMaxScreenRow() {
-        return maxScreenRow;
-    }
+    public int getMaxScreenRow() {return maxScreenRow;}
 
-    public int getScreenWidth() {
-        return screenWidth;
-    }
+    public int getScreenWidth() {return screenWidth;}
 
-    public int getScreenHeight() {
-        return screenHeight;
-    }
+    public int getScreenHeight() {return screenHeight;}
 
-    public void setGameThread(Thread gameThread) {
-        this.gameThread = gameThread;
-    }
+    public CheckerCollision getCheckerCollision() { return checkerCollision; }
 
     public GamePannel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -100,7 +102,6 @@ public class GamePannel extends JPanel implements Runnable {
 
     public void update() {
         player.update();
-
     }
 
     public void paintComponent(Graphics g) {
