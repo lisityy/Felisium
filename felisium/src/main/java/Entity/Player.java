@@ -13,11 +13,7 @@ public class Player extends Entity {
     private final GamePannel gp;
     private final KeyHandler kh;
 
-    private final int xScreen, yScreen;
-
-    public int getxScreen() {return xScreen;}
-
-    public int getyScreen() {return yScreen;}
+    public final int xScreen, yScreen;
 
     public GamePannel getGp() {
         return gp;
@@ -29,39 +25,29 @@ public class Player extends Entity {
 
 
     public Player(GamePannel gp, KeyHandler kh) {
-        super();
+        //ok
         this.gp = gp;
         this.kh = kh;
 
-        this.xScreen= gp.getScreenWidth()/2 - (gp.getTileSize()/2);
-        this.yScreen=gp.getScreenHeight()/2 - (gp.getTileSize()/2);
+        this.xScreen = (gp.getScreenWidth() / 2) - (gp.getTileSize() / 2);
+        this.yScreen = (gp.getScreenHeight() / 2) - (gp.getTileSize() / 2);
 
-        this.hitBox = new Rectangle();
-//        this.hitBox.x=xScreen;
-//        this.hitBox.y=yScreen;
-//        this.hitBox.height=gp.getTileSize();
-//        this.hitBox.width=gp.getTileSize();
-        this.hitBox.x=8;
-        this.hitBox.y=28;
-        this.hitBox.height=20;
-        this.hitBox.width=32;
+        this.hitBox = new Rectangle(8, 16, 32, 32);
 
         setDefultValues();
         getPlayerImg();
     }
-    public void drawHitbox(Graphics g){
-        g.setColor(Color.red);
-        g.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
-    }
 
     public void setDefultValues() {
-        this.xWorld = gp.getTileSize()*21;
-        this.yWorld = gp.getTileSize()*23;
-        this.speed = 4;
+        //ok
+        this.xWorld = gp.getTileSize() * 23;
+        this.yWorld = gp.getTileSize() * 21;
+        this.speed = 2;
         this.direction = "up";
     }
 
     public void getPlayerImg() {
+        //ok
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/players/cat_up_1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("/players/cat_up_2.png"));
@@ -78,47 +64,51 @@ public class Player extends Entity {
     }
 
     public void update() {
+        //ok
+        if (kh.isDownPressed() || kh.isUpPressed() || kh.isRightPressed() || kh.isLeftPressed()) {
 
-        if (kh.isUpPressed()) {
-            direction = "up";
-        } else if (kh.isDownPressed()) {
-            direction = "down";
-        } else if (kh.isLeftPressed()) {
-            direction = "left";
-        } else if (kh.isRightPressed()) {
-            direction = "right";
+            if (kh.isUpPressed()) {
+                direction = "up";
+            } else if (kh.isDownPressed()) {
+                direction = "down";
+            } else if (kh.isLeftPressed()) {
+                direction = "left";
+            } else if (kh.isRightPressed()) {
+                direction = "right";
+            }
+
+            // CHECK TILE COLLISION
+            collitionOn = false;
+            gp.getCheckerCollision().checkTile(this);
+            if (!collitionOn) {
+                switch (direction) {
+                    case "up" -> yWorld -= speed;
+                    case "down" -> yWorld += speed;
+                    case "left" -> xWorld -= speed;
+                    case "right" -> xWorld += speed;
+                }
+            }
+
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
+            }
+
         } else {
             waitCounter++;
             if (waitCounter > 100) {
                 direction = "sleep";
             }
-            return;
         }
-        // CHECK TILE COLLISION
-        gp.getCheckerCollision().checkTile(this);
-        if(!collitionOn){
-            switch (direction) {
-                case "up" -> yWorld -= speed;
-                case "down" -> yWorld += speed;
-                case "left" -> xWorld -= speed;
-                case "right" -> xWorld += speed;
-            }
-        }
-        waitCounter = 0;
-        spriteCounter++;
-        if (spriteCounter > 7) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 1;
-            }
-            spriteCounter = 0;
-        }
-
     }
 
-    public void draw(Graphics2D g2) {
-
+    public void draw (Graphics2D g2){
+        //ok
         BufferedImage img = switch (direction) {
             case "up" -> spriteNum == 1 ? up1 : up2;
             case "down" -> spriteNum == 1 ? down1 : down2;
@@ -128,9 +118,6 @@ public class Player extends Entity {
             default -> null;
         };
         g2.drawImage(img, xScreen, yScreen, gp.getTileSize(), gp.getTileSize(), null);
-        System.out.println("xW: "+this.xWorld);
-        System.out.println("yW "+this.yWorld);
-//        this.drawHitbox(g2);
     }
 
 }

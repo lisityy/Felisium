@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="efa3bf19-ca0b-4af6-97d1-e1f8612f56e9" name="Changes" comment="" />
+    <list default="true" id="efa3bf19-ca0b-4af6-97d1-e1f8612f56e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/newFelisium/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/Entity/Entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/Entity/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/CheckerCollision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/KeyHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/Entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/Entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/Entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/background/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/background/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/background/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/background/TileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/CheckerCollision.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/CheckerCollision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/GamePannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/GamePannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/target/classes/Entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/Entity/Entity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/target/classes/Entity/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/Entity/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/target/classes/background/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/background/Tile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/target/classes/background/TileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/background/TileManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/target/classes/main_pjv/CheckerCollision.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/main_pjv/CheckerCollision.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/target/classes/main_pjv/GamePannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/main_pjv/GamePannel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newFelisium/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/GamePanel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,16 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/hella/Documents/pimenol1/felisium",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/hella/Documents/pimenol1/felisium&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -37,6 +72,8 @@
       <option name="presentableId" value="Default" />
       <updated>1681419301246</updated>
       <workItem from="1681419302878" duration="62000" />
+      <workItem from="1683469330318" duration="428000" />
+      <workItem from="1683469851504" duration="175000" />
     </task>
     <servers />
   </component>
