@@ -1,6 +1,7 @@
 package main_pjv;
 
 import Entity.Player;
+import Objects.Objects;
 import background.TileManager;
 
 import javax.swing.JPanel;
@@ -31,6 +32,8 @@ public class GamePannel extends JPanel implements Runnable {
     public Player player = new Player(this, kh);
     private CheckerCollision checkerCollision = new CheckerCollision(this);
 
+    public Objects[] obj =new Objects[10];
+    private AssetSetter assetSetter=new AssetSetter(this);
 
     public GamePannel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -38,6 +41,9 @@ public class GamePannel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(kh);
         this.setFocusable(true);
+    }
+    public void setUpGame(){
+        assetSetter.setObjects();
     }
 
     public void startGameThread() {
@@ -80,6 +86,11 @@ public class GamePannel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         tileManager.draw(g2);
+        for(int i=0;i<obj.length;i++){
+            if(obj[i]!=null){
+                obj[i].draw(g2,this);
+            }
+        }
         player.draw(g2);
         g2.dispose();
     }
@@ -152,4 +163,27 @@ public class GamePannel extends JPanel implements Runnable {
         return checkerCollision;
     }
 
+    public void setGameThread(Thread gameThread) {
+        this.gameThread = gameThread;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setCheckerCollision(CheckerCollision checkerCollision) {
+        this.checkerCollision = checkerCollision;
+    }
+
+    public Object[] getObj() {
+        return obj;
+    }
+
+    public AssetSetter getAssetSetter() {
+        return assetSetter;
+    }
+
+    public void setAssetSetter(AssetSetter assetSetter) {
+        this.assetSetter = assetSetter;
+    }
 }

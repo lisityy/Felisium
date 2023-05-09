@@ -15,6 +15,8 @@ public class Player extends Entity {
 
     public final int xScreen, yScreen;
 
+    private boolean hasWings=false;
+
     public GamePannel getGp() {
         return gp;
     }
@@ -33,7 +35,8 @@ public class Player extends Entity {
         this.yScreen = (gp.getScreenHeight() / 2) - (gp.getTileSize() / 2);
 
         this.hitBox = new Rectangle(8, 16, 32, 32);
-
+        this.defultHitBoxX = hitBox.x;
+        this.defultHitBoxY = hitBox.y;
         setDefultValues();
         getPlayerImg();
     }
@@ -42,7 +45,7 @@ public class Player extends Entity {
         //ok
         this.xWorld = gp.getTileSize() * 23;
         this.yWorld = gp.getTileSize() * 21;
-        this.speed = 2;
+        this.speed = 4;
         this.direction = "up";
     }
 
@@ -78,8 +81,12 @@ public class Player extends Entity {
             }
 
             // CHECK TILE COLLISION
-            collitionOn = false;
+            collitionOn=false;
             gp.getCheckerCollision().checkTile(this);
+
+            int objInx = gp.getCheckerCollision().checkObject(this, true);
+            pickUpObj(objInx);
+
             if (!collitionOn) {
                 switch (direction) {
                     case "up" -> yWorld -= speed;
@@ -107,8 +114,17 @@ public class Player extends Entity {
         }
     }
 
-    public void draw (Graphics2D g2){
-        //ok
+    public void pickUpObj(int inx){
+        if(inx!=999){
+            switch (gp.obj[inx].name){
+                case "wing" ->{
+                    gp.obj[inx]=null;
+                    hasWings=true;
+                }
+            }
+        }
+    }
+    public void draw(Graphics2D g2) {
         BufferedImage img = switch (direction) {
             case "up" -> spriteNum == 1 ? up1 : up2;
             case "down" -> spriteNum == 1 ? down1 : down2;

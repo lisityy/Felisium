@@ -88,4 +88,49 @@ public class CheckerCollision {
         }
     }
 
+    public int checkObject(Entity entity, boolean isPlayer) {
+        int index = 999;
+        for (int i = 0; i < gp.obj.length; i++) {
+
+            if (gp.obj[i] != null) {
+                entity.hitBox.x = entity.xWorld + entity.hitBox.x;
+                entity.hitBox.y = entity.yWorld + entity.hitBox.y;
+
+                gp.obj[i].getHitBox().x = gp.obj[i].worldX + gp.obj[i].getHitBox().x;
+                gp.obj[i].getHitBox().y = gp.obj[i].worldY + gp.obj[i].getHitBox().y;
+                switch (entity.direction) {
+                    case "up" -> {
+                        entity.hitBox.y -= entity.speed;
+                    }
+                    case "down" -> {
+                        entity.hitBox.y += entity.speed;
+                    }
+                    case "left" -> {
+                        entity.hitBox.x -= entity.speed;
+                    }
+                    case "right" -> {
+                        entity.hitBox.x += entity.speed;
+                    }
+                }
+
+                if (entity.hitBox.intersects(gp.obj[i].getHitBox())) {
+                    if (gp.obj[i].collision) {
+                        entity.collitionOn = true;
+                    }
+                    if (isPlayer) {
+                        index = i;
+                    }
+                }
+
+                entity.hitBox.x = entity.getDefultHitBoxX();
+                entity.hitBox.y = entity.getDefultHitBoxY();
+
+                gp.obj[i].getHitBox().x = gp.obj[i].getDefultHitBoxX();
+                gp.obj[i].getHitBox().y = gp.obj[i].getDefultHitBoxY();
+            }
+
+        }
+
+        return index;
+    }
 }
