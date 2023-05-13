@@ -25,7 +25,7 @@ public class GamePannel extends JPanel implements Runnable {
     private final int maxWorldWidth = tileSize * maxWorldCol;
 
 
-    private final int FPS = 120;
+    private final int FPS = 100;
     private final KeyHandler kh = new KeyHandler();
     private final TileManager tileManager = new TileManager(this);
     private Thread gameThread;
@@ -53,6 +53,8 @@ public class GamePannel extends JPanel implements Runnable {
 
     @Override
     public void run() {
+//        MusicPlayer musicPlayer=new MusicPlayer();
+//        musicPlayer.play("/music/musBegin.wav");
         double drawInterval = (double) 1000000000 / FPS;
         double nexDrowTime = System.nanoTime() + drawInterval;
 

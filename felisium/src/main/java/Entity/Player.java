@@ -2,6 +2,7 @@ package Entity;
 
 import main_pjv.GamePannel;
 import main_pjv.KeyHandler;
+import main_pjv.MusicPlayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,15 +13,12 @@ public class Player extends Entity {
 
     private final GamePannel gp;
     private final KeyHandler kh;
+    private MusicPlayer musicPlayer = new MusicPlayer();
 
     public final int xScreen, yScreen;
 
-    private boolean hasWings=false;
-
-    public GamePannel getGp() {
-        return gp;
-    }
-
+    private boolean hasWings = false;
+    private int keyCount=0;
     public KeyHandler getKh() {
         return kh;
     }
@@ -81,7 +79,7 @@ public class Player extends Entity {
             }
 
             // CHECK TILE COLLISION
-            collitionOn=false;
+            collitionOn = false;
             gp.getCheckerCollision().checkTile(this);
 
             int objInx = gp.getCheckerCollision().checkObject(this, true);
@@ -108,22 +106,39 @@ public class Player extends Entity {
 
         } else {
             waitCounter++;
-            if (waitCounter > 100) {
+            if (waitCounter > 250) {
                 direction = "sleep";
+                waitCounter=0;
             }
         }
     }
 
-    public void pickUpObj(int inx){
-        if(inx!=999){
-            switch (gp.obj[inx].name){
-                case "wing" ->{
+    public void pickUpObj(int inx) {
+        if (inx == 999) return;
+
+        switch (gp.obj[inx].name) {
+            case "wing" -> {
+                musicPlayer.play("/music/UrrCat.wav");
+                musicPlayer.stop();
+                gp.obj[inx] = null;
+                hasWings = true;
+            }
+            case "key" ->{
+                musicPlayer.play("/music/UrrCat.wav");
+                musicPlayer.stop();
+                gp.obj[inx]=null;
+                keyCount+=1;
+            }
+            case "door" ->{
+                if (keyCount>0){
                     gp.obj[inx]=null;
-                    hasWings=true;
+                    keyCount-=1;
                 }
             }
         }
+
     }
+
     public void draw(Graphics2D g2) {
         BufferedImage img = switch (direction) {
             case "up" -> spriteNum == 1 ? up1 : up2;

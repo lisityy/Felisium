@@ -10,11 +10,17 @@ public class AssetSetter {
     }
 
     public void setObjects() {
-        gp.obj[0] = new Wing();
-        setObjWorld(0,23,7);
+//        gp.obj[0] = new Wing();
+//        setObjWorld(0,23,7);
 
         gp.obj[1] =new Wing();
         setObjWorld(1,23,40);
+
+        gp.obj[0] = new Key();
+        setObjWorld(0,23, 7);
+
+        gp.obj[3] = new Door();
+        setObjWorld(3,23, 10);
     }
 
     public void setObjWorld(int index, int numCol, int numRow) {
