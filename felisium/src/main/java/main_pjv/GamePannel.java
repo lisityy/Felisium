@@ -14,7 +14,7 @@ public class GamePannel extends JPanel implements Runnable {
 
     private final int tileSize = originalTileSize * scale;
     private final int maxScreenCol = 16;
-    private final int maxScreenRow = 12;
+    private final int maxScreenRow = 14;
     private final int screenWidth = tileSize * maxScreenCol;
     private final int screenHeight = tileSize * maxScreenRow;
 
@@ -36,6 +36,8 @@ public class GamePannel extends JPanel implements Runnable {
     private AssetSetter assetSetter=new AssetSetter(this);
     private UI ui=new UI(this);
 
+
+
     public GamePannel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -54,10 +56,11 @@ public class GamePannel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        MusicPlayer musicPlayer=new MusicPlayer();
-        musicPlayer.play("/music/musBegin.wav");
+
         double drawInterval = (double) 1000000000 / FPS;
         double nexDrowTime = System.nanoTime() + drawInterval;
+        MusicPlayer musicPlayer=new MusicPlayer();
+        musicPlayer.play("/music/musBegin.wav");
 
         while (gameThread != null) {
             update();
@@ -77,6 +80,7 @@ public class GamePannel extends JPanel implements Runnable {
             }
 
         }
+        musicPlayer.stop();
 
     }
 
@@ -88,13 +92,15 @@ public class GamePannel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        tileManager.draw(g2);
-        for(int i=0;i<obj.length;i++){
-            if(obj[i]!=null){
-                obj[i].draw(g2,this);
+        if (ui.isGamePlay()){
+            tileManager.draw(g2);
+            for(int i=0;i<obj.length;i++){
+                if(obj[i]!=null){
+                    obj[i].draw(g2,this);
+                }
             }
+            player.draw(g2);
         }
-        player.draw(g2);
         ui.draw(g2);
         g2.dispose();
     }
@@ -189,5 +195,17 @@ public class GamePannel extends JPanel implements Runnable {
 
     public void setAssetSetter(AssetSetter assetSetter) {
         this.assetSetter = assetSetter;
+    }
+
+    public void setObj(Objects[] obj) {
+        this.obj = obj;
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public void setUi(UI ui) {
+        this.ui = ui;
     }
 }

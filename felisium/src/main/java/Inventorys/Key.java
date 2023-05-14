@@ -25,5 +25,6 @@ public class Key extends Objects {
         musicPlayer.stop();
         player.getGp().obj[inx]=null;
         player.setKeyCount(player.getKeyCount()+1);
+        player.getGp().getUi().writeMessage("You got a key!");
     }
 }

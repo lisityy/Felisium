@@ -25,6 +25,7 @@ public class Wing extends Objects{
         musicPlayer.stop();
         player.getGp().obj[inx]=null;
         player.setHasWings(true);
+        player.getGp().getUi().setGameFinished(true);
     }
 
 }

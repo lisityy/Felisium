@@ -36,7 +36,7 @@ public class Player extends Entity {
         this.xScreen = (gp.getScreenWidth() / 2) - (gp.getTileSize() / 2);
         this.yScreen = (gp.getScreenHeight() / 2) - (gp.getTileSize() / 2);
 
-        this.hitBox = new Rectangle(8, 16, 32, 32);
+        this.hitBox = new Rectangle(8, 22, 18, 18);
         this.defultHitBoxX = hitBox.x;
         this.defultHitBoxY = hitBox.y;
         setDefultValues();

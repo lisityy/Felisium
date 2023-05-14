@@ -12,10 +12,11 @@ public class Objects {
     public boolean collision = false;
     public int worldX, worldY;
 
-    protected Rectangle hitBox=new Rectangle(0,0,48,48);
-    protected int defultHitBoxX=0;
-    protected int defultHitBoxY=0;
-    public void draw(Graphics2D g2, GamePannel gp){
+    protected Rectangle hitBox = new Rectangle(0, 0, 48, 48);
+    protected int defultHitBoxX = 0;
+    protected int defultHitBoxY = 0;
+
+    public void draw(Graphics2D g2, GamePannel gp) {
         int screenX = worldX - gp.player.xWorld + gp.player.xScreen;
         int screenY = worldY - gp.player.yWorld + gp.player.yScreen;
 
@@ -27,7 +28,7 @@ public class Objects {
         }
     }
 
-    public void pickUp(Player player, int inx){
+    public void pickUp(Player player, int inx) {
         return;
     }
 
