@@ -1,7 +1,7 @@
 package main_pjv;
 
 import Entity.Player;
-import Objects.Objects;
+import Inventorys.Objects;
 import background.TileManager;
 
 import javax.swing.JPanel;
@@ -10,7 +10,7 @@ import java.awt.*;
 public class GamePannel extends JPanel implements Runnable {
     // SCREEN SETTINGS
     private final int originalTileSize = 16;
-    private final int scale = 3;
+    private final int scale = 4;
 
     private final int tileSize = originalTileSize * scale;
     private final int maxScreenCol = 16;
@@ -34,6 +34,7 @@ public class GamePannel extends JPanel implements Runnable {
 
     public Objects[] obj =new Objects[10];
     private AssetSetter assetSetter=new AssetSetter(this);
+    private UI ui=new UI(this);
 
     public GamePannel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -53,8 +54,8 @@ public class GamePannel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-//        MusicPlayer musicPlayer=new MusicPlayer();
-//        musicPlayer.play("/music/musBegin.wav");
+        MusicPlayer musicPlayer=new MusicPlayer();
+        musicPlayer.play("/music/musBegin.wav");
         double drawInterval = (double) 1000000000 / FPS;
         double nexDrowTime = System.nanoTime() + drawInterval;
 
@@ -94,6 +95,7 @@ public class GamePannel extends JPanel implements Runnable {
             }
         }
         player.draw(g2);
+        ui.draw(g2);
         g2.dispose();
     }
 

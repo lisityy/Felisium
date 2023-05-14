@@ -1,5 +1,6 @@
-package Objects;
+package Inventorys;
 
+import Entity.Player;
 import main_pjv.GamePannel;
 
 import java.awt.*;
@@ -24,6 +25,10 @@ public class Objects {
                 && worldY - gp.getTileSize() < gp.player.yWorld + gp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
         }
+    }
+
+    public void pickUp(Player player, int inx){
+        return;
     }
 
     public BufferedImage getImg() {
