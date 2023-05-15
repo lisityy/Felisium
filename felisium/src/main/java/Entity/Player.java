@@ -1,28 +1,33 @@
 package Entity;
 
+import background.Tile;
 import main_pjv.GamePannel;
 import main_pjv.KeyHandler;
 import main_pjv.MusicPlayer;
+import main_pjv.Utils;
 
 import javax.imageio.ImageIO;
+import javax.sound.midi.Soundbank;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity {
 
     private final GamePannel gp;
     private final KeyHandler kh;
     private MusicPlayer musicPlayer = new MusicPlayer();
-    BufferedImage rightSocks1,rightSocks2 ,leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
+    BufferedImage rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
 
     public final int xScreen, yScreen;
 
     private boolean hasWings = false;
-    private int keyCount=0;
-    private  boolean hasSocks=false;
-    private int socksTimer=0;
-//    private  int wingsTimer=0;
+    private int keyCount = 0;
+    private boolean hasSocks = false;
+    private int socksTimer = 0;
+
+    //    private  int wingsTimer=0;
     public KeyHandler getKh() {
         return kh;
     }
@@ -36,7 +41,7 @@ public class Player extends Entity {
         this.xScreen = (gp.getScreenWidth() / 2) - (gp.getTileSize() / 2);
         this.yScreen = (gp.getScreenHeight() / 2) - (gp.getTileSize() / 2);
 
-        this.hitBox = new Rectangle(8, 22, 18, 18);
+        this.hitBox = new Rectangle(1*gp.getScale(), 9*gp.getScale(), 13*gp.getScale(), 6*gp.getScale());
         this.defultHitBoxX = hitBox.x;
         this.defultHitBoxY = hitBox.y;
         setDefultValues();
@@ -44,38 +49,47 @@ public class Player extends Entity {
     }
 
     public void setDefultValues() {
-        //ok
+
         this.xWorld = gp.getTileSize() * 23;
         this.yWorld = gp.getTileSize() * 21;
         this.speed = 4;
         this.direction = "up";
     }
 
-    public void getPlayerImg() {
-        //ok
+    public BufferedImage setup(String imageName) {
+        Utils utils = new Utils();
+        BufferedImage img = null;
         try {
-            rightSocks1=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_right_1.png"));
-            rightSocks2=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_right_2.png"));
-            leftSocks1=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_left_1.png"));
-            leftSocks2=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_left_2.png"));
-            downSocks1=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_down_1.png"));
-            downSocks2=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_down_2.png"));
-            upSocks1=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_up_1.png"));
-            upSocks2=ImageIO.read(getClass().getResourceAsStream("/players/cat_socks_up_2.png"));
-
-
-            up1 = ImageIO.read(getClass().getResourceAsStream("/players/cat_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/players/cat_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/players/cat_down_1.1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/players/cat_down_2.2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_right_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/players/catfat_left_2.png"));
-            sleep = ImageIO.read(getClass().getResourceAsStream("/players/cat_sleep.png"));
+            img = ImageIO.read(getClass().getResourceAsStream("/players/" + imageName + ".png"));
+            img = utils.scaleImg(img, gp.getTileSize(), gp.getTileSize());
         } catch (IOException e) {
+            System.out.println("Error reading img player:" + e.getMessage());
             e.printStackTrace();
         }
+        return img;
+    }
+
+    public void getPlayerImg() {
+
+        rightSocks1 = setup("cat_socks_right_1");
+        rightSocks2 = setup("cat_socks_right_2");
+        leftSocks1 = setup("cat_socks_left_1");
+        leftSocks2 = setup("cat_socks_left_2");
+        downSocks1 = setup("cat_socks_down_1");
+        downSocks2 = setup("cat_socks_down_2");
+        upSocks1 = setup("cat_socks_up_1");
+        upSocks2 = setup("cat_socks_up_2");
+
+        up1 = setup("cat_up_1");
+        up2 = setup("cat_up_2");
+        down1 = setup("cat_down_1.1");
+        down2 = setup("cat_down_2.2");
+        right1 = setup("catfat_right_1");
+        right2 = setup("catfat_right_2");
+        left1 = setup("catfat_left_1");
+        left2 = setup("catfat_left_2");
+        sleep = setup("cat_sleep");
+
     }
 
     public void update() {
@@ -99,14 +113,14 @@ public class Player extends Entity {
             int objInx = gp.getCheckerCollision().checkObject(this, true);
             pickUpObj(objInx);
 
-            if(hasSocks){
+            if (hasSocks) {
                 socksTimer++;
-                if(socksTimer>500){
-                    hasSocks=false;
-                    speed-=2;
+                if (socksTimer > 500) {
+                    hasSocks = false;
+                    speed -= 2;
                 }
             }
-            if(hasWings){
+            if (hasWings) {
 
             }
 
@@ -133,7 +147,7 @@ public class Player extends Entity {
             waitCounter++;
             if (waitCounter > 250) {
                 direction = "sleep";
-                waitCounter=0;
+                waitCounter = 0;
             }
         }
     }
@@ -145,7 +159,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage img;
-        if(hasSocks){
+        if (hasSocks) {
             img = switch (direction) {
                 case "up" -> spriteNum == 1 ? upSocks1 : upSocks2;
                 case "down" -> spriteNum == 1 ? downSocks1 : downSocks2;
@@ -165,7 +179,7 @@ public class Player extends Entity {
                 default -> null;
             };
         }
-        g2.drawImage(img, xScreen, yScreen, gp.getTileSize(), gp.getTileSize(), null);
+        g2.drawImage(img, xScreen, yScreen, null);
     }
 
 

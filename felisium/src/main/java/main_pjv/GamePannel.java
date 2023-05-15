@@ -26,16 +26,16 @@ public class GamePannel extends JPanel implements Runnable {
 
 
     private final int FPS = 100;
-    private final KeyHandler kh = new KeyHandler();
+    private final KeyHandler kh = new KeyHandler(this);
     private final TileManager tileManager = new TileManager(this);
     private Thread gameThread;
     public Player player = new Player(this, kh);
     private CheckerCollision checkerCollision = new CheckerCollision(this);
+    private GameState gameState;
 
-    public Objects[] obj =new Objects[10];
-    private AssetSetter assetSetter=new AssetSetter(this);
-    private UI ui=new UI(this);
-
+    public Objects[] obj = new Objects[10];
+    private AssetSetter assetSetter = new AssetSetter(this);
+    private UI ui = new UI(this);
 
 
     public GamePannel() {
@@ -45,8 +45,10 @@ public class GamePannel extends JPanel implements Runnable {
         this.addKeyListener(kh);
         this.setFocusable(true);
     }
-    public void setUpGame(){
+
+    public void setUpGame() {
         assetSetter.setObjects();
+        gameState = GameState.PLAY;
     }
 
     public void startGameThread() {
@@ -59,8 +61,9 @@ public class GamePannel extends JPanel implements Runnable {
 
         double drawInterval = (double) 1000000000 / FPS;
         double nexDrowTime = System.nanoTime() + drawInterval;
-        MusicPlayer musicPlayer=new MusicPlayer();
+        MusicPlayer musicPlayer = new MusicPlayer();
         musicPlayer.play("/music/musBegin.wav");
+        musicPlayer.changeIntensity(0.5F);
 
         while (gameThread != null) {
             update();
@@ -86,23 +89,40 @@ public class GamePannel extends JPanel implements Runnable {
 
 
     public void update() {
-        player.update();
+        switch (gameState) {
+            case PLAY -> {
+                player.update();
+            }
+            case PAUSE -> {
+
+            }
+            case MAIN -> {
+
+            }
+            case SETTINGS -> {
+
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        if (ui.isGamePlay()){
+        if (gameState==GameState.PLAY) {
             tileManager.draw(g2);
-            for(int i=0;i<obj.length;i++){
-                if(obj[i]!=null){
-                    obj[i].draw(g2,this);
-                }
-            }
+            drawObjects(g2);
             player.draw(g2);
         }
         ui.draw(g2);
         g2.dispose();
+    }
+
+    public void drawObjects(Graphics2D g2){
+        for (Objects objects : obj) {
+            if (objects != null) {
+                objects.draw(g2, this);
+            }
+        }
     }
 
     public int getOriginalTileSize() {
@@ -111,42 +131,6 @@ public class GamePannel extends JPanel implements Runnable {
 
     public int getScale() {
         return scale;
-    }
-
-    public int getFPS() {
-        return FPS;
-    }
-
-    public KeyHandler getKh() {
-        return kh;
-    }
-
-    public TileManager getTileManager() {
-        return tileManager;
-    }
-
-    public Thread getGameThread() {
-        return gameThread;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public int getMaxWorldCol() {
-        return maxWorldCol;
-    }
-
-    public int getMaxWorldRow() {
-        return maxWorldRow;
-    }
-
-    public int getMaxWorldHigh() {
-        return maxWorldHigh;
-    }
-
-    public int getMaxWorldWidth() {
-        return maxWorldWidth;
     }
 
     public int getTileSize() {
@@ -169,24 +153,72 @@ public class GamePannel extends JPanel implements Runnable {
         return screenHeight;
     }
 
-    public CheckerCollision getCheckerCollision() {
-        return checkerCollision;
+    public int getMaxWorldCol() {
+        return maxWorldCol;
+    }
+
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public int getMaxWorldHigh() {
+        return maxWorldHigh;
+    }
+
+    public int getMaxWorldWidth() {
+        return maxWorldWidth;
+    }
+
+    public int getFPS() {
+        return FPS;
+    }
+
+    public KeyHandler getKh() {
+        return kh;
+    }
+
+    public TileManager getTileManager() {
+        return tileManager;
+    }
+
+    public Thread getGameThread() {
+        return gameThread;
     }
 
     public void setGameThread(Thread gameThread) {
         this.gameThread = gameThread;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public CheckerCollision getCheckerCollision() {
+        return checkerCollision;
     }
 
     public void setCheckerCollision(CheckerCollision checkerCollision) {
         this.checkerCollision = checkerCollision;
     }
 
-    public Object[] getObj() {
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    public Objects[] getObj() {
         return obj;
+    }
+
+    public void setObj(Objects[] obj) {
+        this.obj = obj;
     }
 
     public AssetSetter getAssetSetter() {
@@ -195,10 +227,6 @@ public class GamePannel extends JPanel implements Runnable {
 
     public void setAssetSetter(AssetSetter assetSetter) {
         this.assetSetter = assetSetter;
-    }
-
-    public void setObj(Objects[] obj) {
-        this.obj = obj;
     }
 
     public UI getUi() {

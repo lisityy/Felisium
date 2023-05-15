@@ -1,6 +1,7 @@
 package background;
 
 import main_pjv.GamePannel;
+import main_pjv.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
@@ -36,13 +36,15 @@ public class TileManager {
         mapData = new int[gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 
         getTileImg();
-        loadMap("/tiles/world01.txt");
+        loadMap("/maps/world01.txt");
     }
 
     public void setup(int index, String imageName, boolean collision) {
+        Utils utils = new Utils();
         try {
             tiles[index] = new Tile();
             tiles[index].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/" + imageName + ".png"))));
+            tiles[index].setImage(utils.scaleImg(tiles[index].getImage(), gp.getTileSize(), gp.getTileSize()));
             tiles[index].setCollision(collision);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,12 +53,13 @@ public class TileManager {
 
 
     public void getTileImg() {
-        setup(0, "grassMy", false);
-        setup(1, "wall", true);
-        setup(2, "water", true);
-        setup(3, "01", false);
-        setup(4, "little_tree", true);
-        setup(5, "sand", false);
+        setup(0, "pGrass", false);
+        setup(1, "pinkTile", true);
+        setup(2, "pWater", true);
+        setup(3, "pGround", false);
+        setup(4, "pTree", true);
+        setup(5, "pGround", false);
+        setup(6,"littleTree", true);
     }
 
 
@@ -107,7 +110,7 @@ public class TileManager {
                     && worldX - gp.getTileSize() < gp.player.xWorld + gp.player.xScreen
                     && worldY + gp.getTileSize() > gp.player.yWorld - gp.player.yScreen
                     && worldY - gp.getTileSize() < gp.player.yWorld + gp.player.yScreen) {
-                g2.drawImage(tiles[tileNum].getImage(), screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
+                g2.drawImage(tiles[tileNum].getImage(), screenX, screenY, null);
             }
 
             worldCol++;

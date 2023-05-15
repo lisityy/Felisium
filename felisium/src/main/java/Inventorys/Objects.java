@@ -2,6 +2,8 @@ package Inventorys;
 
 import Entity.Player;
 import main_pjv.GamePannel;
+import main_pjv.UI;
+import main_pjv.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,6 +17,8 @@ public class Objects {
     protected Rectangle hitBox = new Rectangle(0, 0, 48, 48);
     protected int defultHitBoxX = 0;
     protected int defultHitBoxY = 0;
+    protected Utils utils =new Utils();
+    protected GamePannel gp;
 
     public void draw(Graphics2D g2, GamePannel gp) {
         int screenX = worldX - gp.player.xWorld + gp.player.xScreen;
@@ -24,7 +28,7 @@ public class Objects {
                 && worldX - gp.getTileSize() < gp.player.xWorld + gp.player.xScreen
                 && worldY + gp.getTileSize() > gp.player.yWorld - gp.player.yScreen
                 && worldY - gp.getTileSize() < gp.player.yWorld + gp.player.yScreen) {
-            g2.drawImage(img, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
+            g2.drawImage(img, screenX, screenY,null);
         }
     }
 
