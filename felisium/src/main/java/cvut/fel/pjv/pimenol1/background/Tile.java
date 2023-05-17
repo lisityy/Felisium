@@ -1,4 +1,4 @@
-package background;
+package cvut.fel.pjv.pimenol1.background;
 
 import java.awt.image.BufferedImage;
 
