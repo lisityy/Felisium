@@ -1,13 +1,10 @@
 package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
+import cvut.fel.pjv.pimenol1.main_pjv.GameState;
 import cvut.fel.pjv.pimenol1.main_pjv.MusicPlayer;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
-public class Wing extends Objects {
+public class Wing extends Items {
 
     private MusicPlayer musicPlayer = new MusicPlayer();
 
@@ -21,9 +18,7 @@ public class Wing extends Objects {
     public void pickUp(Player player, int inx) {
         musicPlayer.play("/music/UrrCat.wav");
         musicPlayer.stop();
-        player.getGp().obj[inx] = null;
         player.setHasWings(true);
-        player.getGp().getUi().setGameFinished(true);
     }
 
 }

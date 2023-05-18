@@ -1,5 +1,7 @@
 package cvut.fel.pjv.pimenol1.background;
 
+import cvut.fel.pjv.pimenol1.entity.Player;
+import cvut.fel.pjv.pimenol1.inventorys.Items;
 import cvut.fel.pjv.pimenol1.main_pjv.Constants;
 import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
 import cvut.fel.pjv.pimenol1.main_pjv.Utils;
@@ -15,8 +17,8 @@ import java.util.Objects;
 public class TileManager {
 
     private final Tile[] tiles;
-    private final GamePanel gp;
     private int[][] mapData;
+
 
     public Tile[] getTiles() {
         return tiles;
@@ -26,8 +28,8 @@ public class TileManager {
         return mapData;
     }
 
-    public TileManager(GamePanel gp) {
-        this.gp = gp;
+    public TileManager() {
+
         this.tiles = new Tile[10];
 
         mapData = new int[Constants.MAX_WORLD_COL][Constants.MAX_WORLD_ROW];
@@ -35,6 +37,8 @@ public class TileManager {
         getTileImg();
         loadMap("/maps/world01.txt");
     }
+
+
 
     public void setup(int index, String imageName, boolean collision) {
         Utils utils = new Utils();
@@ -92,7 +96,7 @@ public class TileManager {
         }
     }
 
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2, Player player) {
         int worldCol = 0;
         int worldRow = 0;
 
@@ -100,13 +104,13 @@ public class TileManager {
             int tileNum = mapData[worldCol][worldRow];
             int worldX = worldCol * Constants.TILE_SIZE ;
             int worldY = worldRow * Constants.TILE_SIZE;
-            int screenX = worldX - gp.player.xWorld + gp.player.xScreen;
-            int screenY = worldY - gp.player.yWorld + gp.player.yScreen;
+            int screenX = worldX - player.xWorld + player.xScreen;
+            int screenY = worldY - player.yWorld + player.yScreen;
 
-            if (worldX + Constants.TILE_SIZE > gp.player.xWorld - gp.player.xScreen
-                    && worldX - Constants.TILE_SIZE < gp.player.xWorld + gp.player.xScreen
-                    && worldY + Constants.TILE_SIZE > gp.player.yWorld - gp.player.yScreen
-                    && worldY - Constants.TILE_SIZE < gp.player.yWorld + gp.player.yScreen) {
+            if (worldX + Constants.TILE_SIZE > player.xWorld - player.xScreen
+                    && worldX - Constants.TILE_SIZE < player.xWorld + player.xScreen
+                    && worldY + Constants.TILE_SIZE > player.yWorld - player.yScreen
+                    && worldY - Constants.TILE_SIZE < player.yWorld + player.yScreen) {
                 g2.drawImage(tiles[tileNum].getImage(), screenX, screenY, null);
             }
 

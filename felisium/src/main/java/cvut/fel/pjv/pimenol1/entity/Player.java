@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Player extends Entity {
 
-    private final GamePanel gp;
+    private final PlayingPage pp;
     private final KeyHandler kh;
     private MusicPlayer musicPlayer = new MusicPlayer();
     BufferedImage rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
@@ -27,9 +27,9 @@ public class Player extends Entity {
     }
 
 
-    public Player(GamePanel gp, KeyHandler kh) {
+    public Player(PlayingPage pp, KeyHandler kh) {
         //ok
-        this.gp = gp;
+        this.pp = pp;
         this.kh = kh;
 
         this.xScreen = (Constants.SCREEN_WIDTH/ 2) - (Constants.TILE_SIZE / 2);
@@ -43,7 +43,6 @@ public class Player extends Entity {
     }
 
     public void setDefultValues() {
-
         this.xWorld = Constants.TILE_SIZE * 23;
         this.yWorld = Constants.TILE_SIZE * 21;
         this.speed = 4;
@@ -102,9 +101,9 @@ public class Player extends Entity {
 
             // CHECK TILE COLLISION
             collitionOn = false;
-            gp.getCheckerCollision().checkTile(this);
+            CheckerCollision.checkTile(this,pp.getTileManager());
 
-            int objInx = gp.getCheckerCollision().checkObject(this, true);
+            int objInx = CheckerCollision.checkObject(this, true, pp);
             pickUpObj(objInx);
 
             if (hasSocks) {
@@ -148,7 +147,8 @@ public class Player extends Entity {
 
     public void pickUpObj(int inx) {
         if (inx == 999) return;
-        gp.obj[inx].pickUp(this, inx);
+        pp.obj[inx].pickUp(this, inx);
+        pp.obj[inx]=null;
     }
 
     public void draw(Graphics2D g2) {
@@ -176,10 +176,6 @@ public class Player extends Entity {
         g2.drawImage(img, xScreen, yScreen, null);
     }
 
-
-    public GamePanel getGp() {
-        return gp;
-    }
     public void setHasWings(boolean hasWings) {
         this.hasWings = hasWings;
     }

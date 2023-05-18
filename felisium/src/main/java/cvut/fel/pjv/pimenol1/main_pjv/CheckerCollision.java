@@ -1,16 +1,12 @@
 package cvut.fel.pjv.pimenol1.main_pjv;
 
+import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.background.Tile;
 
 public class CheckerCollision {
-    GamePanel gp;
 
-    public CheckerCollision(GamePanel gp) {
-        this.gp = gp;
-    }
-
-    public void checkTile(Entity entity) {
+    public static void checkTile(Entity entity, TileManager tm) {
         int tileSize = Constants.TILE_SIZE;
 
         int left = entity.xWorld + entity.hitBox.x;
@@ -28,23 +24,23 @@ public class CheckerCollision {
         switch (entity.direction) {
             case "up" -> {
                 topRow = (top - entity.speed) / tileSize;
-                tileNum1 = gp.getTileManager().getMapData()[leftCol][topRow];
-                tileNum2 = gp.getTileManager().getMapData()[rightCol][topRow];
+                tileNum1 = tm.getMapData()[leftCol][topRow];
+                tileNum2 = tm.getMapData()[rightCol][topRow];
             }
             case "down" -> {
                 bottomRow = (bottom + entity.speed) / tileSize;
-                tileNum1 = gp.getTileManager().getMapData()[leftCol][bottomRow];
-                tileNum2 = gp.getTileManager().getMapData()[rightCol][bottomRow];
+                tileNum1 = tm.getMapData()[leftCol][bottomRow];
+                tileNum2 = tm.getMapData()[rightCol][bottomRow];
             }
             case "left" -> {
                 leftCol = (left - entity.speed) / tileSize;
-                tileNum1 = gp.getTileManager().getMapData()[leftCol][topRow];
-                tileNum2 = gp.getTileManager().getMapData()[leftCol][bottomRow];
+                tileNum1 = tm.getMapData()[leftCol][topRow];
+                tileNum2 = tm.getMapData()[leftCol][bottomRow];
             }
             case "right" -> {
                 rightCol = (right + entity.speed) / tileSize;
-                tileNum1 = gp.getTileManager().getMapData()[rightCol][topRow];
-                tileNum2 = gp.getTileManager().getMapData()[rightCol][bottomRow];
+                tileNum1 = tm.getMapData()[rightCol][topRow];
+                tileNum2 = tm.getMapData()[rightCol][bottomRow];
 
             }
             default -> {
@@ -52,22 +48,22 @@ public class CheckerCollision {
             }
         }
 
-        Tile[] tiles = gp.getTileManager().getTiles();
+        Tile[] tiles = tm.getTiles();
         if (tiles[tileNum1].isCollision() || tiles[tileNum2].isCollision()) {
             entity.collitionOn = true;
         }
     }
 
-    public int checkObject(Entity entity, boolean isPlayer) {
+    public static int checkObject(Entity entity, boolean isPlayer , PlayingPage pp) {
         int index = 999;
-        for (int i = 0; i < gp.obj.length; i++) {
+        for (int i = 0; i < pp.obj.length; i++) {
 
-            if (gp.obj[i] != null) {
+            if (pp.obj[i] != null) {
                 entity.hitBox.x = entity.xWorld + entity.hitBox.x;
                 entity.hitBox.y = entity.yWorld + entity.hitBox.y;
 
-                gp.obj[i].getHitBox().x = gp.obj[i].worldX + gp.obj[i].getHitBox().x;
-                gp.obj[i].getHitBox().y = gp.obj[i].worldY + gp.obj[i].getHitBox().y;
+                pp.obj[i].getHitBox().x = pp.obj[i].worldX + pp.obj[i].getHitBox().x;
+                pp.obj[i].getHitBox().y = pp.obj[i].worldY + pp.obj[i].getHitBox().y;
                 switch (entity.direction) {
                     case "up" -> {
                         entity.hitBox.y -= entity.speed;
@@ -83,8 +79,8 @@ public class CheckerCollision {
                     }
                 }
 
-                if (entity.hitBox.intersects(gp.obj[i].getHitBox())) {
-                    if (gp.obj[i].collision) {
+                if (entity.hitBox.intersects(pp.obj[i].getHitBox())) {
+                    if (pp.obj[i].collision) {
                         entity.collitionOn = true;
                     }
                     if (isPlayer) {
@@ -95,8 +91,8 @@ public class CheckerCollision {
                 entity.hitBox.x = entity.getDefultHitBoxX();
                 entity.hitBox.y = entity.getDefultHitBoxY();
 
-                gp.obj[i].getHitBox().x = gp.obj[i].getDefultHitBoxX();
-                gp.obj[i].getHitBox().y = gp.obj[i].getDefultHitBoxY();
+                pp.obj[i].getHitBox().x = pp.obj[i].getDefultHitBoxX();
+                pp.obj[i].getHitBox().y = pp.obj[i].getDefultHitBoxY();
             }
 
         }

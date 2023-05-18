@@ -20,4 +20,8 @@ public class Constants {
     public static final int MAX_WORLD_WIDTH = TILE_SIZE * MAX_WORLD_COL;
 
     public static final int FPS = 100;
+
+    public static GameState gameState;
+
+
 }

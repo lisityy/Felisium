@@ -1,16 +1,16 @@
 package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.main_pjv.Constants;
+import cvut.fel.pjv.pimenol1.main_pjv.PlayingPage;
 import cvut.fel.pjv.pimenol1.main_pjv.Utils;
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Objects {
+public class Items {
     public BufferedImage img;
     public String name;
     public boolean collision = false;
@@ -22,7 +22,7 @@ public class Objects {
     protected int defultHitBoxY = 0;
     protected Utils utils = new Utils();
 
-    public Objects(String nameFile, int index, int worldX, int worldY) {
+    public Items(String nameFile, int index, int worldX, int worldY) {
         this.index=index;
         this.worldX=worldX;
         this.worldY=worldY;
@@ -34,14 +34,14 @@ public class Objects {
         }
     }
 
-    public void draw(Graphics2D g2, GamePanel gp) {
-        int screenX = worldX - gp.player.xWorld + gp.player.xScreen;
-        int screenY = worldY - gp.player.yWorld + gp.player.yScreen;
+    public void draw(Graphics2D g2, PlayingPage pp) {
+        int screenX = worldX - pp.player.xWorld + pp.player.xScreen;
+        int screenY = worldY - pp.player.yWorld + pp.player.yScreen;
 
-        if (worldX + Constants.TILE_SIZE > gp.player.xWorld - gp.player.xScreen
-                && worldX - Constants.TILE_SIZE < gp.player.xWorld + gp.player.xScreen
-                && worldY + Constants.TILE_SIZE > gp.player.yWorld - gp.player.yScreen
-                && worldY - Constants.TILE_SIZE < gp.player.yWorld + gp.player.yScreen) {
+        if (worldX + Constants.TILE_SIZE > pp.player.xWorld - pp.player.xScreen
+                && worldX - Constants.TILE_SIZE < pp.player.xWorld + pp.player.xScreen
+                && worldY + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
+                && worldY - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, null);
         }
     }
