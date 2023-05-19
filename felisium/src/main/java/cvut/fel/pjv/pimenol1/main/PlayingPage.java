@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.main;
 
 import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Player;
@@ -32,6 +32,7 @@ public class PlayingPage extends JPanel implements Page {
         musicPlayer.play("/music/musBegin.wav");
         musicPlayer.changeIntensity(0.5F);
         setUpGame();
+        Constants.gameState=GameState.PLAY;
     }
 
     public void setUpGame() {
@@ -49,10 +50,15 @@ public class PlayingPage extends JPanel implements Page {
 
     @Override
     public void draw(Graphics2D g2) {
-        tileManager.draw(g2, player);
-        drawObjects(g2);
-        player.draw(g2);
-        ui.drawGame(g2);
+        if(!isPause){
+            tileManager.draw(g2, player);
+            drawObjects(g2);
+            player.draw(g2);
+            ui.drawGame(g2);
+        } else{
+            ui.drawPause(g2);
+        }
+
     }
 
     public void drawObjects(Graphics2D g2) {

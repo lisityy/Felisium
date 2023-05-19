@@ -1,7 +1,6 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.main;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public interface Page {
     public void update();

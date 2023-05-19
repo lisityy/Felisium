@@ -1,12 +1,8 @@
 package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.inventorys.*;
-import cvut.fel.pjv.pimenol1.main_pjv.Constants;
-import cvut.fel.pjv.pimenol1.main_pjv.PlayingPage;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.PlayingPage;
 
 public class AssetSetter {
     PlayingPage pp;

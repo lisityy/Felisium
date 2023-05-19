@@ -1,7 +1,5 @@
 package cvut.fel.pjv.pimenol1.utils;
 
-import cvut.fel.pjv.pimenol1.main_pjv.Constants;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

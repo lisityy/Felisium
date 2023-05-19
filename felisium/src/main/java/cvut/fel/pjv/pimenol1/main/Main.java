@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.main;
 
 import javax.swing.*;
 

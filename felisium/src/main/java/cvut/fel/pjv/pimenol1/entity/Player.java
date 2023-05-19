@@ -1,6 +1,6 @@
 package cvut.fel.pjv.pimenol1.entity;
 
-import cvut.fel.pjv.pimenol1.main_pjv.*;
+import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
@@ -16,7 +16,7 @@ public class Player extends Entity {
     private final PlayingPage pp;
     private final KeyHandler kh;
     private MusicPlayer musicPlayer = new MusicPlayer();
-    BufferedImage rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
+    BufferedImage sleep, rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
 
     public final int xScreen, yScreen;
 
@@ -32,6 +32,7 @@ public class Player extends Entity {
 
 
     public Player(PlayingPage pp, KeyHandler kh) {
+        super("player", "cat");
         //ok
         this.pp = pp;
         this.kh = kh;
@@ -53,44 +54,21 @@ public class Player extends Entity {
         this.direction = "up";
     }
 
-    public BufferedImage setup(String imageName) {
-        Utils utils = new Utils();
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(getClass().getResourceAsStream("/players/" + imageName + ".png"));
-            img = utils.scaleImg(img, Constants.TILE_SIZE, Constants.TILE_SIZE);
-        } catch (IOException e) {
-            System.out.println("Error reading img player:" + e.getMessage());
-            e.printStackTrace();
-        }
-        return img;
-    }
-
     public void getPlayerImg() {
+        sleep=setup("player", "cat_sleep");
 
-        rightSocks1 = setup("cat_socks_right_1");
-        rightSocks2 = setup("cat_socks_right_2");
-        leftSocks1 = setup("cat_socks_left_1");
-        leftSocks2 = setup("cat_socks_left_2");
-        downSocks1 = setup("cat_socks_down_1");
-        downSocks2 = setup("cat_socks_down_2");
-        upSocks1 = setup("cat_socks_up_1");
-        upSocks2 = setup("cat_socks_up_2");
-
-        up1 = setup("cat_up_1");
-        up2 = setup("cat_up_2");
-        down1 = setup("cat_down_1.1");
-        down2 = setup("cat_down_2.2");
-        right1 = setup("catfat_right_1");
-        right2 = setup("catfat_right_2");
-        left1 = setup("catfat_left_1");
-        left2 = setup("catfat_left_2");
-        sleep = setup("cat_sleep");
+        rightSocks1 = setup("player","cat_socks_right_1");
+        rightSocks2 = setup("player","cat_socks_right_2");
+        leftSocks1 = setup("player","cat_socks_left_1");
+        leftSocks2 = setup("player","cat_socks_left_2");
+        downSocks1 = setup("player","cat_socks_down_1");
+        downSocks2 = setup("player","cat_socks_down_2");
+        upSocks1 = setup("player","cat_socks_up_1");
+        upSocks2 = setup("player","cat_socks_up_2");
 
     }
 
     public void update() {
-        //ok
         if (kh.isDownPressed() || kh.isUpPressed() || kh.isRightPressed() || kh.isLeftPressed()) {
 
             if (kh.isUpPressed()) {

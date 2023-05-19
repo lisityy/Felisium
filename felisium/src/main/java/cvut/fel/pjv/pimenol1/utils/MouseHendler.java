@@ -1,8 +1,7 @@
 package cvut.fel.pjv.pimenol1.utils;
 
-import cvut.fel.pjv.pimenol1.main_pjv.Constants;
-import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
-import cvut.fel.pjv.pimenol1.main_pjv.GameState;
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.GamePanel;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,7 +22,7 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
     @Override
     public void mousePressed(MouseEvent e) {
         switch (Constants.gameState){
-            case MAIN->{
+            case MAINMENU ->{
                 gp.getMainMenuPage().mousePressed(e);
             }
             case PLAY -> {
@@ -34,7 +33,7 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         switch (Constants.gameState){
-            case MAIN->{
+            case MAINMENU ->{
                 gp.getMainMenuPage().mouseReleased(e);
             }
             case PLAY -> {
@@ -60,7 +59,7 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {
         switch (Constants.gameState){
-            case MAIN->{
+            case MAINMENU ->{
                 gp.getMainMenuPage().mouseMoved(e);
             }
             case PLAY -> {

@@ -1,7 +1,7 @@
 package cvut.fel.pjv.pimenol1.utils;
 
-import cvut.fel.pjv.pimenol1.main_pjv.Constants;
-import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

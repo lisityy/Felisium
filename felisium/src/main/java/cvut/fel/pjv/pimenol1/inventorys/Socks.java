@@ -1,7 +1,7 @@
 package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.main_pjv.Constants;
+import cvut.fel.pjv.pimenol1.main.Constants;
 
 public class Socks extends Items {
     public Socks(int i, int x, int y) {

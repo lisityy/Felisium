@@ -1,6 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
-
-import javax.swing.plaf.PanelUI;
+package cvut.fel.pjv.pimenol1.main;
 
 public class Constants {
     public static final int ORIGINAL_TILE_SIZE = 16;

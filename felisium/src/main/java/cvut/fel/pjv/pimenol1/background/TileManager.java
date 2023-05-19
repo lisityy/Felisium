@@ -1,7 +1,7 @@
 package cvut.fel.pjv.pimenol1.background;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.main_pjv.Constants;
+import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import javax.imageio.ImageIO;

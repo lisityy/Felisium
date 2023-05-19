@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.main;
 
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
@@ -28,7 +28,7 @@ public class MainMenuPage implements Page {
     }
 
     private void loadButtons() {
-        buttons[0] = new MenuButton(85 * Constants.SCALE, (int) (50 * Constants.SCALE), 0, GameState.PLAY);
+        buttons[0] = new MenuButton(85 * Constants.SCALE, (int) (50 * Constants.SCALE), 0, GameState.NEWGAME);
         buttons[1] = new MenuButton(85 * Constants.SCALE, (int) (80 * Constants.SCALE), 1, GameState.PLAY);
         buttons[2] = new MenuButton(95 * Constants.SCALE, (int) (110 * Constants.SCALE), 2, GameState.WIN);
     }

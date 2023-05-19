@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.main;
 
 import cvut.fel.pjv.pimenol1.utils.Utils;
 

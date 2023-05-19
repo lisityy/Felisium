@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.main;
 
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MouseHendler;
@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
         addMouseMotionListener(mh);
         this.setFocusable(true);
 
-        Constants.gameState = GameState.MAIN;
+        Constants.gameState = GameState.MAINMENU;
 
         mainMenuPage = new MainMenuPage();
         playingPage = new PlayingPage(this);
@@ -63,12 +63,11 @@ public class GamePanel extends JPanel implements Runnable {
             case PLAY -> {
                 playingPage.update();
             }
-            case MAIN -> {
+            case MAINMENU -> {
                 mainMenuPage.update();
-
             }
-            case SETTINGS -> {
-
+            case NEWGAME -> {
+                playingPage.startGame();
             }
         }
     }
@@ -82,7 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
             case PLAY -> {
                 playingPage.draw(g2);
             }
-            case MAIN -> {
+            case MAINMENU -> {
                 mainMenuPage.draw(g2);
             }
             case SETTINGS -> {
