@@ -101,4 +101,49 @@ public class CheckerCollision {
 
         return index;
     }
+
+    public static int checkEntity (Entity entity, Entity[] npc) {
+        int index = 999;
+        for (int i = 0; i < npc.length; i++) {
+
+            if (npc[i] != null) {
+                entity.hitBox.x = entity.xWorld + entity.hitBox.x;
+                entity.hitBox.y = entity.yWorld + entity.hitBox.y;
+
+                npc[i].hitBox.x = npc[i].xWorld + npc[i].hitBox.x;
+                npc[i].hitBox.y = npc[i].yWorld + npc[i].hitBox.y;
+                switch (entity.direction) {
+                    case "up" -> {
+                        entity.hitBox.y -= entity.speed;
+                    }
+                    case "down" -> {
+                        entity.hitBox.y += entity.speed;
+                    }
+                    case "left" -> {
+                        entity.hitBox.x -= entity.speed;
+                    }
+                    case "right" -> {
+                        entity.hitBox.x += entity.speed;
+                    }
+                }
+
+                if (entity.hitBox.intersects(npc[i].hitBox)) {
+                    if (npc[i].collitionOn) {
+                        entity.collitionOn = true;
+                        index=i;
+                    }
+                }
+
+                entity.hitBox.x = entity.getDefultHitBoxX();
+                entity.hitBox.y = entity.getDefultHitBoxY();
+
+                npc[i].hitBox.x = npc[i].getDefultHitBoxX();
+                npc[i].hitBox.y = npc[i].getDefultHitBoxY();
+            }
+
+        }
+
+        return index;
+    }
+
 }

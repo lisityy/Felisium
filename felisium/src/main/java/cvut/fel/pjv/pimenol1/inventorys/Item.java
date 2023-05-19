@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Items {
+public class Item {
     public BufferedImage img;
     public String name;
     public boolean collision = false;
@@ -22,7 +22,7 @@ public class Items {
     protected int defultHitBoxY = 0;
     protected Utils utils = new Utils();
 
-    public Items(String nameFile, int index, int worldX, int worldY) {
+    public Item(String nameFile, int index, int worldX, int worldY) {
         this.index=index;
         this.worldX=worldX;
         this.worldY=worldY;

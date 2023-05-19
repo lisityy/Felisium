@@ -3,7 +3,7 @@ package cvut.fel.pjv.pimenol1.inventorys;
 import cvut.fel.pjv.pimenol1.entity.Player;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
-public class Key extends Items {
+public class Key extends Item {
 
     private MusicPlayer musicPlayer = new MusicPlayer();
 

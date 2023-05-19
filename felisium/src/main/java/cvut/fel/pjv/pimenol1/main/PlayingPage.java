@@ -1,8 +1,9 @@
 package cvut.fel.pjv.pimenol1.main;
 
 import cvut.fel.pjv.pimenol1.background.TileManager;
+import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.inventorys.Items;
+import cvut.fel.pjv.pimenol1.inventorys.Item;
 import cvut.fel.pjv.pimenol1.utils.AssetSetter;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
@@ -14,7 +15,8 @@ public class PlayingPage extends JPanel implements Page {
     private GamePanel gp;
     private final TileManager tileManager = new TileManager();
     public Player player;
-    public Items[] obj = new Items[10];
+    public Item[] obj = new Item[10];
+    public Entity[] npc= new Entity[10];
 
     private AssetSetter assetSetter = new AssetSetter(this);
     private UI ui = new UI();
@@ -37,6 +39,7 @@ public class PlayingPage extends JPanel implements Page {
 
     public void setUpGame() {
         assetSetter.setObjects();
+        assetSetter.setNPC();
     }
 
     public void endGame() {
@@ -53,21 +56,32 @@ public class PlayingPage extends JPanel implements Page {
         if(!isPause){
             tileManager.draw(g2, player);
             drawObjects(g2);
-            player.draw(g2);
+            drawNPC(g2);
             ui.drawGame(g2);
+            player.draw(g2,this);
+
         } else{
             ui.drawPause(g2);
         }
 
     }
 
-    public void drawObjects(Graphics2D g2) {
-        for (int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].draw(g2, this);
+    private void drawNPC(Graphics2D g2){
+        for (Entity entity : npc) {
+            if (entity != null) {
+                entity.draw(g2,this);
             }
         }
     }
+
+    private void drawObjects(Graphics2D g2) {
+        for (Item items : obj) {
+            if (items != null) {
+                items.draw(g2, this);
+            }
+        }
+    }
+
 
     public boolean isPause() {return isPause;}
 
@@ -85,11 +99,11 @@ public class PlayingPage extends JPanel implements Page {
         this.player = player;
     }
 
-    public Items[] getObj() {
+    public Item[] getObj() {
         return obj;
     }
 
-    public void setObj(Items[] obj) {
+    public void setObj(Item[] obj) {
         this.obj = obj;
     }
 

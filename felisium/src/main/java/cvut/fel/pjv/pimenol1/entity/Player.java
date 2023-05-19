@@ -1,15 +1,15 @@
 package cvut.fel.pjv.pimenol1.entity;
 
+import cvut.fel.pjv.pimenol1.inventorys.Item;
 import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
-import cvut.fel.pjv.pimenol1.utils.Utils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Player extends Entity {
 
@@ -17,6 +17,7 @@ public class Player extends Entity {
     private final KeyHandler kh;
     private MusicPlayer musicPlayer = new MusicPlayer();
     BufferedImage sleep, rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
+    BufferedImage tileInventorys;
 
     public final int xScreen, yScreen;
 
@@ -24,6 +25,8 @@ public class Player extends Entity {
     private int keyCount = 0;
     private boolean hasSocks = false;
     private int socksTimer = 0;
+
+    public ArrayList<Item> items = new ArrayList<>();
 
     //    private  int wingsTimer=0;
     public KeyHandler getKh() {
@@ -37,12 +40,14 @@ public class Player extends Entity {
         this.pp = pp;
         this.kh = kh;
 
-        this.xScreen = (Constants.SCREEN_WIDTH/ 2) - (Constants.TILE_SIZE / 2);
+        this.xScreen = (Constants.SCREEN_WIDTH / 2) - (Constants.TILE_SIZE / 2);
         this.yScreen = (Constants.SCREEN_HIGH / 2) - (Constants.TILE_SIZE / 2);
 
-        this.hitBox = new Rectangle(1*Constants.SCALE, 9*Constants.SCALE, 13*Constants.SCALE, 6*Constants.SCALE);
+        this.hitBox = new Rectangle(1 * Constants.SCALE, 9 * Constants.SCALE, 13 * Constants.SCALE, 6 * Constants.SCALE);
         this.defultHitBoxX = hitBox.x;
         this.defultHitBoxY = hitBox.y;
+
+
         setDefultValues();
         getPlayerImg();
     }
@@ -55,19 +60,20 @@ public class Player extends Entity {
     }
 
     public void getPlayerImg() {
-        sleep=setup("player", "cat_sleep");
+        sleep = setup("player", "cat_sleep");
 
-        rightSocks1 = setup("player","cat_socks_right_1");
-        rightSocks2 = setup("player","cat_socks_right_2");
-        leftSocks1 = setup("player","cat_socks_left_1");
-        leftSocks2 = setup("player","cat_socks_left_2");
-        downSocks1 = setup("player","cat_socks_down_1");
-        downSocks2 = setup("player","cat_socks_down_2");
-        upSocks1 = setup("player","cat_socks_up_1");
-        upSocks2 = setup("player","cat_socks_up_2");
+        rightSocks1 = setup("player", "cat_socks_right_1");
+        rightSocks2 = setup("player", "cat_socks_right_2");
+        leftSocks1 = setup("player", "cat_socks_left_1");
+        leftSocks2 = setup("player", "cat_socks_left_2");
+        downSocks1 = setup("player", "cat_socks_down_1");
+        downSocks2 = setup("player", "cat_socks_down_2");
+        upSocks1 = setup("player", "cat_socks_up_1");
+        upSocks2 = setup("player", "cat_socks_up_2");
 
     }
 
+    @Override
     public void update() {
         if (kh.isDownPressed() || kh.isUpPressed() || kh.isRightPressed() || kh.isLeftPressed()) {
 
@@ -83,10 +89,12 @@ public class Player extends Entity {
 
             // CHECK TILE COLLISION
             collitionOn = false;
-            CheckerCollision.checkTile(this,pp.getTileManager());
+            CheckerCollision.checkTile(this, pp.getTileManager());
 
             int objInx = CheckerCollision.checkObject(this, true, pp);
             pickUpObj(objInx);
+
+            int npcInx = CheckerCollision.checkEntity(this, pp.npc); //TODO: something with npc
 
             if (hasSocks) {
                 socksTimer++;
@@ -129,11 +137,26 @@ public class Player extends Entity {
 
     public void pickUpObj(int inx) {
         if (inx == 999) return;
+        if (items.size()>=5){
+            pp.getUi().writeMessage("Your bag is full!");
+            return;
+        }
         pp.obj[inx].pickUp(this, inx);
-        pp.obj[inx]=null;
+        items.add(pp.obj[inx]);
+        pp.obj[inx] = null;
+
+    }
+    public void drawItems(Graphics2D g2){
+        int x=655;
+        int y=50;
+        for(Item item: items){
+            g2.drawImage(item.img,x,y,null);
+            x+=Constants.TILE_SIZE+8;
+        }
     }
 
-    public void draw(Graphics2D g2) {
+    @Override
+    public void draw(Graphics2D g2, PlayingPage pp) {
         BufferedImage img;
         if (hasSocks) {
             img = switch (direction) {
@@ -156,6 +179,8 @@ public class Player extends Entity {
             };
         }
         g2.drawImage(img, xScreen, yScreen, null);
+
+        drawItems(g2);
     }
 
     public void setHasWings(boolean hasWings) {
@@ -173,5 +198,7 @@ public class Player extends Entity {
     public void setHasSocks(boolean hasSocks) {
         this.hasSocks = hasSocks;
     }
+
+
 }
 
