@@ -3,6 +3,8 @@ package cvut.fel.pjv.pimenol1.main_pjv;
 import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Player;
 import cvut.fel.pjv.pimenol1.inventorys.Items;
+import cvut.fel.pjv.pimenol1.utils.AssetSetter;
+import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,3 +111,4 @@ public class PlayingPage extends JPanel implements Page {
         this.musicPlayer = musicPlayer;
     }
 }
+

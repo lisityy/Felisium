@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.utils;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

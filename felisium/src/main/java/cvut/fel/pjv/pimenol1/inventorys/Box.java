@@ -1,7 +1,7 @@
 package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.main_pjv.MusicPlayer;
+import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
 public class Box extends Items {
 

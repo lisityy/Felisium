@@ -1,8 +1,10 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.background.Tile;
+import cvut.fel.pjv.pimenol1.main_pjv.Constants;
+import cvut.fel.pjv.pimenol1.main_pjv.PlayingPage;
 
 public class CheckerCollision {
 

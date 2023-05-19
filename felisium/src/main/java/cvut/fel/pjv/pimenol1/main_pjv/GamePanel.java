@@ -1,14 +1,15 @@
 package cvut.fel.pjv.pimenol1.main_pjv;
 
-import javax.swing.JPanel;
+import cvut.fel.pjv.pimenol1.utils.KeyHandler;
+
+import javax.swing.*;
 import java.awt.*;
-import java.awt.CardLayout;
 
 public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private final KeyHandler kh = new KeyHandler(this);
-    private MainMenuPage mainMenuPanel;
+    private MainMenuPage mainMenuPage;
     private PlayingPage playingPage;
 
     public GamePanel() {
@@ -17,12 +18,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(kh);
         this.setFocusable(true);
-        Constants.gameState = GameState.MAIN;
-        mainMenuPanel = new MainMenuPage();
-        playingPage = new PlayingPage(this);
-        add(mainMenuPanel, "Main menu");
-        add(playingPage, "Play");
 
+        Constants.gameState = GameState.MAIN;
+
+        mainMenuPage = new MainMenuPage();
+        playingPage = new PlayingPage(this);
     }
 
     public void startGameThread() {
@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
         double drawInterval = (double) 1000000000 / Constants.FPS;
         double nexDrowTime = System.nanoTime() + drawInterval;
         while (gameThread != null) {
+
             update();
             repaint();
 
@@ -67,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -76,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
                 playingPage.draw(g2);
             }
             case MAIN -> {
-                mainMenuPanel.draw(g2);
+                mainMenuPage.draw(g2);
             }
             case SETTINGS -> {
 
@@ -93,12 +95,12 @@ public class GamePanel extends JPanel implements Runnable {
         return kh;
     }
 
-    public MainMenuPage getMainMenuPanel() {
-        return mainMenuPanel;
+    public MainMenuPage getMainMenuPage() {
+        return mainMenuPage;
     }
 
-    public void setMainMenuPanel(MainMenuPage mainMenuPanel) {
-        this.mainMenuPanel = mainMenuPanel;
+    public void setMainMenuPage(MainMenuPage mainMenuPage) {
+        this.mainMenuPage = mainMenuPage;
     }
 
     public PlayingPage getPlayingPage() {

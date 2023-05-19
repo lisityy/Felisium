@@ -1,6 +1,12 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.inventorys.*;
+import cvut.fel.pjv.pimenol1.main_pjv.Constants;
+import cvut.fel.pjv.pimenol1.main_pjv.PlayingPage;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class AssetSetter {
     PlayingPage pp;
@@ -24,4 +30,6 @@ public class AssetSetter {
 
         pp.obj[7] = new Valeriana(7, 9 * Constants.TILE_SIZE, 28 * Constants.TILE_SIZE);
     }
+
+
 }

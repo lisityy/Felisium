@@ -1,6 +1,10 @@
 package cvut.fel.pjv.pimenol1.entity;
 
 import cvut.fel.pjv.pimenol1.main_pjv.*;
+import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
+import cvut.fel.pjv.pimenol1.utils.KeyHandler;
+import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
+import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

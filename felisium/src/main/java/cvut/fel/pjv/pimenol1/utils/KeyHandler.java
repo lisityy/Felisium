@@ -1,4 +1,7 @@
-package cvut.fel.pjv.pimenol1.main_pjv;
+package cvut.fel.pjv.pimenol1.utils;
+
+import cvut.fel.pjv.pimenol1.main_pjv.Constants;
+import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,15 +30,7 @@ public class KeyHandler implements KeyListener {
         this.gp = gp;
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
+    private void playingKey(int code){
         if (code == KeyEvent.VK_W) {
             upPressed = true;
         }
@@ -51,7 +46,20 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_P){
             gp.getPlayingPage().setPause(!gp.getPlayingPage().isPause());
         }
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch (Constants.gameState){
+            case PLAY -> {
+                playingKey(code);
+            }
+        }
     }
 
     @Override

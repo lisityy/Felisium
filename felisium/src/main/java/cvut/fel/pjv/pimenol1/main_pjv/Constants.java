@@ -9,7 +9,7 @@ public class Constants {
 
     //SCREEN SETTINGS
     public static final int MAX_SCREEN_COL = 16;
-    public static final int MAX_SCREEN_ROW = 14;
+    public static final int MAX_SCREEN_ROW = 12;
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HIGH = TILE_SIZE * MAX_SCREEN_ROW;
 

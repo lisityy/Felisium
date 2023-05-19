@@ -1,10 +1,8 @@
 package cvut.fel.pjv.pimenol1.background;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.inventorys.Items;
 import cvut.fel.pjv.pimenol1.main_pjv.Constants;
-import cvut.fel.pjv.pimenol1.main_pjv.GamePanel;
-import cvut.fel.pjv.pimenol1.main_pjv.Utils;
+import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
