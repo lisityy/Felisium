@@ -1,6 +1,7 @@
 package cvut.fel.pjv.pimenol1.main_pjv;
 
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
+import cvut.fel.pjv.pimenol1.utils.MouseHendler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private final KeyHandler kh = new KeyHandler(this);
+    private MouseHendler mh= new MouseHendler(this);
     private MainMenuPage mainMenuPage;
     private PlayingPage playingPage;
 
@@ -17,6 +19,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(kh);
+        addMouseListener(mh);
+        addMouseMotionListener(mh);
         this.setFocusable(true);
 
         Constants.gameState = GameState.MAIN;
@@ -60,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
                 playingPage.update();
             }
             case MAIN -> {
+                mainMenuPage.update();
 
             }
             case SETTINGS -> {

@@ -16,7 +16,6 @@ public class UI {
     public UI() {
         try {
             InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
-            assert is != null;
             fontMy = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (Exception e) {
             System.out.println("Error read font: " + e.getMessage());

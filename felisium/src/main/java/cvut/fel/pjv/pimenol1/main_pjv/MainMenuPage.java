@@ -6,23 +6,31 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
 public class MainMenuPage implements Page {
 
     private MenuButton[] buttons = new MenuButton[3];
     private BufferedImage backgroundImage;
-    private int menuX, menuY, menuWidth, menuHeight;
+    Font myFont;
 
     public MainMenuPage() {
         loadButtons();
         backgroundImage = Utils.load_image("background", "inCloud");
         backgroundImage = Utils.scaleImg(backgroundImage, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH);
+
+        try {
+            InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
+            myFont = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (Exception e) {
+            System.out.println("Error read font: " + e.getMessage());
+        }
     }
 
     private void loadButtons() {
-        buttons[0] = new MenuButton(35 * Constants.SCALE, (int) (40 * Constants.SCALE), 0, GameState.PLAY);
-        buttons[1] = new MenuButton(35 * Constants.SCALE, (int) (70 * Constants.SCALE), 1, GameState.PLAY);
-        buttons[2] = new MenuButton(46 * Constants.SCALE, (int) (100 * Constants.SCALE), 2, GameState.WIN);
+        buttons[0] = new MenuButton(85 * Constants.SCALE, (int) (50 * Constants.SCALE), 0, GameState.PLAY);
+        buttons[1] = new MenuButton(85 * Constants.SCALE, (int) (80 * Constants.SCALE), 1, GameState.PLAY);
+        buttons[2] = new MenuButton(95 * Constants.SCALE, (int) (110 * Constants.SCALE), 2, GameState.WIN);
     }
 
     public boolean isInButton(MouseEvent e, MenuButton mb) {
@@ -37,9 +45,14 @@ public class MainMenuPage implements Page {
 
     @Override
     public void draw(Graphics2D g2) {
+        g2.setFont(myFont.deriveFont(Font.PLAIN, 150F));
+        g2.setColor(new Color(58,0,137));
+
         g2.drawImage(backgroundImage, 0, 0, null);
         for (MenuButton mb : buttons)
             mb.draw(g2);
+
+        g2.drawString("FELISIUM", 230, 150);
     }
 
     public void mousePressed(MouseEvent e) {
@@ -71,7 +84,6 @@ public class MainMenuPage implements Page {
 
         for (MenuButton mb : buttons)
             if (isInButton(e, mb)) {
-                System.out.println("Hit");
                 mb.setMouseOver(true);
                 break;
             }

@@ -6,11 +6,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MenuButton {
-    private final int buttonWidth = 270;
+    private final int buttonWidth = 290;
     private final int buttonHight = 75;
     private int xPos, yPos, rowIndex, index;
     private GameState state;
-    private BufferedImage[] images= new BufferedImage[3];;
+    private BufferedImage[] images = new BufferedImage[3];
     private boolean mouseOver, mousePressed;
     private Rectangle hitBox;
 
@@ -18,7 +18,7 @@ public class MenuButton {
         this.xPos = xPos;
         this.yPos = yPos;
         this.rowIndex = indexButt;
-        this.state=gameState;
+        this.state = gameState;
         loadButtonImages();
         initHitBox();
     }
@@ -27,8 +27,8 @@ public class MenuButton {
         this.hitBox = new Rectangle(xPos, yPos, buttonWidth, buttonHight);
     }
 
-    public void draw(Graphics g) {
-        g.drawImage(images[index], xPos , yPos, buttonWidth, buttonHight, null);
+    public void draw(Graphics2D g2) {
+        g2.drawImage(images[index], xPos, yPos, buttonWidth, buttonHight, null);
     }
 
     public void update() {
@@ -44,8 +44,9 @@ public class MenuButton {
         for (int i = 0; i < images.length; i++)
             images[i] = temp.getSubimage(i * 120, rowIndex * 27, 120, 27);
     }
-    public void applyGameState(){
-        Constants.gameState=state;
+
+    public void applyGameState() {
+        Constants.gameState = state;
     }
 
 
