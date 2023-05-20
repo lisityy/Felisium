@@ -16,8 +16,10 @@ public class Entity {
     public String name;
     BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
-    int spriteCounter = 0, waitCounter = 0;
-    int spriteNum = 1, waitNum = 1;
+    protected int spriteCounter = 0, waitCounter = 0;
+    protected int spriteNum = 1, waitNum = 1;
+    protected int maxLife, life;
+
 
     public boolean collitionOn = false;
     public Rectangle hitBox = new Rectangle(0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);

@@ -5,33 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efa3bf19-ca0b-4af6-97d1-e1f8612f56e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/newFelisium/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/Entity/Entity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/Entity/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/CheckerCollision.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/KeyHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/Entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/Entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/Entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/background/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/background/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/background/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/background/TileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/CheckerCollision.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/CheckerCollision.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/GamePannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/src/main/java/main_pjv/GamePannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/target/classes/Entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/Entity/Entity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/target/classes/Entity/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/Entity/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/target/classes/background/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/background/Tile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/target/classes/background/TileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/background/TileManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/target/classes/main_pjv/CheckerCollision.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/main_pjv/CheckerCollision.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/felisium/target/classes/main_pjv/GamePannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/felisium/target/classes/main_pjv/GamePannel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newFelisium/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/newFelisium/src/main/java/main/GamePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/felisium/src/main/resources/maps/World2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/resources/tiles/littleTree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/resources/tiles/pGlass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/resources/tiles/purpleTile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/resources/tiles/sand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/felisium/src/main/resources/tiles/tree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/draw_pictures.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/draw_pictures.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/end_page_utils.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/end_page_utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/font_prop14x16.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/font_rom8x16.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/font_types.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/gameplay_utils.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/gameplay_utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/mzapo_parlcd.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/mzapo_parlcd.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/mzapo_phys.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/mzapo_phys.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/mzapo_regs.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/pixel_utils.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/print_words.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/print_words.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/serialize_lock.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/serialize_lock.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p/snake.c" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +77,7 @@
       <workItem from="1681419302878" duration="62000" />
       <workItem from="1683469330318" duration="428000" />
       <workItem from="1683469851504" duration="175000" />
+      <workItem from="1684541949376" duration="18000" />
     </task>
     <servers />
   </component>

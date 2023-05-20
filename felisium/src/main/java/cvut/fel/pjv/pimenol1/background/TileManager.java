@@ -28,12 +28,12 @@ public class TileManager {
 
     public TileManager() {
 
-        this.tiles = new Tile[10];
+        this.tiles = new Tile[50];
 
         mapData = new int[Constants.MAX_WORLD_COL][Constants.MAX_WORLD_ROW];
 
         getTileImg();
-        loadMap("/maps/world01.txt");
+        loadMap("/maps/map.txt");
     }
 
 
@@ -52,13 +52,19 @@ public class TileManager {
 
 
     public void getTileImg() {
-        setup(0, "pGrass", false);
-        setup(1, "pinkTile", true);
-        setup(2, "pWater", true);
-        setup(3, "pGround", false);
-        setup(4, "pTree", true);
-        setup(5, "pGround", false);
-        setup(6,"littleTree", true);
+        for(int i=1;i<38;i++){
+            if(i<10){
+                setup(i, "00"+i, false);
+            } else if (i==17){
+                setup(16, "0"+i, true);
+            } else if (i==16){
+                setup(17, "0"+i, true);
+            } else if (i>17){
+                setup(i, "0"+i, true);
+            } else {
+                setup(i, "0"+i, false);
+            }
+        }
     }
 
 

@@ -57,6 +57,8 @@ public class Player extends Entity {
         this.yWorld = Constants.TILE_SIZE * 21;
         this.speed = 4;
         this.direction = "up";
+        this.maxLife=9;
+        this.life=maxLife;
     }
 
     public void getPlayerImg() {

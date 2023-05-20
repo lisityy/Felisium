@@ -1,5 +1,6 @@
 package cvut.fel.pjv.pimenol1.main;
 
+import cvut.fel.pjv.pimenol1.inventorys.Heart;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import javax.imageio.ImageIO;
@@ -14,15 +15,19 @@ public class UI {
     boolean haveMessage = false;
     int MessageTimer = 0;
     private double gameTime = 0;
-    BufferedImage tileInventorys;
+    BufferedImage tileInventorys, heart;
 
     public UI() {
         try {
             InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
 
-            tileInventorys= Utils.load_image("tiles","pinkTile");
-            tileInventorys=Utils.scaleImg(tileInventorys, Constants.TILE_SIZE+5, Constants.TILE_SIZE+5);
+            tileInventorys = Utils.load_image("tiles", "blueTile");
+            tileInventorys = Utils.scaleImg(tileInventorys, Constants.TILE_SIZE + 5, Constants.TILE_SIZE + 5);
+
+            heart = Utils.load_image("objects", "heart");
+            heart = Utils.scaleImg(heart, Constants.TILE_SIZE, Constants.TILE_SIZE);
+
         } catch (Exception e) {
             System.out.println("Error read font: " + e.getMessage());
         }
@@ -35,7 +40,7 @@ public class UI {
 
     public void drawGame(Graphics2D g2) {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 50F));
-        g2.setColor(new Color(58,0,137));
+        g2.setColor(new Color(58, 0, 137));
 
         gameTime += (double) 1 / Constants.FPS;
         if (haveMessage) {
@@ -46,13 +51,28 @@ public class UI {
                 MessageTimer = 0;
             }
         }
+        drawBag(g2);
+        drawLife(g2,9);
+
+
+    }
+
+    private void drawLife(Graphics2D g2, int life){
+        int x=30;
+        int y=30;
+        for (int i = 0; i < life ; i++) {
+            g2.drawImage(heart, x, y, null);
+            x += Constants.TILE_SIZE/2-10;
+        }
+    }
+
+    private void drawBag(Graphics2D g2){
         int x = 650;
         int y = 50;
         for (int i = 0; i < 5; i++) {
             g2.drawImage(tileInventorys, x, y, null);
             x += Constants.TILE_SIZE + 10;
         }
-
     }
 
     public void drawPause(Graphics2D g2) {
