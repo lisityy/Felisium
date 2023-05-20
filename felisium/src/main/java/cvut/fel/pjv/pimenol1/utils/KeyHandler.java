@@ -46,6 +46,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_P){
             gp.getPlayingPage().setPause(!gp.getPlayingPage().isPause());
         }
+        if(code==KeyEvent.VK_ENTER){
+            gp.getPlayingPage().setEnterPressed(true);
+        }
     }
 
     @Override
@@ -76,6 +79,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if(code==KeyEvent.VK_ENTER){
+            gp.getPlayingPage().setEnterPressed(false);
         }
     }
 }

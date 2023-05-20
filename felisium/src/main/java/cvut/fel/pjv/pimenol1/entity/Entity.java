@@ -19,6 +19,9 @@ public class Entity {
     protected BufferedImage left, right, up, down;
     protected BufferedImage[] left_a, right_a, up_a, down_a;
 
+    protected BufferedImage dialog;
+    private boolean haveDialog=false;
+
     protected int sizeSubImg = 30;
     public String direction;
 
@@ -47,7 +50,7 @@ public class Entity {
         CheckerCollision.checkObject(this, false, pp);
         CheckerCollision.checkEntity(this, pp.npc);
         CheckerCollision.checkEntity(this, pp.getAliens());
-        CheckerCollision.checkPlayer(this,pp.player);
+        CheckerCollision.checkPlayer(this, pp.player);
 
         if (!collitionOn) {
             switch (direction) {
@@ -61,7 +64,9 @@ public class Entity {
         if (spriteTimer > timeUpdate) {
             spriteNum = (spriteNum + 1) % maxSprite;
             spriteTimer = 0;
-
+            haveDialog=false;
+            Random random = new Random();
+            timeUpdate = random.nextInt(250);
         }
 
     }
@@ -83,9 +88,27 @@ public class Entity {
                 && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
                 && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, null);
+            if(haveDialog){
+                g2.drawImage(dialog, screenX+Constants.TILE_SIZE+20, screenY-10, null);
+            }
         }
     }
 
+
+    public void speak() {
+        haveDialog=true;
+        dialog = Utils.load_image("text", "dialog");
+        dialog = Utils.scaleImg(dialog, Constants.TILE_SIZE, Constants.TILE_SIZE);
+    }
+
+    public void facePlayer() {
+        switch (pp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
+    }
 
     public void getEntityImg(String path) {
         left_a = new BufferedImage[maxSprite];

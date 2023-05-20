@@ -9,6 +9,8 @@ import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class PlayingPage extends JPanel implements Page {
 
@@ -17,18 +19,26 @@ public class PlayingPage extends JPanel implements Page {
     public Player player;
 
     public Item[] obj = new Item[10];
-    public Entity[] npc= new Entity[10];
-    private Entity[] aliens= new Entity[10];
+    public Entity[] npc = new Entity[10];
+    private Entity[] aliens = new Entity[10];
 
     private AssetSetter assetSetter = new AssetSetter(this);
     private UI ui = new UI();
     MusicPlayer musicPlayer;
 
     private boolean isPause = false;
+    private boolean enterPressed = false;
+    public Font myFont;
 
     public PlayingPage(GamePanel gp) {
         this.gp = gp;
         player = new Player(this, gp.getKh());
+        InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
+        try{
+        myFont = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (Exception e){
+            System.out.println("ERROR: reading font"+e);
+        }
     }
 
     public void startGame() {
@@ -36,7 +46,7 @@ public class PlayingPage extends JPanel implements Page {
         musicPlayer.play("/music/musBegin.wav");
         musicPlayer.changeIntensity(0.5F);
         setUpGame();
-        Constants.gameState=GameState.PLAY;
+        Constants.gameState = GameState.PLAY;
     }
 
     public void setUpGame() {
@@ -53,8 +63,8 @@ public class PlayingPage extends JPanel implements Page {
     public void update() {
         player.update();
 
-        for(Entity alien: aliens){
-            if(alien!=null){
+        for (Entity alien : aliens) {
+            if (alien != null) {
                 alien.update();
             }
         }
@@ -68,24 +78,24 @@ public class PlayingPage extends JPanel implements Page {
 
     @Override
     public void draw(Graphics2D g2) {
-        if(!isPause){
+        if (!isPause) {
             tileManager.draw(g2, player);
             drawObjects(g2);
             drawNPC(g2);
             drawEnemy(g2);
             ui.drawGame(g2);
-            player.draw(g2,this);
+            player.draw(g2, this);
 
-        } else{
+        } else {
             ui.drawPause(g2);
         }
 
     }
 
-    private void drawNPC(Graphics2D g2){
+    private void drawNPC(Graphics2D g2) {
         for (Entity entity : npc) {
             if (entity != null) {
-                entity.draw(g2,this);
+                entity.draw(g2, this);
             }
         }
     }
@@ -98,10 +108,10 @@ public class PlayingPage extends JPanel implements Page {
         }
     }
 
-    private void drawEnemy(Graphics2D g2){
-        for(Entity alien: aliens){
-            if(alien!=null){
-                alien.draw(g2,this);
+    private void drawEnemy(Graphics2D g2) {
+        for (Entity alien : aliens) {
+            if (alien != null) {
+                alien.draw(g2, this);
             }
         }
     }
@@ -114,9 +124,13 @@ public class PlayingPage extends JPanel implements Page {
         this.aliens = aliens;
     }
 
-    public boolean isPause() {return isPause;}
+    public boolean isPause() {
+        return isPause;
+    }
 
-    public void setPause(boolean pause) {isPause = pause;}
+    public void setPause(boolean pause) {
+        isPause = pause;
+    }
 
     public TileManager getTileManager() {
         return tileManager;
@@ -160,6 +174,14 @@ public class PlayingPage extends JPanel implements Page {
 
     public void setMusicPlayer(MusicPlayer musicPlayer) {
         this.musicPlayer = musicPlayer;
+    }
+
+    public boolean isEnterPressed() {
+        return enterPressed;
+    }
+
+    public void setEnterPressed(boolean enterPressed) {
+        this.enterPressed = enterPressed;
     }
 }
 

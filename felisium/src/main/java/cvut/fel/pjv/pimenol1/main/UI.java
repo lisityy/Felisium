@@ -22,8 +22,6 @@ public class UI {
             InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
 
-
-
             heart = Utils.load_image("objects", "heart");
             heart = Utils.scaleImg(heart, Constants.TILE_SIZE, Constants.TILE_SIZE);
 

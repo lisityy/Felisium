@@ -17,6 +17,7 @@ public class Player extends Entity {
     private MusicPlayer musicPlayer = new MusicPlayer();
     BufferedImage sleep, rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
     protected BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+
     BufferedImage tileInventorys;
 
     public final int xScreen, yScreen;
@@ -107,7 +108,8 @@ public class Player extends Entity {
             int objInx = CheckerCollision.checkObject(this, true, pp);
             pickUpObj(objInx);
 
-            int npcInx = CheckerCollision.checkEntity(this, pp.npc); //TODO: something with npc
+            int npcInx = CheckerCollision.checkEntity(this, pp.npc);
+            connectNPC(npcInx);
             int alienInx=CheckerCollision.checkEntity(this, pp.getAliens());
 
             if (hasSocks) {
@@ -147,6 +149,31 @@ public class Player extends Entity {
 
         bag.update();
     }
+
+    private void connectNPC(int index){
+        if (index != 999){
+            if (pp.isEnterPressed()) {
+                pp.npc[index].speak();
+            }
+        }
+    }
+
+//    private void connectAlien(int index){
+//        if (i != 999){
+//            if (!invincible && !gp.monster[gp.currentMap][i].dying){
+//                gp.playSE(6);
+//
+//                int damage = gp.monster[gp.currentMap][i].attack - defence;
+//                if (damage < 1){
+//                    damage = 1;
+//                }
+//
+//                life -= damage;
+//                invincible = true;
+//                transparent = true;
+//            }
+//        }
+//    }
 
 
     private void pickUpObj(int inx) {
