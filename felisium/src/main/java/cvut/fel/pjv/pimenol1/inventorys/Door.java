@@ -7,12 +7,7 @@ public class Door extends Item {
         super("door",i,x,y);
         name = "door";
         collision = true;
+        canTake=false;
     }
 
-    @Override
-    public void pickUp(Player player, int inx) {
-        if (player.getKeyCount() > 0) {
-            player.setKeyCount(player.getKeyCount() - 1);
-        }
-    }
 }

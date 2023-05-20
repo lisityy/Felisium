@@ -17,7 +17,7 @@ public class AssetSetter {
 
         pp.obj[0] = new Key(0, 23 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
 
-        pp.obj[3] = new Door(3, 10 * Constants.TILE_SIZE, 11 * Constants.TILE_SIZE);
+        pp.obj[3] = new Door(3, 19 * Constants.TILE_SIZE, 22 * Constants.TILE_SIZE);
 
         pp.obj[4] = new Socks(4, 11 * Constants.TILE_SIZE, 9 * Constants.TILE_SIZE);
 

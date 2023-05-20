@@ -15,8 +15,16 @@ public class Key extends Item {
 
     @Override
     public void pickUp(Player player, int inx) {
-        musicPlayer.play("/music/UrrCat.wav");
-        musicPlayer.stop();
         player.setKeyCount(player.getKeyCount() + 1);
+    }
+
+    @Override
+    public boolean useItem(Player player){
+        if(player.isHitDoor()){
+            player.setHitDoor(false);
+            player.getPp().obj[player.getIndexDoor()]=null;
+            return true;
+        }
+        return false;
     }
 }

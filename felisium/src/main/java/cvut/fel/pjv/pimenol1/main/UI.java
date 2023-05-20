@@ -22,8 +22,7 @@ public class UI {
             InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
 
-            tileInventorys = Utils.load_image("tiles", "blueTile");
-            tileInventorys = Utils.scaleImg(tileInventorys, Constants.TILE_SIZE + 5, Constants.TILE_SIZE + 5);
+
 
             heart = Utils.load_image("objects", "heart");
             heart = Utils.scaleImg(heart, Constants.TILE_SIZE, Constants.TILE_SIZE);
@@ -51,7 +50,7 @@ public class UI {
                 MessageTimer = 0;
             }
         }
-        drawBag(g2);
+
         drawLife(g2,9);
 
 
@@ -66,14 +65,6 @@ public class UI {
         }
     }
 
-    private void drawBag(Graphics2D g2){
-        int x = 650;
-        int y = 50;
-        for (int i = 0; i < 5; i++) {
-            g2.drawImage(tileInventorys, x, y, null);
-            x += Constants.TILE_SIZE + 10;
-        }
-    }
 
     public void drawPause(Graphics2D g2) {
         try {

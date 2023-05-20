@@ -26,6 +26,7 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
                 gp.getMainMenuPage().mousePressed(e);
             }
             case PLAY -> {
+                gp.getPlayingPage().player.bag.mousePressed(e);
             }
         }
     }
@@ -37,6 +38,7 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
                 gp.getMainMenuPage().mouseReleased(e);
             }
             case PLAY -> {
+                gp.getPlayingPage().player.bag.mouseReleased(e);
             }
         }
     }
@@ -63,6 +65,7 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
                 gp.getMainMenuPage().mouseMoved(e);
             }
             case PLAY -> {
+                gp.getPlayingPage().player.bag.mouseMoved(e);
             }
         }
     }

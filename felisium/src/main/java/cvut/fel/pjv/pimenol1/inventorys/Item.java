@@ -14,6 +14,7 @@ public class Item {
     public BufferedImage img;
     public String name;
     public boolean collision = false;
+    public boolean canTake =true;
     public int worldX, worldY;
     protected int index;
 
@@ -44,6 +45,10 @@ public class Item {
                 && worldY - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, null);
         }
+    }
+
+    public boolean useItem(Player player){
+        return false;
     }
 
     public void pickUp(Player player, int inx) {

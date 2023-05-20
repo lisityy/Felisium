@@ -18,4 +18,6 @@ public class Box extends Item {
         musicPlayer.play("/music/UrrCat.wav");
         musicPlayer.stop();
     }
+
+
 }

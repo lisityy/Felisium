@@ -1,5 +1,6 @@
 package cvut.fel.pjv.pimenol1.entity;
 
+import cvut.fel.pjv.pimenol1.inventorys.Bag;
 import cvut.fel.pjv.pimenol1.inventorys.Item;
 import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
@@ -9,6 +10,7 @@ import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.PriorityQueue;
 
 public class Player extends Entity {
@@ -24,9 +26,11 @@ public class Player extends Entity {
     private boolean hasWings = false;
     private int keyCount = 0;
     private boolean hasSocks = false;
+    private boolean hitDoor = false;
+    private int indexDoor;
     private int socksTimer = 0;
 
-    public ArrayList<Item> items = new ArrayList<>();
+    public Bag bag;
 
     //    private  int wingsTimer=0;
     public KeyHandler getKh() {
@@ -47,7 +51,6 @@ public class Player extends Entity {
         this.defultHitBoxX = hitBox.x;
         this.defultHitBoxY = hitBox.y;
 
-
         setDefultValues();
         getPlayerImg();
     }
@@ -57,8 +60,9 @@ public class Player extends Entity {
         this.yWorld = Constants.TILE_SIZE * 21;
         this.speed = 4;
         this.direction = "up";
-        this.maxLife=9;
-        this.life=maxLife;
+        this.maxLife = 9;
+        this.life = maxLife;
+        this.bag = new Bag(this);
     }
 
     public void getPlayerImg() {
@@ -91,6 +95,7 @@ public class Player extends Entity {
 
             // CHECK TILE COLLISION
             collitionOn = false;
+            hitDoor = false;
             CheckerCollision.checkTile(this, pp.getTileManager());
 
             int objInx = CheckerCollision.checkObject(this, true, pp);
@@ -105,11 +110,8 @@ public class Player extends Entity {
                     speed -= 2;
                 }
             }
-            if (hasWings) {
 
-            }
-
-            if (!collitionOn || hasWings) {
+            if (!collitionOn && !hitDoor) {
                 switch (direction) {
                     case "up" -> yWorld -= speed;
                     case "down" -> yWorld += speed;
@@ -135,25 +137,22 @@ public class Player extends Entity {
                 waitCounter = 0;
             }
         }
+
+        bag.update();
     }
 
     public void pickUpObj(int inx) {
         if (inx == 999) return;
-        if (items.size()>=5){
-            pp.getUi().writeMessage("Your bag is full!");
-            return;
-        }
-        pp.obj[inx].pickUp(this, inx);
-        items.add(pp.obj[inx]);
-        pp.obj[inx] = null;
-
-    }
-    public void drawItems(Graphics2D g2){
-        int x=655;
-        int y=50;
-        for(Item item: items){
-            g2.drawImage(item.img,x,y,null);
-            x+=Constants.TILE_SIZE+8;
+        if (!pp.obj[inx].canTake) {
+            if (Objects.equals(pp.obj[inx].name, "door")) {
+                hitDoor = true;
+                indexDoor=inx;
+            }
+        } else {
+            musicPlayer.play("/music/UrrCat.wav");
+            musicPlayer.stop();
+            bag.addItem(pp.obj[inx], pp.getUi());
+            pp.obj[inx] = null;
         }
     }
 
@@ -182,7 +181,7 @@ public class Player extends Entity {
         }
         g2.drawImage(img, xScreen, yScreen, null);
 
-        drawItems(g2);
+        bag.drawBag(g2);
     }
 
     public void setHasWings(boolean hasWings) {
@@ -201,6 +200,20 @@ public class Player extends Entity {
         this.hasSocks = hasSocks;
     }
 
+    public boolean isHitDoor() {
+        return hitDoor;
+    }
 
+    public void setHitDoor(boolean hitDoor) {
+        this.hitDoor = hitDoor;
+    }
+
+    public PlayingPage getPp() {
+        return pp;
+    }
+
+    public int getIndexDoor() {
+        return indexDoor;
+    }
 }
 
