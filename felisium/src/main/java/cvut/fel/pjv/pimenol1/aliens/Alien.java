@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 public class Alien extends Entity {
 
     private int imgSize = 30;
+    protected int damage=1;
     private BufferedImage[] imgLeft = new BufferedImage[4];
     private BufferedImage[] imgRight = new BufferedImage[4];
     private int sum =25;
@@ -46,5 +47,11 @@ public class Alien extends Entity {
 
     }
 
+    public int getDamage() {
+        return damage;
+    }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }

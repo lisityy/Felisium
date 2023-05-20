@@ -15,7 +15,8 @@ public class UI {
     boolean haveMessage = false;
     int MessageTimer = 0;
     private double gameTime = 0;
-    BufferedImage tileInventorys, heart;
+    BufferedImage heart;
+    private int countHeart=9;
 
     public UI() {
         try {
@@ -49,8 +50,7 @@ public class UI {
             }
         }
 
-        drawLife(g2,9);
-
+        drawLife(g2,countHeart);
 
     }
 
@@ -94,4 +94,11 @@ public class UI {
 //    }
 
 
+    public int getCountHeart() {
+        return countHeart;
+    }
+
+    public void setCountHeart(int countHeart) {
+        this.countHeart = countHeart;
+    }
 }

@@ -31,6 +31,7 @@ public class Entity {
     protected int timeUpdate = 12;
 
     protected int maxLife, life;
+    protected int damage=0;
 
 
     public boolean collitionOn = false;
@@ -173,27 +174,11 @@ public class Entity {
         return defultHitBoxY;
     }
 
-    public int getSpriteTimer() {
-        return spriteTimer;
+    public int getDamage() {
+        return damage;
     }
 
-    public int getWaitTimer() {
-        return waitTimer;
-    }
-
-    public int getSpriteNum() {
-        return spriteNum;
-    }
-
-    public int getWaitNum() {
-        return waitNum;
-    }
-
-    public int getMaxSprite() {
-        return maxSprite;
-    }
-
-    public int getTimeUpdate() {
-        return timeUpdate;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }
