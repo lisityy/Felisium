@@ -1,5 +1,6 @@
 package cvut.fel.pjv.pimenol1.utils;
 
+import cvut.fel.pjv.pimenol1.aliens.Alien;
 import cvut.fel.pjv.pimenol1.entity.NPC_blackCat;
 import cvut.fel.pjv.pimenol1.inventorys.*;
 import cvut.fel.pjv.pimenol1.main.Constants;
@@ -30,5 +31,9 @@ public class AssetSetter {
 
     public void setNPC(){
         pp.npc[0]= new NPC_blackCat("NPC_greyCat", "gcat", 21*Constants.TILE_SIZE, 21*Constants.TILE_SIZE);
+    }
+
+    public void setAliens(){
+        pp.getAliens()[0]=new Alien("enemy", "enemyCalm", 23 * Constants.TILE_SIZE,23 * Constants.TILE_SIZE);
     }
 }

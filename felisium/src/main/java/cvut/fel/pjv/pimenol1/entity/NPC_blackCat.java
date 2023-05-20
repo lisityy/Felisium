@@ -6,11 +6,14 @@ import cvut.fel.pjv.pimenol1.utils.Utils;
 public class NPC_blackCat extends Entity{
 
     public NPC_blackCat(String path, String name, int x, int y) {
-        super(path, name);
+        super(name);
         this.xWorld=x;
         this.yWorld=y;
         direction="up";
         collitionOn=true;
+        sizeSubImg = 16;
+
+        getEntityImg(path);
     }
 
 }

@@ -19,6 +19,7 @@ public class Player extends Entity {
     private final KeyHandler kh;
     private MusicPlayer musicPlayer = new MusicPlayer();
     BufferedImage sleep, rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
+    protected BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     BufferedImage tileInventorys;
 
     public final int xScreen, yScreen;
@@ -39,7 +40,7 @@ public class Player extends Entity {
 
 
     public Player(PlayingPage pp, KeyHandler kh) {
-        super("player", "cat");
+        super( "cat");
         //ok
         this.pp = pp;
         this.kh = kh;
@@ -66,16 +67,24 @@ public class Player extends Entity {
     }
 
     public void getPlayerImg() {
-        sleep = setup("player", "cat_sleep");
-
-        rightSocks1 = setup("player", "cat_socks_right_1");
-        rightSocks2 = setup("player", "cat_socks_right_2");
-        leftSocks1 = setup("player", "cat_socks_left_1");
-        leftSocks2 = setup("player", "cat_socks_left_2");
-        downSocks1 = setup("player", "cat_socks_down_1");
-        downSocks2 = setup("player", "cat_socks_down_2");
-        upSocks1 = setup("player", "cat_socks_up_1");
-        upSocks2 = setup("player", "cat_socks_up_2");
+        String path="player";
+        sleep = setup(path, "cat_sleep");
+        up1 = setup(path, name+"_up_1");
+        down1 = setup(path, name+"_down_1");
+        right1 = setup(path, name+"_right_1");
+        left1 = setup(path, name+"_left_1");
+        right2 = setup(path, name+"_right_2");
+        up2 = setup(path, name+"_up_2");
+        down2 = setup(path, name+"_down_2");
+        left2 = setup(path, name+"_left_2");
+        rightSocks1 = setup(path, "cat_socks_right_1");
+        rightSocks2 = setup(path, "cat_socks_right_2");
+        leftSocks1 = setup(path, "cat_socks_left_1");
+        leftSocks2 = setup(path, "cat_socks_left_2");
+        downSocks1 = setup(path, "cat_socks_down_1");
+        downSocks2 = setup(path, "cat_socks_down_2");
+        upSocks1 = setup(path, "cat_socks_up_1");
+        upSocks2 = setup(path, "cat_socks_up_2");
 
     }
 

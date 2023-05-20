@@ -15,8 +15,10 @@ public class PlayingPage extends JPanel implements Page {
     private GamePanel gp;
     private final TileManager tileManager = new TileManager();
     public Player player;
+
     public Item[] obj = new Item[10];
     public Entity[] npc= new Entity[10];
+    private Entity[] aliens= new Entity[10];
 
     private AssetSetter assetSetter = new AssetSetter(this);
     private UI ui = new UI();
@@ -40,6 +42,7 @@ public class PlayingPage extends JPanel implements Page {
     public void setUpGame() {
         assetSetter.setObjects();
         assetSetter.setNPC();
+        assetSetter.setAliens();
     }
 
     public void endGame() {
@@ -49,6 +52,18 @@ public class PlayingPage extends JPanel implements Page {
     @Override
     public void update() {
         player.update();
+
+        for(Entity alien: aliens){
+            if(alien!=null){
+                alien.update();
+            }
+        }
+
+        for (Entity entity : npc) {
+            if (entity != null) {
+                entity.update();
+            }
+        }
     }
 
     @Override
@@ -57,6 +72,7 @@ public class PlayingPage extends JPanel implements Page {
             tileManager.draw(g2, player);
             drawObjects(g2);
             drawNPC(g2);
+            drawEnemy(g2);
             ui.drawGame(g2);
             player.draw(g2,this);
 
@@ -82,6 +98,21 @@ public class PlayingPage extends JPanel implements Page {
         }
     }
 
+    private void drawEnemy(Graphics2D g2){
+        for(Entity alien: aliens){
+            if(alien!=null){
+                alien.draw(g2,this);
+            }
+        }
+    }
+
+    public Entity[] getAliens() {
+        return aliens;
+    }
+
+    public void setAliens(Entity[] aliens) {
+        this.aliens = aliens;
+    }
 
     public boolean isPause() {return isPause;}
 
