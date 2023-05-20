@@ -13,9 +13,10 @@ public class Alien extends Entity {
     private int imgSize = 30;
     private BufferedImage[] imgLeft = new BufferedImage[4];
     private BufferedImage[] imgRight = new BufferedImage[4];
+    private int sum =25;
 
-    public Alien(String path, String name, int x, int y) {
-        super(name);
+    public Alien(String path, String name, int x, int y, PlayingPage pp) {
+        super(name, pp);
 
         xWorld = x;
         yWorld = y;
@@ -24,6 +25,9 @@ public class Alien extends Entity {
         maxLife = 3;
         life = maxLife;
 
+
+        hitBox.height=Constants.TILE_SIZE+sum;
+        hitBox.width=Constants.TILE_SIZE+sum;
         defultHitBoxX = hitBox.x;
         defultHitBoxY = hitBox.y;
 
@@ -33,7 +37,7 @@ public class Alien extends Entity {
         getEntityImg("enemy");
 
         for (int i = 0; i < maxSprite; i++) {
-            int sum =20;
+
             left_a[i] = Utils.scaleImg(left_a[i], Constants.TILE_SIZE+sum, Constants.TILE_SIZE+sum);
             right_a[i] = Utils.scaleImg(right_a[i], Constants.TILE_SIZE+sum, Constants.TILE_SIZE+sum);
             up_a[i] = Utils.scaleImg(up_a[i], Constants.TILE_SIZE+sum, Constants.TILE_SIZE+sum);

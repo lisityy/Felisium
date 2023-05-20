@@ -1,7 +1,6 @@
 package cvut.fel.pjv.pimenol1.entity;
 
 import cvut.fel.pjv.pimenol1.inventorys.Bag;
-import cvut.fel.pjv.pimenol1.inventorys.Item;
 import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
@@ -9,9 +8,7 @@ import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.PriorityQueue;
 
 public class Player extends Entity {
 
@@ -40,7 +37,7 @@ public class Player extends Entity {
 
 
     public Player(PlayingPage pp, KeyHandler kh) {
-        super( "cat");
+        super( "cat", pp);
         //ok
         this.pp = pp;
         this.kh = kh;
@@ -56,7 +53,7 @@ public class Player extends Entity {
         getPlayerImg();
     }
 
-    public void setDefultValues() {
+    private void setDefultValues() {
         this.xWorld = Constants.TILE_SIZE * 23;
         this.yWorld = Constants.TILE_SIZE * 21;
         this.speed = 4;
@@ -66,7 +63,7 @@ public class Player extends Entity {
         this.bag = new Bag(this);
     }
 
-    public void getPlayerImg() {
+    private void getPlayerImg() {
         String path="player";
         sleep = setup(path, "cat_sleep");
         up1 = setup(path, name+"_up_1");
@@ -111,6 +108,7 @@ public class Player extends Entity {
             pickUpObj(objInx);
 
             int npcInx = CheckerCollision.checkEntity(this, pp.npc); //TODO: something with npc
+            int alienInx=CheckerCollision.checkEntity(this, pp.getAliens());
 
             if (hasSocks) {
                 socksTimer++;
@@ -129,28 +127,29 @@ public class Player extends Entity {
                 }
             }
 
-            spriteCounter++;
-            if (spriteCounter > 12) {
+            spriteTimer++;
+            if (spriteTimer > 12) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
                     spriteNum = 1;
                 }
-                spriteCounter = 0;
+                spriteTimer = 0;
             }
 
         } else {
-            waitCounter++;
-            if (waitCounter > 250) {
+            waitTimer++;
+            if (waitTimer > 250) {
                 direction = "sleep";
-                waitCounter = 0;
+                waitTimer = 0;
             }
         }
 
         bag.update();
     }
 
-    public void pickUpObj(int inx) {
+
+    private void pickUpObj(int inx) {
         if (inx == 999) return;
         if (!pp.obj[inx].canTake) {
             if (Objects.equals(pp.obj[inx].name, "door")) {

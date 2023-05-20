@@ -3,6 +3,7 @@ package cvut.fel.pjv.pimenol1.utils;
 import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.background.Tile;
+import cvut.fel.pjv.pimenol1.entity.Player;
 import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.main.PlayingPage;
 
@@ -128,7 +129,7 @@ public class CheckerCollision {
                 }
 
                 if (entity.hitBox.intersects(npc[i].hitBox)) {
-                    if (npc[i].collitionOn) {
+                    if (npc[i] != entity) {
                         entity.collitionOn = true;
                         index=i;
                     }
@@ -144,6 +145,34 @@ public class CheckerCollision {
         }
 
         return index;
+    }
+    public static boolean checkPlayer(Entity entity, Player player){
+
+        boolean contactPlayer = false;
+
+        entity.hitBox.x = entity.xWorld + entity.hitBox.x;
+        entity.hitBox.y = entity.yWorld + entity.hitBox.y;
+
+        player.hitBox.x = player.xWorld + player.hitBox.x;
+        player.hitBox.y = player.yWorld + player.hitBox.y;
+
+        switch (entity.direction) {
+            case "up" -> entity.hitBox.y -= entity.speed;
+            case "down" -> entity.hitBox.y += entity.speed;
+            case "left" -> entity.hitBox.x -= entity.speed;
+            case "right" -> entity.hitBox.x += entity.speed;
+        }
+        if (entity.hitBox.intersects(player.hitBox)) {
+            entity.collitionOn = true;
+            contactPlayer = true;
+        }
+
+        entity.hitBox.x = entity.getDefultHitBoxX();
+        entity.hitBox.y = entity.getDefultHitBoxY();
+        player.hitBox.x = player.getDefultHitBoxX();
+        player.hitBox.y = player.getDefultHitBoxY();
+
+        return contactPlayer;
     }
 
 }

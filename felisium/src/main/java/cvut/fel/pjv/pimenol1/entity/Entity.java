@@ -2,14 +2,16 @@ package cvut.fel.pjv.pimenol1.entity;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.main.PlayingPage;
+import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.util.Random;
 
 public class Entity {
+    private PlayingPage pp;
+
     public int xWorld, yWorld;
     public int xScreen, yScreen;
     public int speed;
@@ -19,9 +21,12 @@ public class Entity {
 
     protected int sizeSubImg = 30;
     public String direction;
-    protected int spriteCounter = 0, waitCounter = 0;
+
+    protected int acrionTimer = 0;
+    protected int spriteTimer = 0, waitTimer = 0;
     protected int spriteNum = 0, waitNum = 1, maxSprite = 1;
     protected int timeUpdate = 12;
+
     protected int maxLife, life;
 
 
@@ -29,15 +34,33 @@ public class Entity {
     public Rectangle hitBox = new Rectangle(0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);
     protected int defultHitBoxX, defultHitBoxY;
 
-    public Entity(String name) {
+
+    public Entity(String name, PlayingPage pp) {
         this.name = name;
+        this.pp = pp;
     }
 
     public void update() {
-        spriteCounter++;
-        if (spriteCounter > timeUpdate) {
+        getRandomDirection(150);
+        collitionOn = false;
+        CheckerCollision.checkTile(this, pp.getTileManager());
+        CheckerCollision.checkObject(this, false, pp);
+        CheckerCollision.checkEntity(this, pp.npc);
+        CheckerCollision.checkEntity(this, pp.getAliens());
+        CheckerCollision.checkPlayer(this,pp.player);
+
+        if (!collitionOn) {
+            switch (direction) {
+                case "up" -> yWorld -= speed;
+                case "down" -> yWorld += speed;
+                case "left" -> xWorld -= speed;
+                case "right" -> xWorld += speed;
+            }
+        }
+        spriteTimer++;
+        if (spriteTimer > timeUpdate) {
             spriteNum = (spriteNum + 1) % maxSprite;
-            spriteCounter=0;
+            spriteTimer = 0;
 
         }
 
@@ -96,6 +119,29 @@ public class Entity {
         return img;
     }
 
+
+    public void getRandomDirection(int interval) {
+        acrionTimer++;
+        if (acrionTimer > interval) {
+            Random random = new Random();
+            int i = random.nextInt(100) + 1;
+
+            if (i <= 25) { // 25% of the time it goes up
+                direction = "up";
+            }
+            if (i > 25 && i <= 50) { // 25% of the time it goes down
+                direction = "down";
+            }
+            if (i > 50 && i <= 75) { // 25% of the time it goes left
+                direction = "left";
+            }
+            if (i > 75) { // 25% of the time it goes right
+                direction = "right";
+            }
+            acrionTimer = 0;
+        }
+    }
+
     public int getDefultHitBoxX() {
         return defultHitBoxX;
     }
@@ -104,12 +150,12 @@ public class Entity {
         return defultHitBoxY;
     }
 
-    public int getSpriteCounter() {
-        return spriteCounter;
+    public int getSpriteTimer() {
+        return spriteTimer;
     }
 
-    public int getWaitCounter() {
-        return waitCounter;
+    public int getWaitTimer() {
+        return waitTimer;
     }
 
     public int getSpriteNum() {

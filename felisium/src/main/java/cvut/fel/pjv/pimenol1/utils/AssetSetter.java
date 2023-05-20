@@ -18,22 +18,23 @@ public class AssetSetter {
 
         pp.obj[0] = new Key(0, 23 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
 
-        pp.obj[3] = new Door(3, 19 * Constants.TILE_SIZE, 22 * Constants.TILE_SIZE);
+        pp.obj[3] = new Door(3, 13 * Constants.TILE_SIZE, 23 * Constants.TILE_SIZE);
 
         pp.obj[4] = new Socks(4, 11 * Constants.TILE_SIZE, 9 * Constants.TILE_SIZE);
 
         pp.obj[5] = new Box(5, 39 * Constants.TILE_SIZE, 11 * Constants.TILE_SIZE);
 
-        pp.obj[6] = new Fish(6, 22 * Constants.TILE_SIZE, 5 * Constants.TILE_SIZE);
+        pp.obj[6] = new Fish(6, 22 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
 
-        pp.obj[7] = new Valeriana(7, 9 * Constants.TILE_SIZE, 28 * Constants.TILE_SIZE);
+        pp.obj[7] = new Valeriana(7, 12 * Constants.TILE_SIZE, 28 * Constants.TILE_SIZE);
     }
 
-    public void setNPC(){
-        pp.npc[0]= new NPC_blackCat("NPC_greyCat", "gcat", 21*Constants.TILE_SIZE, 21*Constants.TILE_SIZE);
+    public void setNPC() {
+        pp.npc[0] = new NPC_blackCat(pp, "NPC_greyCat", "gcat", 21 * Constants.TILE_SIZE, 21 * Constants.TILE_SIZE);
     }
 
-    public void setAliens(){
-        pp.getAliens()[0]=new Alien("enemy", "enemyCalm", 23 * Constants.TILE_SIZE,23 * Constants.TILE_SIZE);
+    public void setAliens() {
+        pp.getAliens()[0] = new Alien("enemy", "enemyCalm", 23 * Constants.TILE_SIZE, 38 * Constants.TILE_SIZE, pp);
+        pp.getAliens()[1] = new Alien("enemy", "enemyCalm", 22 * Constants.TILE_SIZE, 35 * Constants.TILE_SIZE, pp);
     }
 }
