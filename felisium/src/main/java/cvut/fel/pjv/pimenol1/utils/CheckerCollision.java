@@ -53,7 +53,7 @@ public class CheckerCollision {
 
         Tile[] tiles = tm.getTiles();
         if (tiles[tileNum1].isCollision() || tiles[tileNum2].isCollision()) {
-            entity.collitionOn = true;
+            entity.collisionOn = true;
         }
     }
 
@@ -84,7 +84,7 @@ public class CheckerCollision {
 
                 if (entity.hitBox.intersects(pp.obj[i].getHitBox())) {
                     if (pp.obj[i].collision) {
-                        entity.collitionOn = true;
+                        entity.collisionOn = true;
                     }
                     if (isPlayer) {
                         index = i;
@@ -130,7 +130,7 @@ public class CheckerCollision {
 
                 if (entity.hitBox.intersects(npc[i].hitBox)) {
                     if (npc[i] != entity) {
-                        entity.collitionOn = true;
+                        entity.collisionOn = true;
                         index=i;
                     }
                 }
@@ -163,7 +163,7 @@ public class CheckerCollision {
             case "right" -> entity.hitBox.x += entity.speed;
         }
         if (entity.hitBox.intersects(player.hitBox)) {
-            entity.collitionOn = true;
+            entity.collisionOn = true;
             contactPlayer = true;
         }
 

@@ -2,6 +2,7 @@ package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.aliens.Alien;
 import cvut.fel.pjv.pimenol1.entity.NPC_blackCat;
+import cvut.fel.pjv.pimenol1.entity.NPC_catan;
 import cvut.fel.pjv.pimenol1.entity.NPC_queenCat;
 import cvut.fel.pjv.pimenol1.inventorys.*;
 import cvut.fel.pjv.pimenol1.main.Constants;
@@ -32,6 +33,7 @@ public class AssetSetter {
 
     public void setNPC() {
         pp.npc[0] = new NPC_queenCat(pp, "queenCat", "queenCat", 21 * Constants.TILE_SIZE, 21 * Constants.TILE_SIZE-50);
+        pp.npc[1] = new NPC_catan(pp,"NPC_catan", "catan",22*Constants.TILE_SIZE, 40*Constants.TILE_SIZE);
     }
 
     public void setAliens() {

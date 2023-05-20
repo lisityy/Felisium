@@ -27,7 +27,6 @@ public class PlayingPage extends JPanel implements Page {
     MusicPlayer musicPlayer;
 
     private boolean isPause = false;
-    private boolean enterPressed = false;
     public Font myFont;
 
     public PlayingPage(GamePanel gp) {
@@ -63,9 +62,13 @@ public class PlayingPage extends JPanel implements Page {
     public void update() {
         player.update();
 
-        for (Entity alien : aliens) {
-            if (alien != null) {
-                alien.update();
+        for (int i = 0; i < aliens.length; i++) {
+            if(aliens[i]!=null){
+                if(aliens[i].getLife()<=0){
+                    aliens[i]=null;
+                }else {
+                    aliens[i].update();
+                }
             }
         }
 
@@ -120,10 +123,6 @@ public class PlayingPage extends JPanel implements Page {
         return aliens;
     }
 
-    public void setAliens(Entity[] aliens) {
-        this.aliens = aliens;
-    }
-
     public boolean isPause() {
         return isPause;
     }
@@ -144,44 +143,10 @@ public class PlayingPage extends JPanel implements Page {
         this.player = player;
     }
 
-    public Item[] getObj() {
-        return obj;
-    }
-
-    public void setObj(Item[] obj) {
-        this.obj = obj;
-    }
-
-    public AssetSetter getAssetSetter() {
-        return assetSetter;
-    }
-
-    public void setAssetSetter(AssetSetter assetSetter) {
-        this.assetSetter = assetSetter;
-    }
 
     public UI getUi() {
         return ui;
     }
 
-    public void setUi(UI ui) {
-        this.ui = ui;
-    }
-
-    public MusicPlayer getMusicPlayer() {
-        return musicPlayer;
-    }
-
-    public void setMusicPlayer(MusicPlayer musicPlayer) {
-        this.musicPlayer = musicPlayer;
-    }
-
-    public boolean isEnterPressed() {
-        return enterPressed;
-    }
-
-    public void setEnterPressed(boolean enterPressed) {
-        this.enterPressed = enterPressed;
-    }
 }
 

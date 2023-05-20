@@ -10,17 +10,17 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Entity {
-    private PlayingPage pp;
+    protected PlayingPage pp;
 
     public int xWorld, yWorld;
-    public int xScreen, yScreen;
     public int speed;
     public String name;
     protected BufferedImage left, right, up, down;
     protected BufferedImage[] left_a, right_a, up_a, down_a;
+    protected int sum = 0;
 
     protected BufferedImage dialog;
-    private boolean haveDialog=false;
+    private boolean haveDialog = false;
 
     protected int sizeSubImg = 30;
     public String direction;
@@ -28,13 +28,13 @@ public class Entity {
     protected int acrionTimer = 0;
     protected int spriteTimer = 0, waitTimer = 0;
     protected int spriteNum = 0, waitNum = 1, maxSprite = 1;
-    protected int timeUpdate = 12;
+    protected int timeUpdate = 12 , maxTimeUpdate=100;
 
     protected int maxLife, life;
-    protected int damage=0;
+    protected int damage = 0;
 
 
-    public boolean collitionOn = false;
+    public boolean collisionOn = false;
     public Rectangle hitBox = new Rectangle(0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);
     protected int defultHitBoxX, defultHitBoxY;
 
@@ -46,14 +46,14 @@ public class Entity {
 
     public void update() {
         getRandomDirection(150);
-        collitionOn = false;
+        collisionOn = false;
         CheckerCollision.checkTile(this, pp.getTileManager());
         CheckerCollision.checkObject(this, false, pp);
         CheckerCollision.checkEntity(this, pp.npc);
         CheckerCollision.checkEntity(this, pp.getAliens());
         CheckerCollision.checkPlayer(this, pp.player);
 
-        if (!collitionOn) {
+        if (!collisionOn) {
             switch (direction) {
                 case "up" -> yWorld -= speed;
                 case "down" -> yWorld += speed;
@@ -65,9 +65,9 @@ public class Entity {
         if (spriteTimer > timeUpdate) {
             spriteNum = (spriteNum + 1) % maxSprite;
             spriteTimer = 0;
-            haveDialog=false;
+            haveDialog = false;
             Random random = new Random();
-            timeUpdate = random.nextInt(250);
+            timeUpdate = random.nextInt(maxTimeUpdate);
         }
 
     }
@@ -89,15 +89,15 @@ public class Entity {
                 && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
                 && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, null);
-            if(haveDialog){
-                g2.drawImage(dialog, screenX+Constants.TILE_SIZE+20, screenY-10, null);
+            if (haveDialog) {
+                g2.drawImage(dialog, screenX + Constants.TILE_SIZE + 20, screenY - 10, null);
             }
         }
     }
 
 
     public void speak() {
-        haveDialog=true;
+        haveDialog = true;
         dialog = Utils.load_image("text", "dialog");
         dialog = Utils.scaleImg(dialog, Constants.TILE_SIZE, Constants.TILE_SIZE);
     }
@@ -128,10 +128,10 @@ public class Entity {
             up_a[i] = up.getSubimage(i * sizeSubImg, 0, sizeSubImg, sizeSubImg);
             down_a[i] = down.getSubimage(i * sizeSubImg, 0, sizeSubImg, sizeSubImg);
 
-            left_a[i] = Utils.scaleImg(left_a[i], Constants.TILE_SIZE, Constants.TILE_SIZE);
-            right_a[i] = Utils.scaleImg(right_a[i], Constants.TILE_SIZE, Constants.TILE_SIZE);
-            up_a[i] = Utils.scaleImg(up_a[i], Constants.TILE_SIZE, Constants.TILE_SIZE);
-            down_a[i] = Utils.scaleImg(down_a[i], Constants.TILE_SIZE, Constants.TILE_SIZE);
+            left_a[i] = Utils.scaleImg(left_a[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
+            right_a[i] = Utils.scaleImg(right_a[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
+            up_a[i] = Utils.scaleImg(up_a[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
+            down_a[i] = Utils.scaleImg(down_a[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
         }
 
     }
@@ -166,6 +166,10 @@ public class Entity {
         }
     }
 
+    public void takeDamage(int damage){
+        life-=damage;
+    }
+
     public int getDefultHitBoxX() {
         return defultHitBoxX;
     }
@@ -180,5 +184,13 @@ public class Entity {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
     }
 }

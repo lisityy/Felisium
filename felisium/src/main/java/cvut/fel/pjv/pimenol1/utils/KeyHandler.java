@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
+    private boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
     GamePanel gp;
 
     public boolean isUpPressed() {
@@ -24,6 +24,9 @@ public class KeyHandler implements KeyListener {
 
     public boolean isRightPressed() {
         return rightPressed;
+    }
+    public boolean isEnterPressed(){
+        return enterPressed;
     }
 
     public KeyHandler(GamePanel gp) {
@@ -47,7 +50,7 @@ public class KeyHandler implements KeyListener {
             gp.getPlayingPage().setPause(!gp.getPlayingPage().isPause());
         }
         if(code==KeyEvent.VK_ENTER){
-            gp.getPlayingPage().setEnterPressed(true);
+            enterPressed=true;
         }
     }
 
@@ -81,7 +84,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
         if(code==KeyEvent.VK_ENTER){
-            gp.getPlayingPage().setEnterPressed(false);
+            enterPressed=false;
         }
     }
 }
