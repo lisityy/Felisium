@@ -9,7 +9,6 @@ import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class PlayingPage extends JPanel implements Page {
@@ -70,10 +69,10 @@ public class PlayingPage extends JPanel implements Page {
                 npcUpdate();
             }
             case PAUSE -> {
-
+                ui.updateButton();
             }
             case GAMEOVER -> {
-                ui.updateGameOver();
+                ui.updateButton();
             }
         }
 
@@ -108,9 +107,6 @@ public class PlayingPage extends JPanel implements Page {
         ui.drawGame(g2);
         player.draw(g2, this);
         switch (Constants.gameStatePlay) {
-            case PLAY -> {
-
-            }
             case PAUSE -> {
                 ui.drawPause(g2);
             }

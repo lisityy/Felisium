@@ -28,7 +28,6 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
             }
             case PLAY -> {
                 gp.getPlayingPage().player.bag.mousePressed(e);
-                if(Constants.gameStatePlay== GameState.GAMEOVER)
                     gp.getPlayingPage().getUi().mousePressed(e);
             }
         }
@@ -42,7 +41,6 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
             }
             case PLAY -> {
                 gp.getPlayingPage().player.bag.mouseReleased(e);
-                if(Constants.gameStatePlay== GameState.GAMEOVER)
                     gp.getPlayingPage().getUi().mouseReleased(e);
             }
         }
@@ -71,7 +69,6 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
             }
             case PLAY -> {
                 gp.getPlayingPage().player.bag.mouseMoved(e);
-                if(Constants.gameStatePlay== GameState.GAMEOVER)
                     gp.getPlayingPage().getUi().mouseMoved(e);
             }
         }

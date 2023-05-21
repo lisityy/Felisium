@@ -17,8 +17,8 @@ public class UI {
     private double gameTime = 0;
     BufferedImage heart;
     private int countHeart=9;
-    BufferedImage gameOverImg;
-    Button[] pauseButtons= new Button[2];
+    BufferedImage backgroundImg;
+    Button[] buttonUi = new Button[2];
 
     public UI() {
         try {
@@ -28,17 +28,17 @@ public class UI {
             heart = Utils.load_image("objects", "heart");
             heart = Utils.scaleImg(heart, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
-            gameOverImg = ImageIO.read(getClass().getResourceAsStream("/background/gameOver.png"));
-            loadButtonsPause();
+            backgroundImg = ImageIO.read(getClass().getResourceAsStream("/background/gameOver.png"));
+            loadButtons();
 
         } catch (Exception e) {
             System.out.println("Error read font: " + e.getMessage());
         }
     }
 
-    private void loadButtonsPause(){
-        pauseButtons[0]=new Button(250, 500, 0, "pauseButtons", 120,27, GameState.MAINMENU);
-        pauseButtons[1]=new Button(550, 500, 1, "pauseButtons", 120,27, GameState.RESET);
+    private void loadButtons(){
+        buttonUi[0]=new Button(250, 500, 0, "pauseButtons", 120,27, GameState.MAINMENU);
+        buttonUi[1]=new Button(550, 500, 1, "pauseButtons", 120,27, GameState.RESET);
     }
 
     public void writeMessage(String text) {
@@ -81,34 +81,40 @@ public class UI {
     }
 
     public void drawPause(Graphics2D g2) {
-        try {
-            BufferedImage pauseImg = ImageIO.read(getClass().getResourceAsStream("/background/pauseMenu.png"));
-            g2.drawImage(pauseImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
-        } catch (Exception e) {
-            System.out.println("Problem with reading pause img: " + e);
-        }
-        g2.setFont(myFont.deriveFont(Font.PLAIN, 100F));
-        g2.drawString("PAUSE", 400, 700);
-    }
-
-    public void drawGameOver(Graphics2D g2) {
 
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
-        g2.drawImage(gameOverImg, 0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
+        g2.drawImage(backgroundImg, 0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
 
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for(Button button: pauseButtons)
+        for(Button button: buttonUi)
+            button.draw(g2);
+
+        g2.drawString("PAUSE", 270, 200);
+        g2.setFont(myFont.deriveFont(Font.PLAIN, 30F));
+        g2.drawString("press ESC for continue", 360, 250);
+    }
+
+    public void drawGameOver(Graphics2D g2) {
+
+        g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
+        g2.drawImage(backgroundImg, 0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
+        g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
+
+        g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
+        g2.setColor(Color.WHITE);
+
+        for(Button button: buttonUi)
             button.draw(g2);
 
         g2.drawString("GAME", 320, 200);
         g2.drawString("OVER", 320, 350);
     }
 
-    public void updateGameOver(){
-        for(Button button: pauseButtons)
+    public void updateButton(){
+        for(Button button: buttonUi)
             button.update();
     }
     public boolean isInButton(MouseEvent e, Button mb) {
@@ -116,14 +122,14 @@ public class UI {
     }
 
     public void mousePressed(MouseEvent e) {
-        for (Button b : pauseButtons) {
+        for (Button b : buttonUi) {
             if (isInButton(e, b))
                 b.setMousePressed(true);
         }
     }
 
     public void mouseReleased(MouseEvent e) {
-        for (Button b : pauseButtons) {
+        for (Button b : buttonUi) {
             if (isInButton(e, b)) {
                 if (b.isMousePressed())
                     b.applyGameState();
@@ -134,15 +140,15 @@ public class UI {
     }
 
     private void resetButtons() {
-        for (Button b : pauseButtons)
+        for (Button b : buttonUi)
             b.resetBooleans();
     }
 
     public void mouseMoved(MouseEvent e) {
-        for (Button b : pauseButtons)
+        for (Button b : buttonUi)
             b.setMouseOver(false);
 
-        for (Button b : pauseButtons)
+        for (Button b : buttonUi)
             if (isInButton(e, b)) {
                 b.setMouseOver(true);
                 break;

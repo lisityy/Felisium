@@ -52,7 +52,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
-        if (code == KeyEvent.VK_P) {
+        if (code == KeyEvent.VK_ESCAPE) {
             if (Constants.gameStatePlay == GameState.PLAY) {
                 Constants.gameStatePlay = GameState.PAUSE;
             } else if (Constants.gameStatePlay == GameState.PAUSE) {
