@@ -6,6 +6,8 @@ import cvut.fel.pjv.pimenol1.utils.MouseHendler;
 import javax.swing.*;
 import java.awt.*;
 
+import static java.lang.System.exit;
+
 public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
@@ -81,6 +83,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
             case MAINMENU -> {
                 mainMenuPage.update();
+            }
+            case EXIT -> {
+                exit(0);
             }
         }
     }

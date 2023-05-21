@@ -20,6 +20,7 @@ public class Box extends Item {
             player.getPp().obj[this.index] = new Box(this.index, player.getPp().npc[player.getIndexCat()].xWorld, player.getPp().npc[player.getIndexCat()].yWorld);
             player.getPp().obj[this.index].canTake=false;
             player.getPp().npc[player.getIndexCat()] = null;
+            collision = false;
             return true;
         }
         return false;

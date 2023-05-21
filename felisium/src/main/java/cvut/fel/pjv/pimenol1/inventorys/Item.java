@@ -17,6 +17,7 @@ public class Item {
     public boolean canTake = true;
     public int worldX, worldY;
     protected int index;
+    protected boolean use = false;
 
     protected Rectangle hitBox = new Rectangle(0, 0, 48, 48);
     protected int defultHitBoxX = 0;

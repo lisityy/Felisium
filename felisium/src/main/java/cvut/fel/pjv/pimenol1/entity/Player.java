@@ -8,6 +8,7 @@ import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
+import javax.sound.midi.Soundbank;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
@@ -30,6 +31,8 @@ public class Player extends Entity {
     private boolean hasSocks = false;
     private boolean hitDoor = false;
     private boolean hitCat = false;
+
+    private  int timerWing = 0;
     private int indexDoor;
     private int indexCat;
     private int socksTimer = 0;
@@ -66,12 +69,12 @@ public class Player extends Entity {
         this.yWorld = Constants.TILE_SIZE * 21;
         this.speed = 4;
         this.direction = "up";
-        this.maxLife = 1;
+        this.maxLife = 9;
         this.life = maxLife;
         this.bag = new Bag(this);
         this.maxSprite = 2;
-        this.maxTimeInvincible=120;
-        bag.addWeapon(new Weapon("swort", 99, -1,-1), pp.getUi());
+        this.maxTimeInvincible = 120;
+        bag.addWeapon(new Weapon("swort", 99, -1, -1), pp.getUi());
     }
 
     private void getPlayerImg() {
@@ -114,8 +117,8 @@ public class Player extends Entity {
     @Override
     public void update() {
 
-        if(life<=0){
-            Constants.gameStatePlay=GameState.GAMEOVER;
+        if (life <= 0) {
+            Constants.gameStatePlay = GameState.GAMEOVER;
             return;
         }
 
@@ -167,6 +170,14 @@ public class Player extends Entity {
                 if (socksTimer > 500) {
                     hasSocks = false;
                     speed -= 2;
+                    socksTimer = 0;
+                }
+            }
+            if (haveWing) {
+                timerWing++;
+                if (timerWing > 1000) {
+                    haveWing = false;
+                    timerWing = 0;
                 }
             }
 
@@ -181,7 +192,6 @@ public class Player extends Entity {
 
             spriteTimer++;
             if (spriteTimer > 12) {
-                System.out.println(spriteNum);
                 if (spriteNum == 0) {
                     spriteNum = 1;
                 } else if (spriteNum == 1) {
@@ -251,7 +261,8 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         }
         g2.drawImage(img, xScreen, yScreen, null);
-
+        System.out.println("xTile: " + this.xWorld / Constants.TILE_SIZE);
+        System.out.println("yTile: " + this.yWorld / Constants.TILE_SIZE);
     }
 
     private void connectNPC(int index) {
@@ -276,7 +287,7 @@ public class Player extends Entity {
     public void attack() {
         int monsterIndex = CheckerCollision.checkEntity(this, pp.getAliens());
 
-        if (monsterIndex != 999 &&  !pp.getAliens()[monsterIndex].invincible) {
+        if (monsterIndex != 999 && !pp.getAliens()[monsterIndex].invincible) {
 
             int damage = calculateDamage();
             pp.getAliens()[monsterIndex].takeDamage(damage);
@@ -354,6 +365,14 @@ public class Player extends Entity {
 
     public void setIndexCat(int indexCat) {
         this.indexCat = indexCat;
+    }
+
+    public int getTimerWing() {
+        return timerWing;
+    }
+
+    public void setTimerWing(int timerWing) {
+        this.timerWing = timerWing;
     }
 }
 

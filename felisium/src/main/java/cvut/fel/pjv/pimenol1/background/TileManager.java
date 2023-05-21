@@ -58,7 +58,7 @@ public class TileManager {
             } else if (i==17){
                 setup(16, "0"+i, true);
             } else if (i==16){
-                setup(17, "0"+i, true);
+                setup(17, "0"+i, false);
             } else if (i>17){
                 setup(i, "0"+i, true);
             } else {

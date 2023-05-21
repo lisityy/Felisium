@@ -17,13 +17,15 @@ public class PlayingPage extends JPanel implements Page {
     private final TileManager tileManager = new TileManager();
     public Player player;
 
-    public Item[] obj = new Item[10];
-    public Entity[] npc = new Entity[10];
-    private Entity[] aliens = new Entity[10];
+    public Item[] obj = new Item[20];
+    public Entity[] npc = new Entity[20];
+    private Entity[] aliens = new Entity[20];
 
     private AssetSetter assetSetter = new AssetSetter(this);
     private UI ui = new UI();
     MusicPlayer musicPlayer;
+
+    private int maxCat=5;
 
     public Font myFont;
 
@@ -161,6 +163,14 @@ public class PlayingPage extends JPanel implements Page {
 
     public UI getUi() {
         return ui;
+    }
+
+    public int getMaxCat() {
+        return maxCat;
+    }
+
+    public void setMaxCat(int maxCat) {
+        this.maxCat = maxCat;
     }
 }
 

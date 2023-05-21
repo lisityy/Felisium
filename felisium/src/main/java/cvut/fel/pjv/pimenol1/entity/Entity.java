@@ -37,7 +37,7 @@ public class Entity {
     protected int maxLife, life;
     protected int damage = 0;
 
-
+    protected boolean haveWing = false;
     public boolean collisionOn = false;
     public Rectangle hitBox = new Rectangle(0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);
     protected int defultHitBoxX, defultHitBoxY;
@@ -96,6 +96,7 @@ public class Entity {
                 g2.drawImage(dialog, screenX + Constants.TILE_SIZE + 20, screenY - 10, null);
             }
         }
+
     }
 
 
@@ -195,5 +196,13 @@ public class Entity {
 
     public void setLife(int life) {
         this.life = life;
+    }
+
+    public boolean isHaveWing() {
+        return haveWing;
+    }
+
+    public void setHaveWing(boolean haveWing) {
+        this.haveWing = haveWing;
     }
 }

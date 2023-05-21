@@ -50,8 +50,11 @@ public class Button {
     }
 
 
-    public void applyGameState() {
+    public void applyGameStatePlay() {
         Constants.gameStatePlay = state;
+    }
+    public void applyGameState() {
+        Constants.gameState= state;
     }
 
     public int getButtonWidth() {
@@ -96,6 +99,9 @@ public class Button {
     public void resetBooleans() {
         this.mouseOver = false;
         this.mousePressed = false;
+    }
+    public GameState getState() {
+        return state;
     }
 
 }

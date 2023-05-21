@@ -7,6 +7,7 @@ import cvut.fel.pjv.pimenol1.main.UI;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Bag {
     public ArrayList<Item> items = new ArrayList<>();
@@ -39,8 +40,8 @@ public class Bag {
         return true;
     }
 
-    public void addWeapon(Weapon w, UI ui){
-        if(weapons.size() >=1){
+    public void addWeapon(Weapon w, UI ui) {
+        if (weapons.size() >= 1) {
             ui.writeMessage("You already have weapon!");
             return;
         }
@@ -67,7 +68,7 @@ public class Bag {
         }
 
         y = y + Constants.TILE_SIZE + 15;
-        x -= (Constants.TILE_SIZE+10);
+        x -= (Constants.TILE_SIZE + 10);
         for (int i = 0; i < weaponCell.length; i++) {
             weaponCell[i] = new BagCell(x, y, 99);
             x += Constants.TILE_SIZE + 10;
@@ -77,17 +78,27 @@ public class Bag {
     public void drawBag(Graphics2D g2) {
         for (BagCell bc : bagCell)
             bc.draw(g2);
-        for (BagCell weapon: weaponCell){
+        for (BagCell weapon : weaponCell) {
             weapon.draw(g2);
         }
 
         int x = 655;
         int y = 25;
-        for (Item item : items) {
-            g2.drawImage(item.img, x, y, null);
-            x += Constants.TILE_SIZE + 8;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).use && Objects.equals(items.get(i).name, "wing")) {
+                float t = 1 - (float) player.getTimerWing() / 1000;
+                g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), t));
+                g2.drawImage(items.get(i).img, x, y, null);
+                g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
+                if (t == 0) {
+                    items.remove(i);
+                }
+            } else {
+                g2.drawImage(items.get(i).img, x, y, null);
+                x += Constants.TILE_SIZE + 8;
+            }
         }
-        g2.drawImage(weapons.get(0).img,950, y+Constants.TILE_SIZE+10,null);
+        g2.drawImage(weapons.get(0).img, 950, y + Constants.TILE_SIZE + 10, null);
     }
 
     public void mousePressed(MouseEvent e) {

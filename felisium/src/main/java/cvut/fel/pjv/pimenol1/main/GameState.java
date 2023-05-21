@@ -4,6 +4,7 @@ public enum GameState {
     MAINMENU,
     CONTINUE,
     SETTINGS,
+    EXIT,
     //use only in game
     PLAY,
     WIN,

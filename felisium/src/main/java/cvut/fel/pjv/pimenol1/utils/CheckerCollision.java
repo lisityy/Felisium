@@ -53,11 +53,15 @@ public class CheckerCollision {
 
         Tile[] tiles = tm.getTiles();
         if (tiles[tileNum1].isCollision() || tiles[tileNum2].isCollision()) {
-            entity.collisionOn = true;
+            if (!entity.isHaveWing()) {
+                entity.collisionOn = true;
+            } else if (tileNum1 == 18 || tileNum2 == 18) {
+                entity.collisionOn = true;
+            }
         }
     }
 
-    public static int checkObject(Entity entity, boolean isPlayer , PlayingPage pp) {
+    public static int checkObject(Entity entity, boolean isPlayer, PlayingPage pp) {
         int index = 999;
         for (int i = 0; i < pp.obj.length; i++) {
 
@@ -103,7 +107,7 @@ public class CheckerCollision {
         return index;
     }
 
-    public static int checkEntity (Entity entity, Entity[] npc) {
+    public static int checkEntity(Entity entity, Entity[] npc) {
         int index = 999;
         for (int i = 0; i < npc.length; i++) {
 
@@ -131,7 +135,7 @@ public class CheckerCollision {
                 if (entity.hitBox.intersects(npc[i].hitBox)) {
                     if (npc[i] != entity) {
                         entity.collisionOn = true;
-                        index=i;
+                        index = i;
                     }
                 }
 
@@ -146,7 +150,8 @@ public class CheckerCollision {
 
         return index;
     }
-    public static boolean checkPlayer(Entity entity, Player player){
+
+    public static boolean checkPlayer(Entity entity, Player player) {
 
         boolean contactPlayer = false;
 

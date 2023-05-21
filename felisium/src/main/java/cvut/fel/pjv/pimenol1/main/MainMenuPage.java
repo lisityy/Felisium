@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 public class MainMenuPage implements Page {
 
-    private MenuButton[] buttons = new MenuButton[3];
+    private Button[] buttons = new Button[3];
     private BufferedImage backgroundImage;
     Font myFont;
 
@@ -28,42 +28,43 @@ public class MainMenuPage implements Page {
     }
 
     private void loadButtons() {
-        buttons[0] = new MenuButton(85 * Constants.SCALE, (int) (50 * Constants.SCALE), 0, GameState.RESET);
-        buttons[1] = new MenuButton(85 * Constants.SCALE, (int) (80 * Constants.SCALE), 1, GameState.PLAY);
-        buttons[2] = new MenuButton(95 * Constants.SCALE, (int) (110 * Constants.SCALE), 2, GameState.WIN);
+        String nameFile="menuButtons";
+        buttons[0] = new Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
+        buttons[1] = new Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.PLAY);
+        buttons[2] = new Button(95 * Constants.SCALE, 110 * Constants.SCALE, 2, nameFile, 120, 27, GameState.EXIT);
     }
-
 
     @Override
     public void update() {
-        for (MenuButton mb : buttons)
+        for (Button mb : buttons)
             mb.update();
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 150F));
-        g2.setColor(new Color(58,0,137));
+        g2.setColor(new Color(58, 0, 137));
 
         g2.drawImage(backgroundImage, 0, 0, null);
-        for (MenuButton mb : buttons)
+        for (Button mb : buttons)
             mb.draw(g2);
 
         g2.drawString("FELISIUM", 230, 150);
     }
-    public boolean isInButton(MouseEvent e, MenuButton mb) {
+
+    public boolean isInButton(MouseEvent e, Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
 
     public void mousePressed(MouseEvent e) {
-        for (MenuButton mb : buttons) {
+        for (Button mb : buttons) {
             if (isInButton(e, mb))
                 mb.setMousePressed(true);
         }
     }
 
     public void mouseReleased(MouseEvent e) {
-        for (MenuButton mb : buttons) {
+        for (Button mb : buttons) {
             if (isInButton(e, mb)) {
                 if (mb.isMousePressed())
                     mb.applyGameState();
@@ -74,15 +75,15 @@ public class MainMenuPage implements Page {
     }
 
     private void resetButtons() {
-        for (MenuButton mb : buttons)
+        for (Button mb : buttons)
             mb.resetBooleans();
     }
 
     public void mouseMoved(MouseEvent e) {
-        for (MenuButton mb : buttons)
+        for (Button mb : buttons)
             mb.setMouseOver(false);
 
-        for (MenuButton mb : buttons)
+        for (Button mb : buttons)
             if (isInButton(e, mb)) {
                 mb.setMouseOver(true);
                 break;

@@ -16,7 +16,7 @@ public class UI {
     int MessageTimer = 0;
     private double gameTime = 0;
     BufferedImage heart;
-    private int countHeart=9;
+    private int countHeart = 9;
     BufferedImage backgroundImg;
     Button[] buttonUi = new Button[2];
 
@@ -36,9 +36,9 @@ public class UI {
         }
     }
 
-    private void loadButtons(){
-        buttonUi[0]=new Button(250, 500, 0, "pauseButtons", 120,27, GameState.MAINMENU);
-        buttonUi[1]=new Button(550, 500, 1, "pauseButtons", 120,27, GameState.RESET);
+    private void loadButtons() {
+        buttonUi[0] = new Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
+        buttonUi[1] = new Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
     }
 
     public void writeMessage(String text) {
@@ -47,6 +47,7 @@ public class UI {
     }
 
     public void drawGame(Graphics2D g2) {
+
         g2.setFont(myFont.deriveFont(Font.PLAIN, 50F));
         g2.setColor(new Color(58, 0, 137));
 
@@ -60,22 +61,22 @@ public class UI {
             }
         }
 
-        drawLife(g2,countHeart);
+        drawLife(g2, countHeart);
 
     }
 
-    private void drawLife(Graphics2D g2, int life){
-        int x=30;
-        int y=30;
-        int j=0;
-        for (int i = 0; i < life ; i++) {
+    private void drawLife(Graphics2D g2, int life) {
+        int x = 30;
+        int y = 30;
+        int j = 0;
+        for (int i = 0; i < life; i++) {
             j++;
             g2.drawImage(heart, x, y, null);
-            x += Constants.TILE_SIZE/2;
-            if(j>12){
+            x += Constants.TILE_SIZE / 2;
+            if (j > 12) {
                 y += Constants.TILE_SIZE;
-                x=30;
-                j=0;
+                x = 30;
+                j = 0;
             }
         }
     }
@@ -83,13 +84,13 @@ public class UI {
     public void drawPause(Graphics2D g2) {
 
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
-        g2.drawImage(backgroundImg, 0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
+        g2.drawImage(backgroundImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
 
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for(Button button: buttonUi)
+        for (Button button : buttonUi)
             button.draw(g2);
 
         g2.drawString("PAUSE", 270, 200);
@@ -100,23 +101,24 @@ public class UI {
     public void drawGameOver(Graphics2D g2) {
 
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
-        g2.drawImage(backgroundImg, 0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
+        g2.drawImage(backgroundImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
 
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for(Button button: buttonUi)
+        for (Button button : buttonUi)
             button.draw(g2);
 
         g2.drawString("GAME", 320, 200);
         g2.drawString("OVER", 320, 350);
     }
 
-    public void updateButton(){
-        for(Button button: buttonUi)
+    public void updateButton() {
+        for (Button button : buttonUi)
             button.update();
     }
+
     public boolean isInButton(MouseEvent e, Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
@@ -132,7 +134,7 @@ public class UI {
         for (Button b : buttonUi) {
             if (isInButton(e, b)) {
                 if (b.isMousePressed())
-                    b.applyGameState();
+                    b.applyGameStatePlay();
                 break;
             }
         }
