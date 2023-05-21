@@ -13,9 +13,9 @@ public class Fish extends Item {
     }
 
     @Override
-    public void pickUp(Player player, int inx) {
-        musicPlayer.play("/music/UrrCat.wav");
-        musicPlayer.stop();
+    public boolean useItem(Player player){
 
+        player.setLife(player.getLife()+1);
+        return true;
     }
 }

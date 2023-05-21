@@ -28,7 +28,7 @@ public class AssetSetter {
 
         pp.obj[6] = new Fish(6, 22 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
 
-        pp.obj[7] = new Valeriana(7, 12 * Constants.TILE_SIZE, 28 * Constants.TILE_SIZE);
+        pp.obj[7] = new Valeriana(7, 22 * Constants.TILE_SIZE, 28 * Constants.TILE_SIZE);
     }
 
     public void setNPC() {

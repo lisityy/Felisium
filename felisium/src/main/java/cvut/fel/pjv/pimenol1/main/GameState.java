@@ -5,6 +5,9 @@ public enum GameState {
     NEWGAME,
     CONTINUE,
     SETTINGS,
+    //use only in game
     PLAY,
-    WIN
+    WIN,
+    GAMEOVER,
+    PAUSE
 }

@@ -10,7 +10,10 @@ public class Valeriana extends Item {
     }
 
     @Override
-    public void pickUp(Player player, int inx) {
-
+    public boolean useItem(Player player){
+        player.setLife(player.getLife()+10);
+        player.setUseValeriana(true);
+        return true;
     }
+
 }

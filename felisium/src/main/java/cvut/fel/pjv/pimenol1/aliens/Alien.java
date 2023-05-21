@@ -23,7 +23,7 @@ public class Alien extends Entity {
         sum = 25;
 
         speed = 1;
-        maxLife = 3;
+        maxLife = 5;
         life = maxLife;
         maxTimeUpdate = 30;
 
@@ -79,6 +79,13 @@ public class Alien extends Entity {
             Random random = new Random();
             timeUpdate = random.nextInt(maxTimeUpdate);
         }
+        if (invincible) {
+            timerInvincible++;
+            if (timerInvincible > maxTimeInvincible) {
+                timerInvincible = 0;
+                invincible = false;
+            }
+        }
 
     }
 
@@ -96,11 +103,18 @@ public class Alien extends Entity {
         int screenX = xWorld - pp.player.xWorld + pp.player.xScreen;
         int screenY = yWorld - pp.player.yWorld + pp.player.yScreen;
 
+
         if (xWorld + Constants.TILE_SIZE > pp.player.xWorld - pp.player.xScreen
                 && xWorld - Constants.TILE_SIZE < pp.player.xWorld + pp.player.xScreen
                 && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
                 && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
+            if (invincible) {
+                g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.5f));
+            }
             g2.drawImage(img, screenX, screenY, null);
+            if (invincible) {
+                g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
+            }
         }
     }
 

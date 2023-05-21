@@ -14,7 +14,7 @@ public class Item {
     public BufferedImage img;
     public String name;
     public boolean collision = false;
-    public boolean canTake =true;
+    public boolean canTake = true;
     public int worldX, worldY;
     protected int index;
 
@@ -24,9 +24,9 @@ public class Item {
     protected Utils utils = new Utils();
 
     public Item(String nameFile, int index, int worldX, int worldY) {
-        this.index=index;
-        this.worldX=worldX;
-        this.worldY=worldY;
+        this.index = index;
+        this.worldX = worldX;
+        this.worldY = worldY;
         try {
             img = ImageIO.read(getClass().getResourceAsStream("/objects/" + nameFile + ".png"));
             img = utils.scaleImg(img, Constants.TILE_SIZE, Constants.TILE_SIZE);
@@ -47,7 +47,7 @@ public class Item {
         }
     }
 
-    public boolean useItem(Player player){
+    public boolean useItem(Player player) {
         return false;
     }
 

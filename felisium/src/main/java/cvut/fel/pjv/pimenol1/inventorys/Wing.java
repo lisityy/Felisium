@@ -13,11 +13,6 @@ public class Wing extends Item {
         collision = true;
     }
 
-    @Override
-    public void pickUp(Player player, int inx) {
-        musicPlayer.play("/music/UrrCat.wav");
-        musicPlayer.stop();
-        player.setHasWings(true);
-    }
+
 
 }

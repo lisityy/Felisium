@@ -1,6 +1,7 @@
 package cvut.fel.pjv.pimenol1.entity;
 
 import cvut.fel.pjv.pimenol1.inventorys.Bag;
+import cvut.fel.pjv.pimenol1.inventorys.Weapon;
 import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
@@ -22,15 +23,15 @@ public class Player extends Entity {
 
     public final int xScreen, yScreen;
 
-    private boolean invincible = false;
-    private int timerInvincible = 0, maxTimeInvincible = 120;
 
-    private boolean hasWings = false;
     private boolean attaking = false;
-    private int keyCount = 0;
+    private boolean useValeriana = false;
+    private int timerValeriana = 0;
     private boolean hasSocks = false;
     private boolean hitDoor = false;
+    private boolean hitCat = false;
     private int indexDoor;
+    private int indexCat;
     private int socksTimer = 0;
 
     private int damage = 2;
@@ -52,7 +53,7 @@ public class Player extends Entity {
         this.xScreen = (Constants.SCREEN_WIDTH / 2) - (Constants.TILE_SIZE / 2);
         this.yScreen = (Constants.SCREEN_HIGH / 2) - (Constants.TILE_SIZE / 2);
 
-        this.hitBox = new Rectangle(1 * Constants.SCALE, 9 * Constants.SCALE, 13 * Constants.SCALE, 6 * Constants.SCALE);
+        this.hitBox = new Rectangle(Constants.SCALE, 9 * Constants.SCALE, 13 * Constants.SCALE, 6 * Constants.SCALE);
         this.defultHitBoxX = hitBox.x;
         this.defultHitBoxY = hitBox.y;
 
@@ -68,7 +69,9 @@ public class Player extends Entity {
         this.maxLife = 9;
         this.life = maxLife;
         this.bag = new Bag(this);
-        this.maxSprite=2;
+        this.maxSprite = 2;
+        this.maxTimeInvincible=120;
+        bag.addWeapon(new Weapon("swort", 99, -1,-1), pp.getUi());
     }
 
     private void getPlayerImg() {
@@ -111,14 +114,36 @@ public class Player extends Entity {
     @Override
     public void update() {
 
-        if (kh.isUpPressed()) {
-            direction = "up";
-        } else if (kh.isDownPressed()) {
-            direction = "down";
-        } else if (kh.isLeftPressed()) {
-            direction = "left";
-        } else if (kh.isRightPressed()) {
-            direction = "right";
+        if(life<=0){
+            Constants.gameState=GameState.GAMEOVER;
+            return;
+        }
+
+        if (useValeriana) {
+            timerValeriana++;
+            if (timerValeriana > 500) {
+                timerValeriana = 0;
+                useValeriana = false;
+            }
+            if (kh.isUpPressed()) {
+                direction = "down";
+            } else if (kh.isDownPressed()) {
+                direction = "up";
+            } else if (kh.isLeftPressed()) {
+                direction = "right";
+            } else if (kh.isRightPressed()) {
+                direction = "left";
+            }
+        } else {
+            if (kh.isUpPressed()) {
+                direction = "up";
+            } else if (kh.isDownPressed()) {
+                direction = "down";
+            } else if (kh.isLeftPressed()) {
+                direction = "left";
+            } else if (kh.isRightPressed()) {
+                direction = "right";
+            }
         }
 
         if (kh.isDownPressed() || kh.isUpPressed() || kh.isRightPressed() || kh.isLeftPressed()) {
@@ -133,6 +158,7 @@ public class Player extends Entity {
 
             int npcInx = CheckerCollision.checkEntity(this, pp.npc);
             connectNPC(npcInx);
+
             int alienInx = CheckerCollision.checkEntity(this, pp.getAliens());
             connectAlien(alienInx);
 
@@ -170,11 +196,11 @@ public class Player extends Entity {
                 waitTimer = 0;
             }
         }
-        if (kh.isEnterPressed()) {
+        if (kh.isSpacePressed()) {
             attaking = true;
             attack();
         } else {
-            attaking =false;
+            attaking = false;
         }
         if (invincible) {
             timerInvincible++;
@@ -230,6 +256,8 @@ public class Player extends Entity {
 
     private void connectNPC(int index) {
         if (index != 999) {
+            hitCat = true;
+            indexCat = index;
             if (kh.isEnterPressed()) {
                 pp.npc[index].speak();
             }
@@ -246,16 +274,12 @@ public class Player extends Entity {
     }
 
     public void attack() {
-        // Check for nearby monsters using the appropriate collision detection mechanism
         int monsterIndex = CheckerCollision.checkEntity(this, pp.getAliens());
 
-        // If a monster is nearby, perform the attack
-        if (monsterIndex != 999) {
-            Entity monster = pp.getAliens()[monsterIndex];
-            int damage = calculateDamage(); // Calculate the damage based on player's stats, weapon, etc.
+        if (monsterIndex != 999 &&  !pp.getAliens()[monsterIndex].invincible) {
 
-            // Update the monster's health
-            monster.takeDamage(damage);
+            int damage = calculateDamage();
+            pp.getAliens()[monsterIndex].takeDamage(damage);
         }
     }
 
@@ -274,22 +298,26 @@ public class Player extends Entity {
         } else {
             musicPlayer.play("/music/UrrCat.wav");
             musicPlayer.stop();
-            bag.addItem(pp.obj[inx], pp.getUi());
-            pp.obj[inx] = null;
+            boolean addToBag = bag.addItem(pp.obj[inx], pp.getUi());
+            if (addToBag)
+                pp.obj[inx] = null;
         }
     }
 
-
-    public void setHasWings(boolean hasWings) {
-        this.hasWings = hasWings;
+    public boolean isUseValeriana() {
+        return useValeriana;
     }
 
-    public int getKeyCount() {
-        return keyCount;
+    public void setUseValeriana(boolean useValeriana) {
+        this.useValeriana = useValeriana;
     }
 
-    public void setKeyCount(int keyCount) {
-        this.keyCount = keyCount;
+    public int getTimerValeriana() {
+        return timerValeriana;
+    }
+
+    public void setTimerValeriana(int timerValeriana) {
+        this.timerValeriana = timerValeriana;
     }
 
     public void setHasSocks(boolean hasSocks) {
@@ -310,6 +338,22 @@ public class Player extends Entity {
 
     public int getIndexDoor() {
         return indexDoor;
+    }
+
+    public boolean isHitCat() {
+        return hitCat;
+    }
+
+    public void setHitCat(boolean hitCat) {
+        this.hitCat = hitCat;
+    }
+
+    public int getIndexCat() {
+        return indexCat;
+    }
+
+    public void setIndexCat(int indexCat) {
+        this.indexCat = indexCat;
     }
 }
 

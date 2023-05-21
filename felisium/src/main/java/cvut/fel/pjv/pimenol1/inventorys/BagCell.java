@@ -12,7 +12,7 @@ public class BagCell {
     private final int callHight = Constants.TILE_SIZE + 10;
 
     private int xPos, yPos, number, index;
-    private BufferedImage[] images = new BufferedImage[2];
+    private BufferedImage[] images = new BufferedImage[3];
     private boolean mouseOver, mousePressed;
     private Rectangle hitBox;
 
@@ -29,7 +29,11 @@ public class BagCell {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(images[index], xPos, yPos, cellWidth, callHight, null);
+        if(this.number == 99){
+            g2.drawImage(images[2], xPos, yPos, cellWidth, callHight, null);
+        } else {
+            g2.drawImage(images[index], xPos, yPos, cellWidth, callHight, null);
+        }
     }
 
     public void update() {
@@ -43,9 +47,11 @@ public class BagCell {
     private void loadButtonImages() {
         images[0] = Utils.load_image("tiles", "blueTile");
         images[1] = Utils.load_image("tiles", "blueTilePressed");
+        images[2] = Utils.load_image("tiles", "blueTile2");
 
         images[0] = Utils.scaleImg(images[0], Constants.TILE_SIZE + 10, Constants.TILE_SIZE + 10);
         images[1] = Utils.scaleImg(images[1], Constants.TILE_SIZE + 10, Constants.TILE_SIZE + 10);
+        images[2] = Utils.scaleImg(images[2], Constants.TILE_SIZE + 10, Constants.TILE_SIZE + 10);
     }
 
     public int getCellWidth() {

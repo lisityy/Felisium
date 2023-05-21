@@ -6,14 +6,14 @@ import cvut.fel.pjv.pimenol1.main.UI;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Bag {
     public ArrayList<Item> items = new ArrayList<>();
-    BufferedImage tileBug;
+    public ArrayList<Weapon> weapons = new ArrayList<>();
+
     private BagCell[] bagCell = new BagCell[5];
+    private BagCell[] weaponCell = new BagCell[1];
     private Player player;
 
     public Bag(Player player) {
@@ -30,18 +30,27 @@ public class Bag {
             bc.update();
     }
 
-    public void addItem(Item item, UI ui) {
+    public boolean addItem(Item item, UI ui) {
         if (items.size() >= 5) {
             ui.writeMessage("Your bag is full!");
-            return;
+            return false;
         }
         items.add(item);
+        return true;
+    }
+
+    public void addWeapon(Weapon w, UI ui){
+        if(weapons.size() >=1){
+            ui.writeMessage("You already have weapon!");
+            return;
+        }
+        weapons.add(w);
     }
 
     public void useItem(int index) {
-        if(items.size()>index) {
-            boolean used=items.get(index).useItem(player);
-            if(used){
+        if (items.size() > index) {
+            boolean used = items.get(index).useItem(player);
+            if (used) {
                 items.remove(index);
             }
         }
@@ -50,9 +59,17 @@ public class Bag {
 
     public void initBagCell() {
         int x = 650;
-        int y = 50;
-        for (int i = 0; i < 5; i++) {
+        int y = 20;
+
+        for (int i = 0; i < bagCell.length; i++) {
             bagCell[i] = new BagCell(x, y, i);
+            x += Constants.TILE_SIZE + 10;
+        }
+
+        y = y + Constants.TILE_SIZE + 15;
+        x -= (Constants.TILE_SIZE+10);
+        for (int i = 0; i < weaponCell.length; i++) {
+            weaponCell[i] = new BagCell(x, y, 99);
             x += Constants.TILE_SIZE + 10;
         }
     }
@@ -60,13 +77,17 @@ public class Bag {
     public void drawBag(Graphics2D g2) {
         for (BagCell bc : bagCell)
             bc.draw(g2);
+        for (BagCell weapon: weaponCell){
+            weapon.draw(g2);
+        }
 
         int x = 655;
-        int y = 55;
+        int y = 25;
         for (Item item : items) {
             g2.drawImage(item.img, x, y, null);
             x += Constants.TILE_SIZE + 8;
         }
+        g2.drawImage(weapons.get(0).img,950, y+Constants.TILE_SIZE+10,null);
     }
 
     public void mousePressed(MouseEvent e) {

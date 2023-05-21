@@ -69,6 +69,9 @@ public class GamePanel extends JPanel implements Runnable {
             case NEWGAME -> {
                 playingPage.startGame();
             }
+            case GAMEOVER -> {
+
+            }
         }
     }
 
@@ -88,6 +91,9 @@ public class GamePanel extends JPanel implements Runnable {
 
             }
             case WIN -> {
+
+            }
+            case GAMEOVER -> {
 
             }
         }

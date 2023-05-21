@@ -57,12 +57,18 @@ public class UI {
     private void drawLife(Graphics2D g2, int life){
         int x=30;
         int y=30;
+        int j=0;
         for (int i = 0; i < life ; i++) {
+            j++;
             g2.drawImage(heart, x, y, null);
-            x += Constants.TILE_SIZE/2-10;
+            x += Constants.TILE_SIZE/2;
+            if(j>12){
+                y += Constants.TILE_SIZE;
+                x=30;
+                j=0;
+            }
         }
     }
-
 
     public void drawPause(Graphics2D g2) {
         try {

@@ -26,8 +26,8 @@ public class PlayingPage extends JPanel implements Page {
     private UI ui = new UI();
     MusicPlayer musicPlayer;
 
-    private boolean isPause = false;
     public Font myFont;
+    private GameState state= GameState.PLAY;
 
     public PlayingPage(GamePanel gp) {
         this.gp = gp;
@@ -60,8 +60,23 @@ public class PlayingPage extends JPanel implements Page {
 
     @Override
     public void update() {
-        player.update();
+        switch (state){
+            case PLAY -> {
+                player.update();
+                aliensUpdate();
+                npcUpdate();
+            }
+            case PAUSE -> {
 
+            }
+            case GAMEOVER -> {
+
+            }
+        }
+
+    }
+
+    private void aliensUpdate(){
         for (int i = 0; i < aliens.length; i++) {
             if(aliens[i]!=null){
                 if(aliens[i].getLife()<=0){
@@ -71,7 +86,9 @@ public class PlayingPage extends JPanel implements Page {
                 }
             }
         }
+    }
 
+    private  void npcUpdate(){
         for (Entity entity : npc) {
             if (entity != null) {
                 entity.update();
@@ -81,16 +98,21 @@ public class PlayingPage extends JPanel implements Page {
 
     @Override
     public void draw(Graphics2D g2) {
-        if (!isPause) {
-            tileManager.draw(g2, player);
-            drawObjects(g2);
-            drawNPC(g2);
-            drawEnemy(g2);
-            ui.drawGame(g2);
-            player.draw(g2, this);
+        switch (state){
+            case PLAY -> {
+                tileManager.draw(g2, player);
+                drawObjects(g2);
+                drawNPC(g2);
+                drawEnemy(g2);
+                ui.drawGame(g2);
+                player.draw(g2, this);
+            }
+            case PAUSE -> {
+                ui.drawPause(g2);
+            }
+            case GAMEOVER -> {
 
-        } else {
-            ui.drawPause(g2);
+            }
         }
 
     }
@@ -123,13 +145,6 @@ public class PlayingPage extends JPanel implements Page {
         return aliens;
     }
 
-    public boolean isPause() {
-        return isPause;
-    }
-
-    public void setPause(boolean pause) {
-        isPause = pause;
-    }
 
     public TileManager getTileManager() {
         return tileManager;
@@ -148,5 +163,12 @@ public class PlayingPage extends JPanel implements Page {
         return ui;
     }
 
+    public GameState getState() {
+        return state;
+    }
+
+    public void setState(GameState state) {
+        this.state = state;
+    }
 }
 

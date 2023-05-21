@@ -19,8 +19,12 @@ public class Entity {
     protected BufferedImage[] left_a, right_a, up_a, down_a;
     protected int sum = 0;
 
+    protected boolean invincible = false;
+    protected int timerInvincible = 0, maxTimeInvincible = 120;
+
     protected BufferedImage dialog;
-    private boolean haveDialog = false;
+    protected boolean haveDialog = false;
+    protected Random random = new Random();
 
     protected int sizeSubImg = 30;
     public String direction;
@@ -66,7 +70,6 @@ public class Entity {
             spriteNum = (spriteNum + 1) % maxSprite;
             spriteTimer = 0;
             haveDialog = false;
-            Random random = new Random();
             timeUpdate = random.nextInt(maxTimeUpdate);
         }
 
@@ -147,7 +150,6 @@ public class Entity {
     public void getRandomDirection(int interval) {
         acrionTimer++;
         if (acrionTimer > interval) {
-            Random random = new Random();
             int i = random.nextInt(100) + 1;
 
             if (i <= 25) { // 25% of the time it goes up
@@ -167,6 +169,7 @@ public class Entity {
     }
 
     public void takeDamage(int damage){
+        invincible=true;
         life-=damage;
     }
 

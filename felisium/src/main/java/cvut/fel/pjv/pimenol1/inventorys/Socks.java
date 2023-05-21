@@ -12,8 +12,9 @@ public class Socks extends Item {
     }
 
     @Override
-    public void pickUp(Player player, int inx) {
+    public boolean useItem(Player player) {
         player.speed += 2;
         player.setHasSocks(true);
+        return true;
     }
 }
