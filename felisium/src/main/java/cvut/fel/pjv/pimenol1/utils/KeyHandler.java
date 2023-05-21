@@ -53,10 +53,10 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
         if (code == KeyEvent.VK_P) {
-            if (gp.getPlayingPage().getState() == GameState.PLAY) {
-                gp.getPlayingPage().setState(GameState.PAUSE);
-            } else if (gp.getPlayingPage().getState() == GameState.PAUSE) {
-                gp.getPlayingPage().setState(GameState.PLAY);
+            if (Constants.gameStatePlay == GameState.PLAY) {
+                Constants.gameStatePlay = GameState.PAUSE;
+            } else if (Constants.gameStatePlay == GameState.PAUSE) {
+                Constants.gameStatePlay = GameState.PLAY;
             }
         }
         if (code == KeyEvent.VK_ENTER) {

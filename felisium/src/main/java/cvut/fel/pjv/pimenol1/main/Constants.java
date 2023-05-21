@@ -1,9 +1,5 @@
 package cvut.fel.pjv.pimenol1.main;
 
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-
 public class Constants {
     public static final int ORIGINAL_TILE_SIZE = 16;
     public static final int SCALE = 4;
@@ -24,6 +20,7 @@ public class Constants {
     public static final int FPS = 100;
 
     public static GameState gameState;
+    public static GameState gameStatePlay;
 
 
 

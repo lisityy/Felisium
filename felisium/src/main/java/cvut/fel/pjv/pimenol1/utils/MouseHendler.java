@@ -2,6 +2,7 @@ package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.main.GamePanel;
+import cvut.fel.pjv.pimenol1.main.GameState;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -27,6 +28,8 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
             }
             case PLAY -> {
                 gp.getPlayingPage().player.bag.mousePressed(e);
+                if(Constants.gameStatePlay== GameState.GAMEOVER)
+                    gp.getPlayingPage().getUi().mousePressed(e);
             }
         }
     }
@@ -39,6 +42,8 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
             }
             case PLAY -> {
                 gp.getPlayingPage().player.bag.mouseReleased(e);
+                if(Constants.gameStatePlay== GameState.GAMEOVER)
+                    gp.getPlayingPage().getUi().mouseReleased(e);
             }
         }
     }
@@ -66,6 +71,8 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
             }
             case PLAY -> {
                 gp.getPlayingPage().player.bag.mouseMoved(e);
+                if(Constants.gameStatePlay== GameState.GAMEOVER)
+                    gp.getPlayingPage().getUi().mouseMoved(e);
             }
         }
     }

@@ -62,15 +62,25 @@ public class GamePanel extends JPanel implements Runnable {
         switch (Constants.gameState) {
             case PLAY -> {
                 playingPage.update();
+                switch (Constants.gameStatePlay){
+                    case RESET -> {
+                        playingPage.endGame();
+                        playingPage.startGame();
+                    }
+                    case MAINMENU -> {
+                        playingPage.endGame();
+                        Constants.gameState=GameState.MAINMENU;
+                    }
+                    case PLAY -> {
+
+                    }
+                }
+            }
+            case RESET -> {
+                playingPage.startGame();
             }
             case MAINMENU -> {
                 mainMenuPage.update();
-            }
-            case NEWGAME -> {
-                playingPage.startGame();
-            }
-            case GAMEOVER -> {
-
             }
         }
     }
@@ -86,15 +96,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
             case MAINMENU -> {
                 mainMenuPage.draw(g2);
-            }
-            case SETTINGS -> {
-
-            }
-            case WIN -> {
-
-            }
-            case GAMEOVER -> {
-
             }
         }
 

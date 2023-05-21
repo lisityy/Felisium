@@ -27,25 +27,28 @@ public class PlayingPage extends JPanel implements Page {
     MusicPlayer musicPlayer;
 
     public Font myFont;
-    private GameState state= GameState.PLAY;
 
     public PlayingPage(GamePanel gp) {
         this.gp = gp;
+
+        Constants.gameStatePlay = GameState.PLAY;
         player = new Player(this, gp.getKh());
         InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
-        try{
-        myFont = Font.createFont(Font.TRUETYPE_FONT, is);
-        } catch (Exception e){
-            System.out.println("ERROR: reading font"+e);
+        try {
+            myFont = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (Exception e) {
+            System.out.println("ERROR: reading font" + e);
         }
     }
 
     public void startGame() {
         musicPlayer = new MusicPlayer();
         musicPlayer.play("/music/musBegin.wav");
-        musicPlayer.changeIntensity(0.5F);
+        musicPlayer.changeIntensity(1F);
         setUpGame();
+        Constants.gameStatePlay = GameState.PLAY;
         Constants.gameState = GameState.PLAY;
+        player = new Player(this, gp.getKh());
     }
 
     public void setUpGame() {
@@ -60,7 +63,7 @@ public class PlayingPage extends JPanel implements Page {
 
     @Override
     public void update() {
-        switch (state){
+        switch (Constants.gameStatePlay) {
             case PLAY -> {
                 player.update();
                 aliensUpdate();
@@ -70,25 +73,25 @@ public class PlayingPage extends JPanel implements Page {
 
             }
             case GAMEOVER -> {
-
+                ui.updateGameOver();
             }
         }
 
     }
 
-    private void aliensUpdate(){
+    private void aliensUpdate() {
         for (int i = 0; i < aliens.length; i++) {
-            if(aliens[i]!=null){
-                if(aliens[i].getLife()<=0){
-                    aliens[i]=null;
-                }else {
+            if (aliens[i] != null) {
+                if (aliens[i].getLife() <= 0) {
+                    aliens[i] = null;
+                } else {
                     aliens[i].update();
                 }
             }
         }
     }
 
-    private  void npcUpdate(){
+    private void npcUpdate() {
         for (Entity entity : npc) {
             if (entity != null) {
                 entity.update();
@@ -98,20 +101,21 @@ public class PlayingPage extends JPanel implements Page {
 
     @Override
     public void draw(Graphics2D g2) {
-        switch (state){
+        tileManager.draw(g2, player);
+        drawObjects(g2);
+        drawNPC(g2);
+        drawEnemy(g2);
+        ui.drawGame(g2);
+        player.draw(g2, this);
+        switch (Constants.gameStatePlay) {
             case PLAY -> {
-                tileManager.draw(g2, player);
-                drawObjects(g2);
-                drawNPC(g2);
-                drawEnemy(g2);
-                ui.drawGame(g2);
-                player.draw(g2, this);
+
             }
             case PAUSE -> {
                 ui.drawPause(g2);
             }
             case GAMEOVER -> {
-
+                ui.drawGameOver(g2);
             }
         }
 
@@ -161,14 +165,6 @@ public class PlayingPage extends JPanel implements Page {
 
     public UI getUi() {
         return ui;
-    }
-
-    public GameState getState() {
-        return state;
-    }
-
-    public void setState(GameState state) {
-        this.state = state;
     }
 }
 

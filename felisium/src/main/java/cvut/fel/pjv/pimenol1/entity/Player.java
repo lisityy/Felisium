@@ -66,7 +66,7 @@ public class Player extends Entity {
         this.yWorld = Constants.TILE_SIZE * 21;
         this.speed = 4;
         this.direction = "up";
-        this.maxLife = 9;
+        this.maxLife = 1;
         this.life = maxLife;
         this.bag = new Bag(this);
         this.maxSprite = 2;
@@ -115,7 +115,7 @@ public class Player extends Entity {
     public void update() {
 
         if(life<=0){
-            Constants.gameState=GameState.GAMEOVER;
+            Constants.gameStatePlay=GameState.GAMEOVER;
             return;
         }
 

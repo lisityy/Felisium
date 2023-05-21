@@ -5,23 +5,25 @@ import cvut.fel.pjv.pimenol1.utils.Utils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MenuButton {
+public class Button {
     private final int buttonWidth = 290;
     private final int buttonHight = 75;
-    private int originButtonWidth = 120;
-    private int originButtonHight = 27;
+    private int originButtonWidth;
+    private int originButtonHight;
     private int xPos, yPos, rowIndex, index;
     private GameState state;
     private BufferedImage[] images = new BufferedImage[3];
     private boolean mouseOver, mousePressed;
     private Rectangle hitBox;
 
-    public MenuButton(int xPos, int yPos, int indexButt, GameState gameState) {
+    public Button(int xPos, int yPos, int rowIndex, String nameFile, int originButtonWidth, int originButtonHight, GameState state) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.rowIndex = indexButt;
-        this.state = gameState;
-        loadButtonImages();
+        this.rowIndex = rowIndex;
+        this.originButtonHight = originButtonHight;
+        this.originButtonWidth = originButtonWidth;
+        this.state=state;
+        loadButtonImages(nameFile);
         initHitBox();
     }
 
@@ -41,14 +43,15 @@ public class MenuButton {
             this.index = 2;
     }
 
-    private void loadButtonImages() {
-        BufferedImage temp = Utils.load_image("button", "menuButtons");
+    private void loadButtonImages(String nameFile) {
+        BufferedImage temp = Utils.load_image("button", nameFile);
         for (int i = 0; i < images.length; i++)
             images[i] = temp.getSubimage(i * originButtonWidth, rowIndex * originButtonHight, originButtonWidth, originButtonHight);
     }
 
+
     public void applyGameState() {
-        Constants.gameState = state;
+        Constants.gameStatePlay = state;
     }
 
     public int getButtonWidth() {
@@ -74,11 +77,6 @@ public class MenuButton {
     public void setOriginButtonHight(int originButtonHight) {
         this.originButtonHight = originButtonHight;
     }
-
-    public boolean isMouseOver() {
-        return this.mouseOver;
-    }
-
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
     }
@@ -100,7 +98,4 @@ public class MenuButton {
         this.mousePressed = false;
     }
 
-    public GameState getState() {
-        return state;
-    }
 }
