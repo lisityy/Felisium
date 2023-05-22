@@ -30,7 +30,7 @@ public class MainMenuPage implements Page {
     private void loadButtons() {
         String nameFile="menuButtons";
         buttons[0] = new Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
-        buttons[1] = new Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.PLAY);
+        buttons[1] = new Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.CONTINUE);
         buttons[2] = new Button(95 * Constants.SCALE, 110 * Constants.SCALE, 2, nameFile, 120, 27, GameState.EXIT);
     }
 

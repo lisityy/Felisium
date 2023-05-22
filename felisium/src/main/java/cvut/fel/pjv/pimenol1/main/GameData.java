@@ -29,6 +29,7 @@ public class GameData implements Serializable {
     private ArrayList<Integer> catX= new ArrayList<>(), catY= new ArrayList<>();
     private ArrayList<String> catsName = new ArrayList<>();
 
+    // player
     private int playerxWorld, playeryWorld;
     private int playerLife;
 

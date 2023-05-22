@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.inventorys.Item;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ public class GameSaver {
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonData = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(gameData);
 
-            // Save the JSON data to a file
             Files.writeString(Paths.get(filePath), jsonData);
 
             System.out.println("Game saved successfully.");

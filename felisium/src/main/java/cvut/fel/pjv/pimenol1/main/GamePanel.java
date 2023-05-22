@@ -85,6 +85,11 @@ public class GamePanel extends JPanel implements Runnable {
             case MAINMENU -> {
                 mainMenuPage.update();
             }
+            case CONTINUE -> {
+                loadGame();
+                Constants.gameState= GameState.PLAY;
+                Constants.gameStatePlay = GameState.PLAY;
+            }
             case EXIT -> {
                 exit(0);
             }
@@ -113,15 +118,10 @@ public class GamePanel extends JPanel implements Runnable {
         GameSaver.saveGame(gameData, "savegame.json");
     }
 
-//    public void loadGame() {
-//        GameData gameData = GameLoader.loadGame("savegame.dat");
-//
-//        if (gameData != null) {
-////            playingPage.player=gameData.getPlayer();
-////            playingPage.obj = gameData.getObj();
-////            playingPage.setAliens(gameData.getAliens());
-//        }
-//    }
+    public void loadGame() {
+        GameData gameData = GameLoader.loadGame("savegame.json");
+        GameLoader.addGameData(gameData, playingPage);
+    }
 
 
     public KeyHandler getKh() {

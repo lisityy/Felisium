@@ -77,7 +77,7 @@ public class UI {
 
     private void drawCatLeft(Graphics2D g2, int catLeft) {
         int x = 30;
-        int y = 70;
+        int y = 70* (int) (countHeart/12+1);
         int j = 0;
         for (int i = 0; i < catLeft; i++) {
             j++;
