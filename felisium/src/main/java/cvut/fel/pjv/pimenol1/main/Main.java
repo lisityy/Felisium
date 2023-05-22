@@ -1,5 +1,7 @@
 package cvut.fel.pjv.pimenol1.main;
 
+import cvut.fel.pjv.pimenol1.main.Felisium;
+
 import javax.swing.*;
 
 public class Main {

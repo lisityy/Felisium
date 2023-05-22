@@ -2,7 +2,6 @@ package cvut.fel.pjv.pimenol1.pages;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.main.GameState;
-import cvut.fel.pjv.pimenol1.pages.Button;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import javax.imageio.ImageIO;

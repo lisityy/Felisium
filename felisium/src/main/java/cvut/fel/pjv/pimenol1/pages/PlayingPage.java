@@ -1,10 +1,12 @@
 package cvut.fel.pjv.pimenol1.pages;
 
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.Felisium;
+import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.entity.Player;
 import cvut.fel.pjv.pimenol1.inventorys.Item;
-import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.AssetSetter;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
@@ -166,6 +168,5 @@ public class PlayingPage extends JPanel implements Page {
     public void setAliens(Entity[] aliens) {
         this.aliens = aliens;
     }
-
 }
 

@@ -1,8 +1,9 @@
 package cvut.fel.pjv.pimenol1.entity;
 
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.inventorys.Bag;
 import cvut.fel.pjv.pimenol1.inventorys.Weapon;
-import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
@@ -34,7 +35,7 @@ public class Player extends Entity {
     private int timerWing = 0;
     private int socksTimer = 0;
 
-    private int catsLeft = 0 ;
+    private int catsLeft = 0;
     private int indexDoor;
     private int indexCat;
 
@@ -116,20 +117,19 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-    // catsCount, win
-        int countCat=0;
-        for(Entity n: pp.npc){
-            if(n!=null){
+        int countCat = 0;
+        for (Entity n : pp.npc) {
+            if (n != null) {
                 countCat++;
             }
         }
-        this.catsLeft=countCat-1;
+        this.catsLeft = countCat - 1;
 
         if (life <= 0) {
             Constants.gameStatePlay = GameState.GAMEOVER;
             return;
         }
-        System.out.println(catsLeft);
+
         if (catsLeft == 0 && hitCat && Objects.equals(pp.npc[indexCat].name, "queenCat")) {
             Constants.gameStatePlay = GameState.WIN;
             return;
@@ -314,7 +314,7 @@ public class Player extends Entity {
     }
 
 
-    private void pickUpObj(int inx) {
+    public void pickUpObj(int inx) {
         if (inx == 999) return;
         if (!pp.obj[inx].canTake) {
             if (Objects.equals(pp.obj[inx].name, "door")) {
@@ -378,5 +378,8 @@ public class Player extends Entity {
         return timerWing;
     }
 
+    public void setIndexCat(int indexCat) {
+        this.indexCat = indexCat;
+    }
 }
 

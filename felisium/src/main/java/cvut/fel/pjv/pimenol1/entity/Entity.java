@@ -13,7 +13,7 @@ import java.util.Random;
 public class Entity implements Serializable {
     protected PlayingPage pp;
 
-    public int xWorld, yWorld;
+    public int xWorld=0, yWorld=0;
     public int speed;
     public String name;
     protected transient BufferedImage left, right, up, down;
