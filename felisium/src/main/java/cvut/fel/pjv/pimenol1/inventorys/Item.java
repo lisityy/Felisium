@@ -1,7 +1,7 @@
 package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
-import cvut.fel.pjv.pimenol1.main.PlayingPage;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 import cvut.fel.pjv.pimenol1.entity.Player;
 
@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Serial;
 import java.io.Serializable;
 
 public class Item implements Serializable {

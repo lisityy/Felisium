@@ -1,5 +1,10 @@
 package cvut.fel.pjv.pimenol1.main;
 
+import cvut.fel.pjv.pimenol1.gameData.GameData;
+import cvut.fel.pjv.pimenol1.gameData.GameLoader;
+import cvut.fel.pjv.pimenol1.gameData.GameSaver;
+import cvut.fel.pjv.pimenol1.pages.MainMenuPage;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MouseHendler;
 
@@ -8,7 +13,7 @@ import java.awt.*;
 
 import static java.lang.System.exit;
 
-public class GamePanel extends JPanel implements Runnable {
+public class Felisium extends JPanel implements Runnable {
 
     private Thread gameThread;
     private final KeyHandler kh = new KeyHandler(this);
@@ -16,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     private MainMenuPage mainMenuPage;
     private PlayingPage playingPage;
 
-    public GamePanel() {
+    public Felisium() {
         this.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);

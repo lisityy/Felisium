@@ -1,6 +1,6 @@
 package cvut.fel.pjv.pimenol1.entity;
 
-import cvut.fel.pjv.pimenol1.main.PlayingPage;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 
 public class NPC_blackCat extends Entity {
 

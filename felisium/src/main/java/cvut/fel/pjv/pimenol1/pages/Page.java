@@ -1,4 +1,4 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.pages;
 
 import java.awt.*;
 

@@ -1,5 +1,7 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.pages;
 
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import java.awt.*;

@@ -2,7 +2,7 @@ package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
 import cvut.fel.pjv.pimenol1.main.Constants;
-import cvut.fel.pjv.pimenol1.main.UI;
+import cvut.fel.pjv.pimenol1.pages.UI;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

@@ -1,11 +1,7 @@
 package cvut.fel.pjv.pimenol1.inventorys;
 
 import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.main.Constants;
-import cvut.fel.pjv.pimenol1.main.PlayingPage;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
-
-import java.awt.*;
 
 public class Wing extends Item {
 

@@ -3,12 +3,12 @@ package cvut.fel.pjv.pimenol1.entity;
 import cvut.fel.pjv.pimenol1.inventorys.Bag;
 import cvut.fel.pjv.pimenol1.inventorys.Weapon;
 import cvut.fel.pjv.pimenol1.main.*;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 import cvut.fel.pjv.pimenol1.utils.CheckerCollision;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
-import javax.sound.midi.Soundbank;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
@@ -17,7 +17,7 @@ public class Player extends Entity {
 
     private final PlayingPage pp;
     private final KeyHandler kh;
-    private MusicPlayer musicPlayer = new MusicPlayer();
+    private final MusicPlayer musicPlayer = new MusicPlayer();
     BufferedImage sleep, rightSocks1, rightSocks2, leftSocks1, leftSocks2, upSocks1, upSocks2, downSocks1, downSocks2;
     BufferedImage attackUp1, attackUp2, attackLeft, attackRight, attackDown1, attackDown2;
     protected BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
@@ -34,7 +34,7 @@ public class Player extends Entity {
     private int timerWing = 0;
     private int socksTimer = 0;
 
-    private int catsLeft = 4;
+    private int catsLeft = 0 ;
     private int indexDoor;
     private int indexCat;
 
@@ -50,7 +50,6 @@ public class Player extends Entity {
 
     public Player(PlayingPage pp, KeyHandler kh) {
         super("cat", pp);
-        //ok
         this.pp = pp;
         this.kh = kh;
 
@@ -117,12 +116,21 @@ public class Player extends Entity {
 
     @Override
     public void update() {
+    // catsCount, win
+        int countCat=0;
+        for(Entity n: pp.npc){
+            if(n!=null){
+                countCat++;
+            }
+        }
+        this.catsLeft=countCat-1;
 
         if (life <= 0) {
             Constants.gameStatePlay = GameState.GAMEOVER;
             return;
         }
-        if (catsLeft == 0) {
+        System.out.println(catsLeft);
+        if (catsLeft == 0 && hitCat && Objects.equals(pp.npc[indexCat].name, "queenCat")) {
             Constants.gameStatePlay = GameState.WIN;
             return;
         }
@@ -204,7 +212,7 @@ public class Player extends Entity {
                 }
                 spriteTimer = 0;
             }
-        } else {
+        } else if (!attaking) {
             waitTimer++;
             if (waitTimer > 250) {
                 direction = "sleep";
@@ -273,11 +281,12 @@ public class Player extends Entity {
         if (index != 999) {
             hitCat = true;
             indexCat = index;
+
             if (kh.isEnterPressed()) {
                 pp.npc[index].speak();
             }
         } else {
-            hitCat=false;
+            hitCat = false;
         }
     }
 
@@ -329,20 +338,8 @@ public class Player extends Entity {
         this.catsLeft = catsLeft;
     }
 
-    public boolean isUseValeriana() {
-        return useValeriana;
-    }
-
     public void setUseValeriana(boolean useValeriana) {
         this.useValeriana = useValeriana;
-    }
-
-    public int getTimerValeriana() {
-        return timerValeriana;
-    }
-
-    public void setTimerValeriana(int timerValeriana) {
-        this.timerValeriana = timerValeriana;
     }
 
     public void setHasSocks(boolean hasSocks) {
@@ -377,16 +374,9 @@ public class Player extends Entity {
         return indexCat;
     }
 
-    public void setIndexCat(int indexCat) {
-        this.indexCat = indexCat;
-    }
-
     public int getTimerWing() {
         return timerWing;
     }
 
-    public void setTimerWing(int timerWing) {
-        this.timerWing = timerWing;
-    }
 }
 

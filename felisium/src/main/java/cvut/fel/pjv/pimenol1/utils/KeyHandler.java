@@ -1,7 +1,7 @@
 package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
-import cvut.fel.pjv.pimenol1.main.GamePanel;
+import cvut.fel.pjv.pimenol1.main.Felisium;
 import cvut.fel.pjv.pimenol1.main.GameState;
 
 import java.awt.event.KeyEvent;
@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     private boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
-    GamePanel gp;
+    Felisium gp;
 
     public boolean isUpPressed() {
         return upPressed;
@@ -35,7 +35,7 @@ public class KeyHandler implements KeyListener {
         return spacePressed;
     }
 
-    public KeyHandler(GamePanel gp) {
+    public KeyHandler(Felisium gp) {
         this.gp = gp;
     }
 

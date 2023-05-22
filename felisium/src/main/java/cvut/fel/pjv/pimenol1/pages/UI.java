@@ -1,5 +1,8 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.pages;
 
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.GameState;
+import cvut.fel.pjv.pimenol1.pages.Button;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import javax.imageio.ImageIO;
@@ -20,7 +23,7 @@ public class UI {
     private int countHeart = 9;
     private int catLeft=4;
     BufferedImage backgroundImg;
-    Button[] buttonUi = new Button[5];
+    cvut.fel.pjv.pimenol1.pages.Button[] buttonUi = new cvut.fel.pjv.pimenol1.pages.Button[5];
 
     public UI() {
         try {
@@ -42,12 +45,12 @@ public class UI {
     }
 
     private void loadButtons() {
-        buttonUi[0] = new Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
-        buttonUi[1] = new Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
-        buttonUi[2] = new Button(400, 600, 2, "pauseButtons", 120, 27, GameState.SAVE);
+        buttonUi[0] = new cvut.fel.pjv.pimenol1.pages.Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
+        buttonUi[1] = new cvut.fel.pjv.pimenol1.pages.Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
+        buttonUi[2] = new cvut.fel.pjv.pimenol1.pages.Button(400, 600, 2, "pauseButtons", 120, 27, GameState.SAVE);
 
-        buttonUi[3] = new Button(100, 400, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
-        buttonUi[4] = new Button(100, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
+        buttonUi[3] = new cvut.fel.pjv.pimenol1.pages.Button(100, 400, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
+        buttonUi[4] = new cvut.fel.pjv.pimenol1.pages.Button(100, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
     }
 
     public void writeMessage(String text) {
@@ -157,23 +160,23 @@ public class UI {
     }
 
     public void updateButton() {
-        for (Button button : buttonUi)
+        for (cvut.fel.pjv.pimenol1.pages.Button button : buttonUi)
             button.update();
     }
 
-    public boolean isInButton(MouseEvent e, Button mb) {
+    public boolean isInButton(MouseEvent e, cvut.fel.pjv.pimenol1.pages.Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
 
     public void mousePressed(MouseEvent e) {
-        for (Button b : buttonUi) {
+        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi) {
             if (isInButton(e, b))
                 b.setMousePressed(true);
         }
     }
 
     public void mouseReleased(MouseEvent e) {
-        for (Button b : buttonUi) {
+        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi) {
             if (isInButton(e, b)) {
                 if (b.isMousePressed())
                     b.applyGameStatePlay();
@@ -184,12 +187,12 @@ public class UI {
     }
 
     private void resetButtons() {
-        for (Button b : buttonUi)
+        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi)
             b.resetBooleans();
     }
 
     public void mouseMoved(MouseEvent e) {
-        for (Button b : buttonUi)
+        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi)
             b.setMouseOver(false);
 
         for (Button b : buttonUi)
@@ -210,5 +213,9 @@ public class UI {
 
     public void setCatLeft(int catLeft) {
         this.catLeft = catLeft;
+    }
+
+    public int getCatLeft() {
+        return catLeft;
     }
 }

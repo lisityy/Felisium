@@ -1,9 +1,10 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.pages;
 
 import cvut.fel.pjv.pimenol1.background.TileManager;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.entity.Player;
 import cvut.fel.pjv.pimenol1.inventorys.Item;
+import cvut.fel.pjv.pimenol1.main.*;
 import cvut.fel.pjv.pimenol1.utils.AssetSetter;
 import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 
@@ -13,29 +14,28 @@ import java.io.InputStream;
 
 public class PlayingPage extends JPanel implements Page {
 
-    private GamePanel gp;
-    private final TileManager tileManager = new TileManager();
+    private final Felisium gp;
+    private TileManager tileManager = new TileManager();
     public Player player;
 
     public Item[] obj = new Item[20];
     public Entity[] npc = new Entity[20];
     private Entity[] aliens = new Entity[20];
 
-    private AssetSetter assetSetter = new AssetSetter(this);
-    private UI ui = new UI();
-    MusicPlayer musicPlayer;
-
-    private int maxCat=5;
+    AssetSetter assetSetter = new AssetSetter(this);
+    private final UI ui = new UI();
+    MusicPlayer musicPlayer= new MusicPlayer();;
 
     public Font myFont;
 
-    public PlayingPage(GamePanel gp) {
+    public PlayingPage(Felisium gp) {
         this.gp = gp;
 
         Constants.gameStatePlay = GameState.PLAY;
         player = new Player(this, gp.getKh());
         InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
         try {
+            assert is != null;
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (Exception e) {
             System.out.println("ERROR: reading font" + e);
@@ -43,7 +43,6 @@ public class PlayingPage extends JPanel implements Page {
     }
 
     public void startGame() {
-        musicPlayer = new MusicPlayer();
         musicPlayer.play("/music/musBegin.wav");
         musicPlayer.changeIntensity(1F);
         setUpGame();
@@ -70,20 +69,14 @@ public class PlayingPage extends JPanel implements Page {
                 aliensUpdate();
                 npcUpdate();
             }
-            case PAUSE -> {
-                ui.updateButton();
-            }
-            case GAMEOVER -> {
-                ui.updateButton();
-            }
-            case WIN -> {
+            default -> {
                 ui.updateButton();
             }
         }
 
     }
 
-    private void aliensUpdate() {
+    void aliensUpdate() {
         for (int i = 0; i < aliens.length; i++) {
             if (aliens[i] != null) {
                 if (aliens[i].getLife() <= 0) {
@@ -95,7 +88,7 @@ public class PlayingPage extends JPanel implements Page {
         }
     }
 
-    private void npcUpdate() {
+    void npcUpdate() {
         for (Entity entity : npc) {
             if (entity != null) {
                 entity.update();
@@ -166,29 +159,13 @@ public class PlayingPage extends JPanel implements Page {
         this.player = player;
     }
 
-
     public UI getUi() {
         return ui;
-    }
-
-    public void setObj(Item[] obj) {
-        this.obj = obj;
-    }
-
-    public void setNpc(Entity[] npc) {
-        this.npc = npc;
     }
 
     public void setAliens(Entity[] aliens) {
         this.aliens = aliens;
     }
 
-    public int getMaxCat() {
-        return maxCat;
-    }
-
-    public void setMaxCat(int maxCat) {
-        this.maxCat = maxCat;
-    }
 }
 

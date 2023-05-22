@@ -1,17 +1,16 @@
 package cvut.fel.pjv.pimenol1.utils;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
-import cvut.fel.pjv.pimenol1.main.GamePanel;
-import cvut.fel.pjv.pimenol1.main.GameState;
+import cvut.fel.pjv.pimenol1.main.Felisium;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class MouseHendler implements MouseListener, MouseMotionListener {
-    GamePanel gp;
+    Felisium gp;
 
-    public MouseHendler(GamePanel gp) {
+    public MouseHendler(Felisium gp) {
         this.gp=gp;
     }
 

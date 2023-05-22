@@ -1,10 +1,7 @@
 package cvut.fel.pjv.pimenol1.entity;
 
-import cvut.fel.pjv.pimenol1.inventorys.Heart;
 import cvut.fel.pjv.pimenol1.main.Constants;
-import cvut.fel.pjv.pimenol1.main.PlayingPage;
-
-import java.util.Random;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 
 public class NPC_catan extends Entity {
 

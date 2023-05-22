@@ -1,8 +1,9 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.gameData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cvut.fel.pjv.pimenol1.entity.Entity;
 import cvut.fel.pjv.pimenol1.inventorys.Item;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -74,6 +75,7 @@ public class GameSaver {
                 tempString.add(cat.name);
             }
         }
+//        gameData.setCatLeft(pp.getUi().getCatLeft());
         gameData.setCatsName(new ArrayList<>(tempString));
         gameData.setCatY(new ArrayList<>(tempY));
         gameData.setCatX(new ArrayList<>(tempX));

@@ -1,5 +1,7 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.pages;
 
+import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.io.InputStream;
 
 public class MainMenuPage implements Page {
 
-    private Button[] buttons = new Button[3];
+    private cvut.fel.pjv.pimenol1.pages.Button[] buttons = new cvut.fel.pjv.pimenol1.pages.Button[3];
     private BufferedImage backgroundImage;
     Font myFont;
 
@@ -29,14 +31,14 @@ public class MainMenuPage implements Page {
 
     private void loadButtons() {
         String nameFile="menuButtons";
-        buttons[0] = new Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
-        buttons[1] = new Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.CONTINUE);
-        buttons[2] = new Button(95 * Constants.SCALE, 110 * Constants.SCALE, 2, nameFile, 120, 27, GameState.EXIT);
+        buttons[0] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
+        buttons[1] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.CONTINUE);
+        buttons[2] = new cvut.fel.pjv.pimenol1.pages.Button(95 * Constants.SCALE, 110 * Constants.SCALE, 2, nameFile, 120, 27, GameState.EXIT);
     }
 
     @Override
     public void update() {
-        for (Button mb : buttons)
+        for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons)
             mb.update();
     }
 
@@ -46,25 +48,25 @@ public class MainMenuPage implements Page {
         g2.setColor(new Color(58, 0, 137));
 
         g2.drawImage(backgroundImage, 0, 0, null);
-        for (Button mb : buttons)
+        for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons)
             mb.draw(g2);
 
         g2.drawString("FELISIUM", 230, 150);
     }
 
-    public boolean isInButton(MouseEvent e, Button mb) {
+    public boolean isInButton(MouseEvent e, cvut.fel.pjv.pimenol1.pages.Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
 
     public void mousePressed(MouseEvent e) {
-        for (Button mb : buttons) {
+        for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons) {
             if (isInButton(e, mb))
                 mb.setMousePressed(true);
         }
     }
 
     public void mouseReleased(MouseEvent e) {
-        for (Button mb : buttons) {
+        for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons) {
             if (isInButton(e, mb)) {
                 if (mb.isMousePressed())
                     mb.applyGameState();
@@ -75,12 +77,12 @@ public class MainMenuPage implements Page {
     }
 
     private void resetButtons() {
-        for (Button mb : buttons)
+        for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons)
             mb.resetBooleans();
     }
 
     public void mouseMoved(MouseEvent e) {
-        for (Button mb : buttons)
+        for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons)
             mb.setMouseOver(false);
 
         for (Button mb : buttons)

@@ -1,9 +1,10 @@
-package cvut.fel.pjv.pimenol1.main;
+package cvut.fel.pjv.pimenol1.gameData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cvut.fel.pjv.pimenol1.aliens.Alien;
 import cvut.fel.pjv.pimenol1.entity.*;
 import cvut.fel.pjv.pimenol1.inventorys.*;
+import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -115,6 +116,7 @@ public class GameLoader {
                     }
                 }
             }
+//            pp.getUi().setCatLeft(gd.getCatLeft());
             tempString.clear();
             System.out.println("Game load successfully.");
         }

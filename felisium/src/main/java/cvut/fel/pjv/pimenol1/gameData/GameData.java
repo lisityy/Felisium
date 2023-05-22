@@ -1,10 +1,4 @@
-package cvut.fel.pjv.pimenol1.main;
-
-import cvut.fel.pjv.pimenol1.aliens.Alien;
-import cvut.fel.pjv.pimenol1.entity.Entity;
-import cvut.fel.pjv.pimenol1.entity.Player;
-import cvut.fel.pjv.pimenol1.inventorys.Bag;
-import cvut.fel.pjv.pimenol1.inventorys.Item;
+package cvut.fel.pjv.pimenol1.gameData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -136,6 +130,14 @@ public class GameData implements Serializable {
     public void setPlayerLife(int playerLife) {
         this.playerLife = playerLife;
     }
+
+//    public int getCatLeft() {
+//        return catLeft;
+//    }
+//
+//    public void setCatLeft(int catLeft) {
+//        this.catLeft = catLeft;
+//    }
 }
 
 
