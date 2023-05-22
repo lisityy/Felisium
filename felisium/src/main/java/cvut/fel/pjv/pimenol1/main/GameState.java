@@ -10,5 +10,6 @@ public enum GameState {
     WIN,
     GAMEOVER,
     PAUSE,
-    RESET
+    RESET,
+    SAVE
 }

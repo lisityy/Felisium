@@ -7,22 +7,23 @@ import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Entity {
+public class Entity implements Serializable {
     protected PlayingPage pp;
 
     public int xWorld, yWorld;
     public int speed;
     public String name;
-    protected BufferedImage left, right, up, down;
-    protected BufferedImage[] left_a, right_a, up_a, down_a;
+    protected transient BufferedImage left, right, up, down;
+    protected transient BufferedImage[] left_a, right_a, up_a, down_a;
     protected int sum = 0;
 
     protected boolean invincible = false;
     protected int timerInvincible = 0, maxTimeInvincible = 120;
 
-    protected BufferedImage dialog;
+//    protected BufferedImage dialog;
     protected boolean haveDialog = false;
     protected Random random = new Random();
 
@@ -92,18 +93,18 @@ public class Entity {
                 && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
                 && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, null);
-            if (haveDialog) {
-                g2.drawImage(dialog, screenX + Constants.TILE_SIZE + 20, screenY - 10, null);
-            }
+//            if (haveDialog) {
+//                g2.drawImage(dialog, screenX + Constants.TILE_SIZE + 20, screenY - 10, null);
+//            }
         }
 
     }
 
 
     public void speak() {
-        haveDialog = true;
-        dialog = Utils.load_image("text", "dialog");
-        dialog = Utils.scaleImg(dialog, Constants.TILE_SIZE, Constants.TILE_SIZE);
+//        haveDialog = true;
+//        dialog = Utils.load_image("text", "dialog");
+//        dialog = Utils.scaleImg(dialog, Constants.TILE_SIZE, Constants.TILE_SIZE);
     }
 
     public void facePlayer() {

@@ -18,7 +18,7 @@ public class UI {
     BufferedImage heart;
     private int countHeart = 9;
     BufferedImage backgroundImg;
-    Button[] buttonUi = new Button[2];
+    Button[] buttonUi = new Button[3];
 
     public UI() {
         try {
@@ -39,6 +39,7 @@ public class UI {
     private void loadButtons() {
         buttonUi[0] = new Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
         buttonUi[1] = new Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
+        buttonUi[2] = new Button(400, 600, 2, "pauseButtons", 120, 27, GameState.SAVE);
     }
 
     public void writeMessage(String text) {

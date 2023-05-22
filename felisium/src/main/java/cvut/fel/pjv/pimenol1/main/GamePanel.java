@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private final KeyHandler kh = new KeyHandler(this);
-    private MouseHendler mh= new MouseHendler(this);
+    private MouseHendler mh = new MouseHendler(this);
     private MainMenuPage mainMenuPage;
     private PlayingPage playingPage;
 
@@ -64,17 +64,18 @@ public class GamePanel extends JPanel implements Runnable {
         switch (Constants.gameState) {
             case PLAY -> {
                 playingPage.update();
-                switch (Constants.gameStatePlay){
+                switch (Constants.gameStatePlay) {
                     case RESET -> {
                         playingPage.endGame();
                         playingPage.startGame();
                     }
                     case MAINMENU -> {
                         playingPage.endGame();
-                        Constants.gameState=GameState.MAINMENU;
+                        Constants.gameState = GameState.MAINMENU;
                     }
-                    case PLAY -> {
-
+                    case SAVE -> {
+                        saveGame();
+                        Constants.gameStatePlay = GameState.PAUSE;
                     }
                 }
             }
@@ -106,6 +107,22 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2.dispose();
     }
+
+    public void saveGame() {
+        GameData gameData = GameSaver.addInformation(playingPage);
+        GameSaver.saveGame(gameData, "savegame.json");
+    }
+
+//    public void loadGame() {
+//        GameData gameData = GameLoader.loadGame("savegame.dat");
+//
+//        if (gameData != null) {
+////            playingPage.player=gameData.getPlayer();
+////            playingPage.obj = gameData.getObj();
+////            playingPage.setAliens(gameData.getAliens());
+//        }
+//    }
+
 
     public KeyHandler getKh() {
         return kh;

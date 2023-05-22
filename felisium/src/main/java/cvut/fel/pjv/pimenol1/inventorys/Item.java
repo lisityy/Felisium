@@ -9,9 +9,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class Item {
-    public BufferedImage img;
+public class Item implements Serializable {
+    public transient BufferedImage img;
     public String name;
     public boolean collision = false;
     public boolean canTake = true;

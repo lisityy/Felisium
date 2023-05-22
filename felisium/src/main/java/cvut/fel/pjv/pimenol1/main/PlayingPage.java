@@ -165,6 +165,18 @@ public class PlayingPage extends JPanel implements Page {
         return ui;
     }
 
+    public void setObj(Item[] obj) {
+        this.obj = obj;
+    }
+
+    public void setNpc(Entity[] npc) {
+        this.npc = npc;
+    }
+
+    public void setAliens(Entity[] aliens) {
+        this.aliens = aliens;
+    }
+
     public int getMaxCat() {
         return maxCat;
     }

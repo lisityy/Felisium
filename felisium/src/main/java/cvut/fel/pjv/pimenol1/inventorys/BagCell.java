@@ -6,7 +6,7 @@ import cvut.fel.pjv.pimenol1.utils.Utils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class BagCell {
+public class BagCell  {
 
     private final int cellWidth = Constants.TILE_SIZE + 10;
     private final int callHight = Constants.TILE_SIZE + 10;

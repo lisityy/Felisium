@@ -24,7 +24,6 @@ public class Player extends Entity {
 
     public final int xScreen, yScreen;
 
-
     private boolean attaking = false;
     private boolean useValeriana = false;
     private int timerValeriana = 0;
@@ -261,8 +260,6 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         }
         g2.drawImage(img, xScreen, yScreen, null);
-        System.out.println("xTile: " + this.xWorld / Constants.TILE_SIZE);
-        System.out.println("yTile: " + this.yWorld / Constants.TILE_SIZE);
     }
 
     private void connectNPC(int index) {

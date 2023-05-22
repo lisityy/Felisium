@@ -8,7 +8,7 @@ import cvut.fel.pjv.pimenol1.inventorys.*;
 import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.main.PlayingPage;
 
-public class AssetSetter {
+public class AssetSetter  {
     PlayingPage pp;
 
     public AssetSetter(PlayingPage pp) {

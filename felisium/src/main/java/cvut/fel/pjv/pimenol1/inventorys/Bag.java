@@ -6,10 +6,11 @@ import cvut.fel.pjv.pimenol1.main.UI;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Bag {
+public class Bag implements Serializable {
     public ArrayList<Item> items = new ArrayList<>();
     public ArrayList<Weapon> weapons = new ArrayList<>();
 
