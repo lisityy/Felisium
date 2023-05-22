@@ -3,6 +3,7 @@ package cvut.fel.pjv.pimenol1.utils;
 import cvut.fel.pjv.pimenol1.aliens.Alien;
 import cvut.fel.pjv.pimenol1.entity.NPC_blackCat;
 import cvut.fel.pjv.pimenol1.entity.NPC_catan;
+import cvut.fel.pjv.pimenol1.entity.NPC_dranik;
 import cvut.fel.pjv.pimenol1.entity.NPC_queenCat;
 import cvut.fel.pjv.pimenol1.inventorys.*;
 import cvut.fel.pjv.pimenol1.main.Constants;
@@ -37,23 +38,25 @@ public class AssetSetter  {
     }
 
     public void setNPC() {
-        pp.npc[1] = new NPC_catan(pp, "NPC_catan", "catan", 22 * Constants.TILE_SIZE, 40 * Constants.TILE_SIZE);
-        pp.npc[2] = new NPC_catan(pp, "NPC_catan", "catan", 37 * Constants.TILE_SIZE, 8 * Constants.TILE_SIZE);
-        pp.npc[3] = new NPC_catan(pp, "NPC_catan", "catan", 20 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
-        pp.npc[4] = new NPC_queenCat(pp, "queenCat", "queenCat", 11 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
+        pp.npc[1] = new NPC_dranik(pp, "NPC_dranik", "dranik", 22 * Constants.TILE_SIZE, 40 * Constants.TILE_SIZE);
+
+        pp.npc[2] = new NPC_dranik(pp, "NPC_dranik", "dranik", 37 * Constants.TILE_SIZE, 8 * Constants.TILE_SIZE);
+
+        pp.npc[3] = new NPC_dranik(pp, "NPC_dranik", "dranik", 20 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
+        pp.npc[4] = new NPC_queenCat(pp, "queenCat", "queenCat", 12 * Constants.TILE_SIZE, 8 * Constants.TILE_SIZE);
     }
 
     public void setAliens() {
         pp.getAliens()[0] = new Alien("enemy", "enemyCalm", 23 * Constants.TILE_SIZE, 38 * Constants.TILE_SIZE, pp);
         pp.getAliens()[1] = new Alien("enemy", "enemyCalm", 22 * Constants.TILE_SIZE, 35 * Constants.TILE_SIZE, pp);
 
-        pp.getAliens()[2] = new Alien("enemy", "enemyCalm", 37 * Constants.TILE_SIZE, 9 * Constants.TILE_SIZE, pp);
+        pp.getAliens()[2] = new Alien("enemy", "enemyCalm", 36 * Constants.TILE_SIZE, 9 * Constants.TILE_SIZE, pp);
         pp.getAliens()[3] = new Alien("enemy", "enemyCalm", 36 * Constants.TILE_SIZE, 11 * Constants.TILE_SIZE, pp);
 
         pp.getAliens()[4] = new Alien("enemy", "enemyCalm", 22 * Constants.TILE_SIZE, 8 * Constants.TILE_SIZE, pp);
         pp.getAliens()[5] = new Alien("enemy", "enemyCalm", 22 * Constants.TILE_SIZE, 11 * Constants.TILE_SIZE, pp);
 
-        pp.getAliens()[6] = new Alien("enemy", "enemyCalm", 12 * Constants.TILE_SIZE, 9 * Constants.TILE_SIZE, pp);
-        pp.getAliens()[7] = new Alien("enemy", "enemyCalm", 12 * Constants.TILE_SIZE, 10 * Constants.TILE_SIZE, pp);
+        pp.getAliens()[6] = new Alien("enemy", "enemyCalm", 12 * Constants.TILE_SIZE, 13 * Constants.TILE_SIZE, pp);
+        pp.getAliens()[7] = new Alien("enemy", "enemyCalm", 12 * Constants.TILE_SIZE, 11 * Constants.TILE_SIZE, pp);
     }
 }

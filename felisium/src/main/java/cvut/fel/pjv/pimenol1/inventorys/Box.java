@@ -17,6 +17,8 @@ public class Box extends Item {
     public boolean useItem(Player player) {
         if (player.isHitCat()) {
             player.setHitCat(false);
+            player.setCatsLeft(player.getCatsLeft()-1);
+            player.getPp().getUi().setCatLeft(player.getCatsLeft());
             player.getPp().obj[this.index] = new Box(this.index, player.getPp().npc[player.getIndexCat()].xWorld, player.getPp().npc[player.getIndexCat()].yWorld);
             player.getPp().obj[this.index].canTake=false;
             player.getPp().npc[player.getIndexCat()] = null;

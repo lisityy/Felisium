@@ -13,18 +13,6 @@ import java.util.ArrayList;
 
 public class GameSaver {
 
-    //    public static void saveGame(GameData gameData, String filePath) {
-//
-//        try (FileOutputStream fileOut = new FileOutputStream(filePath);
-//             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
-//
-//            objectOut.writeObject(gameData);
-//            System.out.println("Game saved successfully.");
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
     public static void saveGame(GameData gameData, String filePath) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -103,16 +91,6 @@ public class GameSaver {
 
 
         return gameData;
-
-
-//        gameData.setAliencName();
-//        gameData.setAliensDamage();
-//
-//
-//
-//
-//
-
     }
 
 }

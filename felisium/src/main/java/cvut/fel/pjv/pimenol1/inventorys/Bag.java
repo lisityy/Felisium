@@ -86,11 +86,13 @@ public class Bag implements Serializable {
         int x = 655;
         int y = 25;
         for (int i = 0; i < items.size(); i++) {
+            // using wings
             if (items.get(i).use && Objects.equals(items.get(i).name, "wing")) {
                 float t = 1 - (float) player.getTimerWing() / 1000;
                 g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), t));
                 g2.drawImage(items.get(i).img, x, y, null);
                 g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
+                x += Constants.TILE_SIZE + 8;
                 if (t == 0) {
                     items.remove(i);
                 }

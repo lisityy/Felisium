@@ -16,9 +16,11 @@ public class UI {
     int MessageTimer = 0;
     private double gameTime = 0;
     BufferedImage heart;
+    BufferedImage cat;
     private int countHeart = 9;
+    private int catLeft=4;
     BufferedImage backgroundImg;
-    Button[] buttonUi = new Button[3];
+    Button[] buttonUi = new Button[5];
 
     public UI() {
         try {
@@ -27,6 +29,9 @@ public class UI {
 
             heart = Utils.load_image("objects", "heart");
             heart = Utils.scaleImg(heart, Constants.TILE_SIZE, Constants.TILE_SIZE);
+
+            cat = Utils.load_image("ui_obj","cat");
+            cat=Utils.scaleImg(cat, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
             backgroundImg = ImageIO.read(getClass().getResourceAsStream("/background/gameOver.png"));
             loadButtons();
@@ -40,6 +45,9 @@ public class UI {
         buttonUi[0] = new Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
         buttonUi[1] = new Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
         buttonUi[2] = new Button(400, 600, 2, "pauseButtons", 120, 27, GameState.SAVE);
+
+        buttonUi[3] = new Button(100, 400, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
+        buttonUi[4] = new Button(100, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
     }
 
     public void writeMessage(String text) {
@@ -63,7 +71,24 @@ public class UI {
         }
 
         drawLife(g2, countHeart);
+        drawCatLeft(g2, catLeft);
 
+    }
+
+    private void drawCatLeft(Graphics2D g2, int catLeft) {
+        int x = 30;
+        int y = 70;
+        int j = 0;
+        for (int i = 0; i < catLeft; i++) {
+            j++;
+            g2.drawImage(cat, x, y, null);
+            x += Constants.TILE_SIZE / 2;
+            if (j > 12) {
+                y += Constants.TILE_SIZE;
+                x = 30;
+                j = 0;
+            }
+        }
     }
 
     private void drawLife(Graphics2D g2, int life) {
@@ -91,8 +116,8 @@ public class UI {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for (Button button : buttonUi)
-            button.draw(g2);
+        for (int i=0;i<3;i++)
+            buttonUi[i].draw(g2);
 
         g2.drawString("PAUSE", 270, 200);
         g2.setFont(myFont.deriveFont(Font.PLAIN, 30F));
@@ -108,11 +133,27 @@ public class UI {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for (Button button : buttonUi)
-            button.draw(g2);
+        for (int i=0;i<3;i++)
+            buttonUi[i].draw(g2);
 
         g2.drawString("GAME", 320, 200);
         g2.drawString("OVER", 320, 350);
+    }
+
+    public void drawWin(Graphics2D g2) {
+        try {
+            BufferedImage pauseImg = ImageIO.read(getClass().getResourceAsStream("/background/catsArm.png"));
+            g2.drawImage(pauseImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
+        } catch (Exception e) {
+            System.out.println("Problem with reading pause img: " + e);
+        }
+        g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
+
+        buttonUi[3].draw(g2);
+        buttonUi[4].draw(g2);
+
+        g2.drawString("YOU", 80, 150);
+        g2.drawString("WIN", 110, 270);
     }
 
     public void updateButton() {
@@ -158,24 +199,6 @@ public class UI {
             }
     }
 
-//    public void drawWin(Graphics2D g2) {
-//        try {
-//            BufferedImage pauseImg = ImageIO.read(getClass().getResourceAsStream("/background/catsArm.png"));
-//            g2.drawImage(pauseImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
-//        } catch (Exception e) {
-//            System.out.println("Problem with reading pause img: " + e);
-//        }
-//        g2.setFont(fontMy.deriveFont(Font.PLAIN, 180F));
-//
-//        g2.drawString("YOU", 80, 150);
-//        g2.drawString("WIN", 110, 270);
-//    }
-//
-//    public int getXCenterForText(String text) {
-//        int len = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-//        return Constants.SCREEN_WIDTH / 2 - len / 2;
-//    }
-
 
     public int getCountHeart() {
         return countHeart;
@@ -183,5 +206,9 @@ public class UI {
 
     public void setCountHeart(int countHeart) {
         this.countHeart = countHeart;
+    }
+
+    public void setCatLeft(int catLeft) {
+        this.catLeft = catLeft;
     }
 }

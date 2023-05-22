@@ -26,15 +26,17 @@ public class Player extends Entity {
 
     private boolean attaking = false;
     private boolean useValeriana = false;
-    private int timerValeriana = 0;
     private boolean hasSocks = false;
     private boolean hitDoor = false;
     private boolean hitCat = false;
 
-    private  int timerWing = 0;
+    private int timerValeriana = 0;
+    private int timerWing = 0;
+    private int socksTimer = 0;
+
+    private int catsLeft = 4;
     private int indexDoor;
     private int indexCat;
-    private int socksTimer = 0;
 
     private int damage = 2;
 
@@ -120,6 +122,26 @@ public class Player extends Entity {
             Constants.gameStatePlay = GameState.GAMEOVER;
             return;
         }
+        if (catsLeft == 0) {
+            Constants.gameStatePlay = GameState.WIN;
+            return;
+        }
+
+        if (hasSocks) {
+            socksTimer++;
+            if (socksTimer > 500) {
+                hasSocks = false;
+                speed -= 2;
+                socksTimer = 0;
+            }
+        }
+        if (haveWing) {
+            timerWing++;
+            if (timerWing > 1000) {
+                haveWing = false;
+                timerWing = 0;
+            }
+        }
 
         if (useValeriana) {
             timerValeriana++;
@@ -163,22 +185,6 @@ public class Player extends Entity {
 
             int alienInx = CheckerCollision.checkEntity(this, pp.getAliens());
             connectAlien(alienInx);
-
-            if (hasSocks) {
-                socksTimer++;
-                if (socksTimer > 500) {
-                    hasSocks = false;
-                    speed -= 2;
-                    socksTimer = 0;
-                }
-            }
-            if (haveWing) {
-                timerWing++;
-                if (timerWing > 1000) {
-                    haveWing = false;
-                    timerWing = 0;
-                }
-            }
 
             if (!collisionOn && !hitDoor) {
                 switch (direction) {
@@ -260,6 +266,7 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         }
         g2.drawImage(img, xScreen, yScreen, null);
+        g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
     }
 
     private void connectNPC(int index) {
@@ -269,6 +276,8 @@ public class Player extends Entity {
             if (kh.isEnterPressed()) {
                 pp.npc[index].speak();
             }
+        } else {
+            hitCat=false;
         }
     }
 
@@ -310,6 +319,14 @@ public class Player extends Entity {
             if (addToBag)
                 pp.obj[inx] = null;
         }
+    }
+
+    public int getCatsLeft() {
+        return catsLeft;
+    }
+
+    public void setCatsLeft(int catsLeft) {
+        this.catsLeft = catsLeft;
     }
 
     public boolean isUseValeriana() {

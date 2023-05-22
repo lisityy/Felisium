@@ -76,6 +76,9 @@ public class PlayingPage extends JPanel implements Page {
             case GAMEOVER -> {
                 ui.updateButton();
             }
+            case WIN -> {
+                ui.updateButton();
+            }
         }
 
     }
@@ -114,6 +117,9 @@ public class PlayingPage extends JPanel implements Page {
             }
             case GAMEOVER -> {
                 ui.drawGameOver(g2);
+            }
+            case WIN -> {
+                ui.drawWin(g2);
             }
         }
 
