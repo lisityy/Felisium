@@ -1,5 +1,6 @@
 package cvut.fel.pjv.pimenol1.entity;
 
+import cvut.fel.pjv.pimenol1.aliens.Alien;
 import cvut.fel.pjv.pimenol1.inventorys.Box;
 import cvut.fel.pjv.pimenol1.inventorys.Door;
 import cvut.fel.pjv.pimenol1.inventorys.Item;
@@ -61,5 +62,57 @@ public class PlayerTest {
         player.life = 0;
         player.update();
         Assertions.assertEquals(GameState.GAMEOVER, Constants.gameStatePlay);
+    }
+
+    @Test
+    public void testAttack(){
+        player.xWorld=0;
+        player.yWorld=0;
+        Entity[] enemys = new Entity[10];
+        enemys[0] = new Alien("enemy", "enemyCalm", 0,0,playingPage);
+        enemys[0].life=2;
+        playingPage.setAliens(enemys);
+
+        player.attack();
+        Assertions.assertEquals(0,playingPage.getAliens()[0].life);
+    }
+
+    @Test
+    public void testAttack_EnemyInvincible(){
+        player.xWorld=0;
+        player.yWorld=0;
+        Entity[] enemys = new Entity[10];
+        enemys[0] = new Alien("enemy", "enemyCalm", 0,0,playingPage);
+        enemys[0].life=2;
+        enemys[0].invincible=true;
+        playingPage.setAliens(enemys);
+
+        player.attack();
+        Assertions.assertEquals(2,playingPage.getAliens()[0].life);
+    }
+
+    @Test
+    public void testAttack_dontConnectAlien(){
+        player.xWorld=0;
+        player.yWorld=0;
+        Entity[] enemys = new Entity[10];
+        enemys[0] = new Alien("enemy", "enemyCalm", 1150,1150,playingPage);
+        enemys[0].life=2;
+        playingPage.setAliens(enemys);
+
+        player.attack();
+        Assertions.assertEquals(2,playingPage.getAliens()[0].life);
+    }
+
+    @Test
+    public void testConnectAlien(){
+        Entity[] enemys = new Entity[10];
+        enemys[0] = new Alien("enemy", "enemyCalm", 0,0,playingPage);
+        enemys[0].damage=1;
+        playingPage.setAliens(enemys);
+        player.life=9;
+        player.connectAlien(0);
+
+        Assertions.assertEquals(8,player.life);
     }
 }

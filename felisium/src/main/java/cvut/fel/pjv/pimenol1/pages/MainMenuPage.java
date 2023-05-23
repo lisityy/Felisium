@@ -46,9 +46,9 @@ public class MainMenuPage implements Page {
         buttons[0] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
         buttons[1] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.CONTINUE);
         buttons[2] = new cvut.fel.pjv.pimenol1.pages.Button(95 * Constants.SCALE, 110 * Constants.SCALE, 2, nameFile, 120, 27, GameState.EXIT);
-        Felisium.logger.info("Button Position: " + buttons[0].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
-        Felisium.logger.info("Button Position: " + buttons[1].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
-        Felisium.logger.info("Button Position: " + buttons[2].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
+        Felisium.logger.info("Button Menu Position: " + buttons[0].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
+        Felisium.logger.info("Button Menu Position: " + buttons[1].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
+        Felisium.logger.info("Button Menu Position: " + buttons[2].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
     }
 
     @Override

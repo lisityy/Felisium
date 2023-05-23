@@ -139,7 +139,11 @@ public class Player extends Entity {
             return;
         }
 
-        // Check win condition
+        if (catsLeft == 0 && hitCat && Objects.equals(pp.npc[indexCat].name, "queenCat")) {
+            Constants.gameStatePlay = GameState.WIN;
+            return;
+        }
+
 
         if (hasSocks) {
             socksTimer++;
@@ -304,7 +308,7 @@ public class Player extends Entity {
         }
     }
 
-    private void connectAlien(int i) {
+    public void connectAlien(int i) {
         if (i != 999) {
             if (!invincible) {
                 life -= pp.getAliens()[i].getDamage();

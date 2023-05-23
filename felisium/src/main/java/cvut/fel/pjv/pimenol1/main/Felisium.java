@@ -29,15 +29,6 @@ public class Felisium extends JPanel implements Runnable {
 
 
     public Felisium() {
-        System.out.println("Do you want to see loggers? (yes/no)");
-        Scanner scanner = new Scanner(System.in);
-        String input= scanner.nextLine();
-        if(Objects.equals(input, "yes")){
-            logger.setLevel(Level.ALL);
-        } else {
-            logger.setLevel(Level.OFF);
-        }
-
         this.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
