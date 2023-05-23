@@ -131,13 +131,6 @@ public class GameData implements Serializable {
         this.playerLife = playerLife;
     }
 
-//    public int getCatLeft() {
-//        return catLeft;
-//    }
-//
-//    public void setCatLeft(int catLeft) {
-//        this.catLeft = catLeft;
-//    }
 }
 
 

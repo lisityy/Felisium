@@ -8,9 +8,4 @@ public class Collar extends Item {
         name="collar";
         collision=true;
     }
-
-    @Override
-    public void pickUp(Player player,int inx){
-
-    }
 }

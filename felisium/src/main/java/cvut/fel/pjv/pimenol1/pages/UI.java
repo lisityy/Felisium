@@ -13,6 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+
+/**
+ * The UI class represents the user interface in the game.
+ * It handles drawing various UI elements and buttons, as well as managing button states and mouse events.
+ */
 public class UI {
 
     private Font myFont;
@@ -26,6 +31,10 @@ public class UI {
     private BufferedImage backgroundImg;
     private Button[] buttonUi = new Button[5];
 
+    /**
+     * Constructs a new UI object.
+     * It loads fonts, images, and initializes UI buttons.
+     */
     public UI() {
         try {
             // Load font
@@ -46,7 +55,9 @@ public class UI {
         }
     }
 
-    // Load UI buttons
+    /**
+     * Loads UI buttons.
+     */
     private void loadButtons() {
         buttonUi[0] = new Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
         buttonUi[1] = new Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
@@ -56,13 +67,19 @@ public class UI {
         buttonUi[4] = new Button(100, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
     }
 
-    // Set a message to display on the screen
+    /**
+     * Sets a message to be displayed on the screen.
+     *
+     * @param text The message text.
+     */
     public void writeMessage(String text) {
-        this.message = text;
-        haveMessage = true;
     }
 
-    // Draw the UI during gameplay
+    /**
+     * Draws the UI during gameplay.
+     *
+     * @param g2 The Graphics2D object.
+     */
     public void drawGame(Graphics2D g2) {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 50F));
         g2.setColor(new Color(58, 0, 137));
@@ -80,7 +97,12 @@ public class UI {
         drawCatLeft(g2, catLeft);
     }
 
-    // Draw the remaining cat lives
+    /**
+     * Draws cat, which you should save.
+     *
+     * @param g2      The Graphics2D object.
+     * @param catLeft The number of cat.
+     */
     private void drawCatLeft(Graphics2D g2, int catLeft) {
         int x = 30;
         int y = 70 * (int) (countHeart / 12 + 1);
@@ -97,7 +119,12 @@ public class UI {
         }
     }
 
-    // Draw the player's remaining lives
+    /**
+     * Draws the player's remaining lives.
+     *
+     * @param g2   The Graphics2D object.
+     * @param life The number of lives remaining.
+     */
     private void drawLife(Graphics2D g2, int life) {
         int x = 30;
         int y = 30;
@@ -114,7 +141,11 @@ public class UI {
         }
     }
 
-    // Draw the pause screen
+    /**
+     * Draws the pause screen.
+     *
+     * @param g2 The Graphics2D object.
+     */
     public void drawPause(Graphics2D g2) {
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         g2.drawImage(backgroundImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
@@ -131,7 +162,11 @@ public class UI {
         g2.drawString("press ESC for continue", 360, 250);
     }
 
-    // Draw the game over screen
+    /**
+     * Draws the game over screen.
+     *
+     * @param g2 The Graphics2D object.
+     */
     public void drawGameOver(Graphics2D g2) {
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         g2.drawImage(backgroundImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
@@ -147,7 +182,11 @@ public class UI {
         g2.drawString("OVER", 320, 350);
     }
 
-    // Draw the win screen
+    /**
+     * Draws the win screen.
+     *
+     * @param g2 The Graphics2D object.
+     */
     public void drawWin(Graphics2D g2) {
         try {
             BufferedImage pauseImg = ImageIO.read(getClass().getResourceAsStream("/background/catsArm.png"));
@@ -164,18 +203,30 @@ public class UI {
         g2.drawString("WIN", 110, 270);
     }
 
-    // Update the button states
+    /**
+     * Updates the button states.
+     */
     public void updateButton() {
         for (Button button : buttonUi)
             button.update();
     }
 
-    // Check if the mouse is inside a button
+    /**
+     * Checks if the mouse is inside a button.
+     *
+     * @param e  The MouseEvent object.
+     * @param mb The Button object to check against.
+     * @return   True if the mouse is inside the button, false otherwise.
+     */
     public boolean isInButton(MouseEvent e, Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
 
-    // Handle mouse pressed event
+    /**
+     * Handles the mouse pressed event.
+     *
+     * @param e The MouseEvent object.
+     */
     public void mousePressed(MouseEvent e) {
         for (Button b : buttonUi) {
             if (isInButton(e, b))
@@ -183,7 +234,11 @@ public class UI {
         }
     }
 
-    // Handle mouse released event
+    /**
+     * Handles the mouse released event.
+     *
+     * @param e The MouseEvent object.
+     */
     public void mouseReleased(MouseEvent e) {
         for (Button b : buttonUi) {
             if (isInButton(e, b)) {
@@ -195,13 +250,19 @@ public class UI {
         resetButtons();
     }
 
-    // Reset button states
+    /**
+     * Resets the button states.
+     */
     private void resetButtons() {
         for (Button b : buttonUi)
             b.resetBooleans();
     }
 
-    // Handle mouse moved event
+    /**
+     * Handles the mouse moved event.
+     *
+     * @param e The MouseEvent object.
+     */
     public void mouseMoved(MouseEvent e) {
         for (Button b : buttonUi)
             b.setMouseOver(false);

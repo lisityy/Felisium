@@ -14,12 +14,8 @@ public class NPC_dranik extends  Entity{
         sizeSubImg = 16;
         maxSprite = 8;
         maxTimeUpdate = 30;
-//        sum = Constants.TILE_SIZE;
-
-//        hitBox.x=Constants.TILE_SIZE/4+10;
-//        hitBox.y=Constants.TILE_SIZE/4+10;
-        defultHitBoxX = hitBox.x;
-        defultHitBoxY = hitBox.y;
+        defaultHitBoxX = hitBox.x;
+        defaultHitBoxY = hitBox.y;
 
         getEntityImg(path);
     }

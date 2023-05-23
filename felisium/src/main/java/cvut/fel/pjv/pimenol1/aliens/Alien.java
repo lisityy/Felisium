@@ -10,11 +10,24 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * The Alien class represents an alien entity in the game.
+ * It extends the Entity class.
+ */
 public class Alien extends Entity {
 
     protected int damage = 1;
     private BufferedImage[] attackImgs = new BufferedImage[5];
 
+    /**
+     * Constructs a new Alien object with the specified parameters.
+     *
+     * @param path The path of the alien's image.
+     * @param name The name of the alien.
+     * @param x    The x-coordinate of the alien's position.
+     * @param y    The y-coordinate of the alien's position.
+     * @param pp   The PlayingPage object.
+     */
     public Alien(String path, String name, int x, int y, PlayingPage pp) {
         super(name, pp);
 
@@ -29,8 +42,8 @@ public class Alien extends Entity {
 
         hitBox.height = Constants.TILE_SIZE + sum;
         hitBox.width = Constants.TILE_SIZE + sum;
-        defultHitBoxX = hitBox.x;
-        defultHitBoxY = hitBox.y;
+        defaultHitBoxX = hitBox.x;
+        defaultHitBoxY = hitBox.y;
 
         direction = "right";
         maxSprite = 4;
@@ -40,18 +53,27 @@ public class Alien extends Entity {
 
     }
 
+    /**
+     * Loads the attack images for the alien.
+     */
     private void loadAttackImg() {
         BufferedImage t = Utils.load_image("enemy", "alien_attack");
         for (int i = 0; i < 5; i++) {
             attackImgs[i] = t.getSubimage(i * sizeSubImg, 0, sizeSubImg, sizeSubImg);
-            attackImgs[i]=Utils.scaleImg(attackImgs[i], Constants.TILE_SIZE+sum, Constants.TILE_SIZE+sum);
+            attackImgs[i] = Utils.scaleImg(attackImgs[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
         }
     }
 
+    /**
+     * Initiates an attack action for the alien.
+     */
     public void attack() {
         direction = "attack";
     }
 
+    /**
+     * Updates the state of the alien.
+     */
     public void update() {
         getRandomDirection(150);
         collisionOn = false;
@@ -60,7 +82,7 @@ public class Alien extends Entity {
         CheckerCollision.checkEntity(this, pp.npc);
         CheckerCollision.checkEntity(this, pp.getAliens());
         boolean connectPlayer = CheckerCollision.checkPlayer(this, pp.player);
-        if(connectPlayer){
+        if (connectPlayer) {
             attack();
         }
 
@@ -89,6 +111,7 @@ public class Alien extends Entity {
 
     }
 
+    
     @Override
     public void draw(Graphics2D g2, PlayingPage pp) {
         BufferedImage img = switch (direction) {
@@ -100,14 +123,14 @@ public class Alien extends Entity {
             default -> null;
         };
 
-        int screenX = xWorld - pp.player.xWorld + pp.player.xScreen;
-        int screenY = yWorld - pp.player.yWorld + pp.player.yScreen;
+        int screenX = xWorld - pp.player.xWorld + pp.player.getxScreen();
+        int screenY = yWorld - pp.player.yWorld + pp.player.getyScreen();
 
 
-        if (xWorld + Constants.TILE_SIZE > pp.player.xWorld - pp.player.xScreen
-                && xWorld - Constants.TILE_SIZE < pp.player.xWorld + pp.player.xScreen
-                && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
-                && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
+        if (xWorld + Constants.TILE_SIZE > pp.player.xWorld - pp.player.getxScreen()
+                && xWorld - Constants.TILE_SIZE < pp.player.xWorld + pp.player.getxScreen()
+                && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.getyScreen()
+                && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.getyScreen()) {
             if (invincible) {
                 g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.5f));
             }

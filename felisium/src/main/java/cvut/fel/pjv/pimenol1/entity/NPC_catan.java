@@ -19,8 +19,8 @@ public class NPC_catan extends Entity {
 
         hitBox.x=Constants.TILE_SIZE/4+10;
         hitBox.y=Constants.TILE_SIZE/4+10;
-        defultHitBoxX = hitBox.x;
-        defultHitBoxY = hitBox.y;
+        defaultHitBoxX = hitBox.x;
+        defaultHitBoxY = hitBox.y;
 
         getEntityImg(path);
     }

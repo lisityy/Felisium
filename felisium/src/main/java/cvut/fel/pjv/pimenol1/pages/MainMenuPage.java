@@ -13,12 +13,18 @@ import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.logging.Level;
 
+/**
+ * The MainMenuPage class represents the main menu page of the game.
+ */
 public class MainMenuPage implements Page {
 
     private cvut.fel.pjv.pimenol1.pages.Button[] buttons = new cvut.fel.pjv.pimenol1.pages.Button[3];
     private BufferedImage backgroundImage;
     Font myFont;
 
+    /**
+     * Initializes the MainMenuPage object.
+     */
     public MainMenuPage() {
         loadButtons();
         backgroundImage = Utils.load_image("background", "inCloud");
@@ -32,6 +38,9 @@ public class MainMenuPage implements Page {
         }
     }
 
+    /**
+     * Loads the buttons for the main menu page.
+     */
     private void loadButtons() {
         String nameFile="menuButtons";
         buttons[0] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
@@ -60,10 +69,22 @@ public class MainMenuPage implements Page {
         g2.drawString("FELISIUM", 230, 150);
     }
 
+    /**
+     * Checks if the mouse is inside a button.
+     *
+     * @param e  The MouseEvent object.
+     * @param mb The Button object to check against.
+     * @return   True if the mouse is inside the button, false otherwise.
+     */
     public boolean isInButton(MouseEvent e, cvut.fel.pjv.pimenol1.pages.Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
 
+    /**
+     * Handles the mouse pressed event.
+     *
+     * @param e The MouseEvent object.
+     */
     public void mousePressed(MouseEvent e) {
         for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons) {
             if (isInButton(e, mb))
@@ -71,6 +92,11 @@ public class MainMenuPage implements Page {
         }
     }
 
+    /**
+     * Handles the mouse released event.
+     *
+     * @param e The MouseEvent object.
+     */
     public void mouseReleased(MouseEvent e) {
         for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons) {
             if (isInButton(e, mb)) {
@@ -82,11 +108,19 @@ public class MainMenuPage implements Page {
         resetButtons();
     }
 
+    /**
+     * Resets the button states.
+     */
     private void resetButtons() {
         for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons)
             mb.resetBooleans();
     }
 
+    /**
+     * Handles the mouse moved event.
+     *
+     * @param e The MouseEvent object.
+     */
     public void mouseMoved(MouseEvent e) {
         for (cvut.fel.pjv.pimenol1.pages.Button mb : buttons)
             mb.setMouseOver(false);
@@ -99,4 +133,5 @@ public class MainMenuPage implements Page {
     }
 
 }
+
 

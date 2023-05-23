@@ -19,8 +19,8 @@ public class NPC_queenCat extends Entity {
 
         hitBox.height = Constants.TILE_SIZE + sum;
         hitBox.width = Constants.TILE_SIZE + sum;
-        defultHitBoxX = hitBox.x;
-        defultHitBoxY = hitBox.y;
+        defaultHitBoxX = hitBox.x;
+        defaultHitBoxY = hitBox.y;
 
         getEntityImg(path);
     }

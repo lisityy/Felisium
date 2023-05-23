@@ -11,9 +11,10 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class Entity implements Serializable {
+
     protected PlayingPage pp;
 
-    public int xWorld=0, yWorld=0;
+    public int xWorld = 0, yWorld = 0;
     public int speed;
     public String name;
     protected transient BufferedImage left, right, up, down;
@@ -23,17 +24,16 @@ public class Entity implements Serializable {
     protected boolean invincible = false;
     protected int timerInvincible = 0, maxTimeInvincible = 120;
 
-//    protected BufferedImage dialog;
     protected boolean haveDialog = false;
     protected Random random = new Random();
 
     protected int sizeSubImg = 30;
     public String direction;
 
-    protected int acrionTimer = 0;
+    protected int actionTimer = 0;
     protected int spriteTimer = 0, waitTimer = 0;
     protected int spriteNum = 0, waitNum = 1, maxSprite = 1;
-    protected int timeUpdate = 12 , maxTimeUpdate=100;
+    protected int timeUpdate = 12, maxTimeUpdate = 100;
 
     protected int maxLife, life;
     protected int damage = 0;
@@ -41,14 +41,16 @@ public class Entity implements Serializable {
     protected boolean haveWing = false;
     public boolean collisionOn = false;
     public Rectangle hitBox = new Rectangle(0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE);
-    protected int defultHitBoxX, defultHitBoxY;
-
+    protected int defaultHitBoxX, defaultHitBoxY;
 
     public Entity(String name, PlayingPage pp) {
         this.name = name;
         this.pp = pp;
     }
 
+    /**
+     * Updates the entity's state and handles collision checks.
+     */
     public void update() {
         getRandomDirection(150);
         collisionOn = false;
@@ -60,12 +62,21 @@ public class Entity implements Serializable {
 
         if (!collisionOn) {
             switch (direction) {
-                case "up" -> yWorld -= speed;
-                case "down" -> yWorld += speed;
-                case "left" -> xWorld -= speed;
-                case "right" -> xWorld += speed;
+                case "up":
+                    yWorld -= speed;
+                    break;
+                case "down":
+                    yWorld += speed;
+                    break;
+                case "left":
+                    xWorld -= speed;
+                    break;
+                case "right":
+                    xWorld += speed;
+                    break;
             }
         }
+
         spriteTimer++;
         if (spriteTimer > timeUpdate) {
             spriteNum = (spriteNum + 1) % maxSprite;
@@ -73,9 +84,14 @@ public class Entity implements Serializable {
             haveDialog = false;
             timeUpdate = random.nextInt(maxTimeUpdate);
         }
-
     }
 
+    /**
+     * Draws the entity on the screen.
+     *
+     * @param g2 The graphics object to draw on.
+     * @param pp The playing page.
+     */
     public void draw(Graphics2D g2, PlayingPage pp) {
         BufferedImage img = switch (direction) {
             case "up" -> up_a[spriteNum];
@@ -93,20 +109,18 @@ public class Entity implements Serializable {
                 && yWorld + Constants.TILE_SIZE > pp.player.yWorld - pp.player.yScreen
                 && yWorld - Constants.TILE_SIZE < pp.player.yWorld + pp.player.yScreen) {
             g2.drawImage(img, screenX, screenY, null);
-//            if (haveDialog) {
-//                g2.drawImage(dialog, screenX + Constants.TILE_SIZE + 20, screenY - 10, null);
-//            }
         }
-
     }
 
-
+    /**
+     * Allows the entity to speak.
+     */
     public void speak() {
-//        haveDialog = true;
-//        dialog = Utils.load_image("text", "dialog");
-//        dialog = Utils.scaleImg(dialog, Constants.TILE_SIZE, Constants.TILE_SIZE);
     }
 
+    /**
+     * Faces the player in the opposite direction.
+     */
     public void facePlayer() {
         switch (pp.player.direction) {
             case "up" -> direction = "down";
@@ -116,8 +130,12 @@ public class Entity implements Serializable {
         }
     }
 
-    public void getEntityImg(String path) {
-        left_a = new BufferedImage[maxSprite];
+    /**
+     * Loads entity images from the specified path.
+     *
+     * @param path The path to the images.
+     */
+    public void getEntityImg(String path) {        left_a = new BufferedImage[maxSprite];
         right_a = new BufferedImage[maxSprite];
         up_a = new BufferedImage[maxSprite];
         down_a = new BufferedImage[maxSprite];
@@ -138,9 +156,15 @@ public class Entity implements Serializable {
             up_a[i] = Utils.scaleImg(up_a[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
             down_a[i] = Utils.scaleImg(down_a[i], Constants.TILE_SIZE + sum, Constants.TILE_SIZE + sum);
         }
-
     }
 
+    /**
+     * Loads and scales an image from the specified path.
+     *
+     * @param path The path to the image.
+     * @param name The name of the image.
+     * @return The loaded and scaled image.
+     */
     public BufferedImage setup(String path, String name) {
         BufferedImage img = null;
         img = Utils.load_image(path, name);
@@ -148,39 +172,45 @@ public class Entity implements Serializable {
         return img;
     }
 
-
+    /**
+     * Sets a random direction for the entity after a specified interval.
+     *
+     * @param interval The interval in which the direction should change.
+     */
     public void getRandomDirection(int interval) {
-        acrionTimer++;
-        if (acrionTimer > interval) {
+        actionTimer++;
+        if (actionTimer > interval) {
             int i = random.nextInt(100) + 1;
 
             if (i <= 25) { // 25% of the time it goes up
                 direction = "up";
-            }
-            if (i > 25 && i <= 50) { // 25% of the time it goes down
+            } else if (i > 25 && i <= 50) { // 25% of the time it goes down
                 direction = "down";
-            }
-            if (i > 50 && i <= 75) { // 25% of the time it goes left
+            } else if (i > 50 && i <= 75) { // 25% of the time it goes left
                 direction = "left";
-            }
-            if (i > 75) { // 25% of the time it goes right
+            } else { // 25% of the time it goes right
                 direction = "right";
             }
-            acrionTimer = 0;
+            actionTimer = 0;
         }
     }
 
-    public void takeDamage(int damage){
-        invincible=true;
-        life-=damage;
+    /**
+     * Inflicts damage to the entity.
+     *
+     * @param damage The amount of damage to inflict.
+     */
+    public void takeDamage(int damage) {
+        invincible = true;
+        life -= damage;
     }
 
-    public int getDefultHitBoxX() {
-        return defultHitBoxX;
+    public int getDefaultHitBoxX() {
+        return defaultHitBoxX;
     }
 
-    public int getDefultHitBoxY() {
-        return defultHitBoxY;
+    public int getDefaultHitBoxY() {
+        return defaultHitBoxY;
     }
 
     public int getDamage() {

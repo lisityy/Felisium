@@ -9,7 +9,7 @@ import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 
 public class CheckerCollision {
     /**
-     * Checks collision with tiles.
+     * Checks collision in map.
      * @param entity the entity to check collision for
      * @param tm the tile manager
      */
@@ -105,11 +105,11 @@ public class CheckerCollision {
                     }
                 }
 
-                entity.hitBox.x = entity.getDefultHitBoxX();
-                entity.hitBox.y = entity.getDefultHitBoxY();
+                entity.hitBox.x = entity.getDefaultHitBoxX();
+                entity.hitBox.y = entity.getDefaultHitBoxY();
 
-                pp.obj[i].getHitBox().x = pp.obj[i].getDefultHitBoxX();
-                pp.obj[i].getHitBox().y = pp.obj[i].getDefultHitBoxY();
+                pp.obj[i].getHitBox().x = pp.obj[i].getDefaultHitBoxX();
+                pp.obj[i].getHitBox().y = pp.obj[i].getDefaultHitBoxY();
             }
 
         }
@@ -118,7 +118,7 @@ public class CheckerCollision {
     }
 
     /**
-     * Checks collision with entities.
+     * Checks collision entity with entities.
      * @param entity the entity to check collision for
      * @param npc the array of NPCs
      * @return the index of the collided entity
@@ -155,11 +155,11 @@ public class CheckerCollision {
                     }
                 }
 
-                entity.hitBox.x = entity.getDefultHitBoxX();
-                entity.hitBox.y = entity.getDefultHitBoxY();
+                entity.hitBox.x = entity.getDefaultHitBoxX();
+                entity.hitBox.y = entity.getDefaultHitBoxY();
 
-                npc[i].hitBox.x = npc[i].getDefultHitBoxX();
-                npc[i].hitBox.y = npc[i].getDefultHitBoxY();
+                npc[i].hitBox.x = npc[i].getDefaultHitBoxX();
+                npc[i].hitBox.y = npc[i].getDefaultHitBoxY();
             }
 
         }
@@ -194,10 +194,10 @@ public class CheckerCollision {
             contactPlayer = true;
         }
 
-        entity.hitBox.x = entity.getDefultHitBoxX();
-        entity.hitBox.y = entity.getDefultHitBoxY();
-        player.hitBox.x = player.getDefultHitBoxX();
-        player.hitBox.y = player.getDefultHitBoxY();
+        entity.hitBox.x = entity.getDefaultHitBoxX();
+        entity.hitBox.y = entity.getDefaultHitBoxY();
+        player.hitBox.x = player.getDefaultHitBoxX();
+        player.hitBox.y = player.getDefaultHitBoxY();
 
         return contactPlayer;
     }

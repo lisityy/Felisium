@@ -15,6 +15,10 @@ import java.awt.*;
 import java.io.InputStream;
 import java.util.logging.Level;
 
+/**
+ * The PlayingPage class represents the gameplay page in the game.
+ * It implements the Page interface and extends JPanel.
+ */
 public class PlayingPage extends JPanel implements Page {
 
     private final Felisium gp;
@@ -27,10 +31,16 @@ public class PlayingPage extends JPanel implements Page {
 
     AssetSetter assetSetter = new AssetSetter(this);
     private final UI ui = new UI();
-    MusicPlayer musicPlayer= new MusicPlayer();;
+    MusicPlayer musicPlayer = new MusicPlayer();
+    ;
 
     public Font myFont;
 
+    /**
+     * Constructs a new PlayingPage object with the specified Felisium game instance.
+     *
+     * @param gp The Felisium game instance.
+     */
     public PlayingPage(Felisium gp) {
         this.gp = gp;
 
@@ -45,25 +55,37 @@ public class PlayingPage extends JPanel implements Page {
         }
     }
 
+    /**
+     * Starts the game.
+     */
     public void startGame() {
         musicPlayer.play("/music/musBegin.wav");
-        musicPlayer.changeIntensity(1F);
+        musicPlayer.changeIntensity(0.3F);
         setUpGame();
         Constants.gameStatePlay = GameState.PLAY;
         Constants.gameState = GameState.PLAY;
         player = new Player(this, gp.getKh());
     }
 
+    /**
+     * Sets up the game by initializing objects, NPCs, and aliens.
+     */
     public void setUpGame() {
         assetSetter.setObjects();
         assetSetter.setNPC();
         assetSetter.setAliens();
     }
 
+    /**
+     * Ends the game by stopping the music player.
+     */
     public void endGame() {
         musicPlayer.stop();
     }
 
+    /**
+     * Updates the state of the aliens.
+     */
     @Override
     public void update() {
         switch (Constants.gameStatePlay) {
