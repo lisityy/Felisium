@@ -22,7 +22,6 @@ public class AssetSetter {
      Sets up the objects in the game.
      */
     public void setObjects() {
-        // Create and initialize objects
         pp.obj[0] = new Key(0, 31 * Constants.TILE_SIZE, 16 * Constants.TILE_SIZE);
         pp.obj[1] = new Wing(1, 24 * Constants.TILE_SIZE, 40 * Constants.TILE_SIZE);
         pp.obj[3] = new Door(3, 13 * Constants.TILE_SIZE, 23 * Constants.TILE_SIZE);
@@ -39,7 +38,6 @@ public class AssetSetter {
      Sets up the NPCs in the game.
      */
     public void setNPC() {
-        // Create and initialize NPCs
         pp.npc[1] = new NPC_dranik(pp, "NPC_dranik", "dranik", 22 * Constants.TILE_SIZE, 40 * Constants.TILE_SIZE);
         pp.npc[2] = new NPC_dranik(pp, "NPC_dranik", "dranik", 37 * Constants.TILE_SIZE, 8 * Constants.TILE_SIZE);
         pp.npc[3] = new NPC_dranik(pp, "NPC_dranik", "dranik", 20 * Constants.TILE_SIZE, 7 * Constants.TILE_SIZE);
@@ -51,7 +49,6 @@ public class AssetSetter {
      Sets up the aliens in the game.
      */
     public void setAliens() {
-        // Create and initialize aliens
         pp.getAliens()[0] = new Alien("enemy", "enemyCalm", 23 * Constants.TILE_SIZE, 38 * Constants.TILE_SIZE, pp);
         pp.getAliens()[1] = new Alien("enemy", "enemyCalm", 22 * Constants.TILE_SIZE, 35 * Constants.TILE_SIZE, pp);
         pp.getAliens()[2] = new Alien("enemy", "enemyCalm", 36 * Constants.TILE_SIZE, 9 * Constants.TILE_SIZE, pp);

@@ -16,7 +16,6 @@ public class MouseHendler implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override

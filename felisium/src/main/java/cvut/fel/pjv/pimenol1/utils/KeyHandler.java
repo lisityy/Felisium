@@ -6,6 +6,7 @@ import cvut.fel.pjv.pimenol1.main.GameState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 
 public class KeyHandler implements KeyListener {
     private boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
@@ -74,10 +75,8 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        switch (Constants.gameState) {
-            case PLAY -> {
-                playingKey(code);
-            }
+        if (Objects.requireNonNull(Constants.gameState) == GameState.PLAY) {
+            playingKey(code);
         }
     }
 
