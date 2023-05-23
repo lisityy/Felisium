@@ -1,14 +1,17 @@
 package cvut.fel.pjv.pimenol1.pages;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.Felisium;
 import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.logging.Level;
 
 public class MainMenuPage implements Page {
 
@@ -25,7 +28,7 @@ public class MainMenuPage implements Page {
             InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (Exception e) {
-            System.out.println("Error read font: " + e.getMessage());
+            Felisium.logger.log(Level.SEVERE, "Error reading font: " + e.getMessage(), e);
         }
     }
 
@@ -34,6 +37,9 @@ public class MainMenuPage implements Page {
         buttons[0] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 50 * Constants.SCALE, 0, nameFile, 120, 27, GameState.RESET);
         buttons[1] = new cvut.fel.pjv.pimenol1.pages.Button(85 * Constants.SCALE, 80 * Constants.SCALE, 1, nameFile, 120, 27, GameState.CONTINUE);
         buttons[2] = new cvut.fel.pjv.pimenol1.pages.Button(95 * Constants.SCALE, 110 * Constants.SCALE, 2, nameFile, 120, 27, GameState.EXIT);
+        Felisium.logger.info("Button Position: " + buttons[0].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
+        Felisium.logger.info("Button Position: " + buttons[1].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
+        Felisium.logger.info("Button Position: " + buttons[2].getHitBox().getX() + ", " + buttons[0].getHitBox().getY());
     }
 
     @Override
@@ -90,13 +96,6 @@ public class MainMenuPage implements Page {
                 mb.setMouseOver(true);
                 break;
             }
-    }
-
-    public void keyPressed(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-
     }
 
 }

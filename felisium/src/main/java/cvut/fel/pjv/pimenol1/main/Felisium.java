@@ -8,8 +8,13 @@ import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 import cvut.fel.pjv.pimenol1.utils.MouseHendler;
 
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.lang.System.exit;
 
@@ -20,8 +25,19 @@ public class Felisium extends JPanel implements Runnable {
     private MouseHendler mh = new MouseHendler(this);
     private MainMenuPage mainMenuPage;
     private PlayingPage playingPage;
+    public static final Logger logger = Logger.getLogger(Felisium.class.getName());
+
 
     public Felisium() {
+        System.out.println("Do you want to see loggers? (yes/no)");
+        Scanner scanner = new Scanner(System.in);
+        String input= scanner.nextLine();
+        if(Objects.equals(input, "yes")){
+            logger.setLevel(Level.ALL);
+        } else {
+            logger.setLevel(Level.OFF);
+        }
+
         this.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -37,7 +53,9 @@ public class Felisium extends JPanel implements Runnable {
     }
 
     public void startGameThread() {
+
         gameThread = new Thread(this);
+        logger.info("Game started.");
         gameThread.start();
     }
 
@@ -73,6 +91,7 @@ public class Felisium extends JPanel implements Runnable {
                     case RESET -> {
                         playingPage.endGame();
                         playingPage.startGame();
+                        logger.info("A new game has started");
                     }
                     case MAINMENU -> {
                         playingPage.endGame();
@@ -86,6 +105,7 @@ public class Felisium extends JPanel implements Runnable {
             }
             case RESET -> {
                 playingPage.startGame();
+                logger.info("A new game has started");
             }
             case MAINMENU -> {
                 mainMenuPage.update();
@@ -96,6 +116,7 @@ public class Felisium extends JPanel implements Runnable {
                 Constants.gameStatePlay = GameState.PLAY;
             }
             case EXIT -> {
+                logger.info("Exit from game.");
                 exit(0);
             }
         }
@@ -121,11 +142,13 @@ public class Felisium extends JPanel implements Runnable {
     public void saveGame() {
         GameData gameData = GameSaver.addInformation(playingPage);
         GameSaver.saveGame(gameData, "savegame.json");
+        logger.info("Game saved.");
     }
 
     public void loadGame() {
         GameData gameData = GameLoader.loadGame("savegame.json");
         GameLoader.addGameData(gameData, playingPage);
+        logger.info("Game loaded.");
     }
 
 

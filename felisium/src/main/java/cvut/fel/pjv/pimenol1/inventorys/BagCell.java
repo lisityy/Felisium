@@ -54,61 +54,13 @@ public class BagCell  {
         images[2] = Utils.scaleImg(images[2], Constants.TILE_SIZE + 10, Constants.TILE_SIZE + 10);
     }
 
-    public int getCellWidth() {
-        return cellWidth;
-    }
-
-    public int getCallHight() {
-        return callHight;
-    }
-
-    public int getxPos() {
-        return xPos;
-    }
-
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
-    }
-
     public int getNumber() {
         return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public void resetBooleans() {
         this.mouseOver = false;
         this.mousePressed = false;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public BufferedImage[] getImages() {
-        return images;
-    }
-
-    public void setImages(BufferedImage[] images) {
-        this.images = images;
-    }
-
-    public boolean isMouseOver() {
-        return mouseOver;
     }
 
     public void setMouseOver(boolean mouseOver) {
@@ -127,7 +79,4 @@ public class BagCell  {
         return hitBox;
     }
 
-    public void setHitBox(Rectangle hitBox) {
-        this.hitBox = hitBox;
-    }
 }

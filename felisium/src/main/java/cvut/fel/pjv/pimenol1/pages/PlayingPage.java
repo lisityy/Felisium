@@ -13,6 +13,7 @@ import cvut.fel.pjv.pimenol1.utils.MusicPlayer;
 import javax.swing.*;
 import java.awt.*;
 import java.io.InputStream;
+import java.util.logging.Level;
 
 public class PlayingPage extends JPanel implements Page {
 
@@ -40,7 +41,7 @@ public class PlayingPage extends JPanel implements Page {
             assert is != null;
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (Exception e) {
-            System.out.println("ERROR: reading font" + e);
+            Felisium.logger.log(Level.SEVERE, "Error reading font: " + e.getMessage(), e);
         }
     }
 
@@ -167,6 +168,22 @@ public class PlayingPage extends JPanel implements Page {
 
     public void setAliens(Entity[] aliens) {
         this.aliens = aliens;
+    }
+
+    private void logObjectCount() {
+        Felisium.logger.info("Number of objects: " + obj.length);
+    }
+
+    private void logNPCCount() {
+        Felisium.logger.info("Number of NPCs: " + npc.length);
+    }
+
+    private void logAlienCount() {
+        Felisium.logger.info("Number of aliens: " + aliens.length);
+    }
+
+    public void logGameState() {
+        Felisium.logger.info("Game state: " + Constants.gameStatePlay);
     }
 }
 

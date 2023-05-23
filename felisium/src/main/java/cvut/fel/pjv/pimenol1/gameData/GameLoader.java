@@ -64,15 +64,15 @@ public class GameLoader {
             }
 
             tempString.clear();
-            Entity[] aliens = new Entity[gd.getAliensLive().size()];
-            for (int i = 0; i < aliens.length; i++) {
+            Entity[] aliens = new Entity[20];
+            for (int i = 0; i < gd.getAliensX().size(); i++) {
                 aliens[i] = new Alien("enemy", "enemyCalm", gd.getAliensX().get(i), gd.getAliensY().get(i), pp);
             }
             pp.setAliens(aliens);
 
 
             tempString = gd.getItemsName();
-            pp.obj=new Item[tempString.size()];
+            pp.obj=new Item[20];
             for (int i = 0; i < tempString.size(); i++) {
                 switch (tempString.get(i)) {
                     case "box" -> {
@@ -102,7 +102,7 @@ public class GameLoader {
             tempString.clear();
 
             tempString = gd.getCatsName();
-            pp.npc=new Entity[tempString.size()];
+            pp.npc=new Entity[20];
             for (int i = 0; i < tempString.size(); i++) {
                 switch (tempString.get(i)) {
                     case "dranik" -> {
@@ -116,9 +116,8 @@ public class GameLoader {
                     }
                 }
             }
-//            pp.getUi().setCatLeft(gd.getCatLeft());
             tempString.clear();
-            System.out.println("Game load successfully.");
+
         }
 
     }

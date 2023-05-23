@@ -1,15 +1,15 @@
 {
-  "bagsItemsNames" : [ "box", "key", "box", "box" ],
-  "aliensX" : [ 1600, 1336, 2296, 2406, 1408, 1494, 768, 790 ],
-  "aliensY" : [ 2598, 2574, 448, 1390, 496, 1006, 832, 621 ],
+  "bagsItemsNames" : [ "box", "key", "box", "box", "valeriana" ],
+  "aliensX" : [ 1584, 1447, 2573, 2240, 1408, 1408, 768, 752 ],
+  "aliensY" : [ 2320, 2662, 448, 1239, 496, 1006, 832, 621 ],
   "aliensLive" : [ 5, 5, 5, 5, 5, 5, 5, 5 ],
-  "itemsName" : [ "key", "wing", "socks", "fish", "valeriana", "box", "box" ],
-  "itemsX" : [ 1984, 1536, 704, 1408, 1408, 1920, 640 ],
-  "itemsY" : [ 1024, 2560, 576, 448, 1792, 1856, 2496 ],
+  "itemsName" : [ "key", "wing", "socks", "fish", "box", "box" ],
+  "itemsX" : [ 1984, 1536, 704, 1408, 1920, 640 ],
+  "itemsY" : [ 1024, 2560, 576, 448, 1856, 2496 ],
   "catX" : [ 768, 832 ],
   "catY" : [ 512, 1920 ],
   "catsName" : [ "queenCat", "dranik" ],
-  "playerxWorld" : 1592,
-  "playeryWorld" : 2380,
+  "playerxWorld" : 1404,
+  "playeryWorld" : 2224,
   "playerLife" : 15
 }

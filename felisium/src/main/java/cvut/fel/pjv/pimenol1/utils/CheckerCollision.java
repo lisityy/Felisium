@@ -8,7 +8,11 @@ import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.pages.PlayingPage;
 
 public class CheckerCollision {
-
+    /**
+     * Checks collision with tiles.
+     * @param entity the entity to check collision for
+     * @param tm the tile manager
+     */
     public static void checkTile(Entity entity, TileManager tm) {
         int tileSize = Constants.TILE_SIZE;
 
@@ -44,7 +48,6 @@ public class CheckerCollision {
                 rightCol = (right + entity.speed) / tileSize;
                 tileNum1 = tm.getMapData()[rightCol][topRow];
                 tileNum2 = tm.getMapData()[rightCol][bottomRow];
-
             }
             default -> {
                 return;
@@ -61,6 +64,13 @@ public class CheckerCollision {
         }
     }
 
+    /**
+     * Checks collision with objects.
+     * @param entity the entity to check collision for
+     * @param isPlayer true if the entity is a player, false otherwise
+     * @param pp the PlayingPage instance
+     * @return the index of the collided object
+     */
     public static int checkObject(Entity entity, boolean isPlayer, PlayingPage pp) {
         int index = 999;
         for (int i = 0; i < pp.obj.length; i++) {
@@ -107,6 +117,12 @@ public class CheckerCollision {
         return index;
     }
 
+    /**
+     * Checks collision with entities.
+     * @param entity the entity to check collision for
+     * @param npc the array of NPCs
+     * @return the index of the collided entity
+     */
     public static int checkEntity(Entity entity, Entity[] npc) {
         int index = 999;
         for (int i = 0; i < npc.length; i++) {
@@ -151,6 +167,12 @@ public class CheckerCollision {
         return index;
     }
 
+    /**
+     * Checks collision with the player.
+     * @param entity the entity to check collision for
+     * @param player the player entity
+     * @return true if collision with player occurred, false otherwise
+     */
     public static boolean checkPlayer(Entity entity, Player player) {
 
         boolean contactPlayer = false;

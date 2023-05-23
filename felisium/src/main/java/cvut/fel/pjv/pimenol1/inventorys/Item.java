@@ -57,13 +57,6 @@ public class Item implements Serializable {
         return;
     }
 
-    public BufferedImage getImg() {
-        return img;
-    }
-
-    public void setImg(BufferedImage img) {
-        this.img = img;
-    }
 
     public String getName() {
         return name;
@@ -81,43 +74,17 @@ public class Item implements Serializable {
         this.collision = collision;
     }
 
-    public int getWorldX() {
-        return worldX;
-    }
-
-    public void setWorldX(int worldX) {
-        this.worldX = worldX;
-    }
-
-    public int getWorldY() {
-        return worldY;
-    }
-
-    public void setWorldY(int worldY) {
-        this.worldY = worldY;
-    }
 
     public Rectangle getHitBox() {
         return hitBox;
-    }
-
-    public void setHitBox(Rectangle hitBox) {
-        this.hitBox = hitBox;
     }
 
     public int getDefultHitBoxX() {
         return defultHitBoxX;
     }
 
-    public void setDefultHitBoxX(int defultHitBoxX) {
-        this.defultHitBoxX = defultHitBoxX;
-    }
-
     public int getDefultHitBoxY() {
         return defultHitBoxY;
     }
 
-    public void setDefultHitBoxY(int defultHitBoxY) {
-        this.defultHitBoxY = defultHitBoxY;
-    }
 }

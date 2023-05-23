@@ -19,8 +19,6 @@ public class GameSaver {
 
             Files.writeString(Paths.get(filePath), jsonData);
 
-            System.out.println("Game saved successfully.");
-
         } catch (IOException e) {
             e.printStackTrace();
         }

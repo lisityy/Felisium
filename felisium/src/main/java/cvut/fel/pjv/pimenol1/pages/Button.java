@@ -1,6 +1,7 @@
 package cvut.fel.pjv.pimenol1.pages;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.Felisium;
 import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
@@ -54,34 +55,12 @@ public class Button {
 
     public void applyGameStatePlay() {
         Constants.gameStatePlay = state;
+        Felisium.logger.info("Button " + state + "pressed.");
     }
     public void applyGameState() {
         Constants.gameState= state;
     }
 
-    public int getButtonWidth() {
-        return buttonWidth;
-    }
-
-    public int getButtonHight() {
-        return buttonHight;
-    }
-
-    public int getOriginButtonWidth() {
-        return originButtonWidth;
-    }
-
-    public void setOriginButtonWidth(int originButtonWidth) {
-        this.originButtonWidth = originButtonWidth;
-    }
-
-    public int getOriginButtonHight() {
-        return originButtonHight;
-    }
-
-    public void setOriginButtonHight(int originButtonHight) {
-        this.originButtonHight = originButtonHight;
-    }
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
     }
@@ -101,24 +80,5 @@ public class Button {
     public void resetBooleans() {
         this.mouseOver = false;
         this.mousePressed = false;
-    }
-    public GameState getState() {
-        return state;
-    }
-
-    public int getxPos() {
-        return xPos;
-    }
-
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
     }
 }

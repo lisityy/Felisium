@@ -1,85 +1,89 @@
 package cvut.fel.pjv.pimenol1.pages;
 
 import cvut.fel.pjv.pimenol1.main.Constants;
+import cvut.fel.pjv.pimenol1.main.Felisium;
 import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.utils.Utils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class UI {
 
-    Font myFont;
-    String message = "";
-    boolean haveMessage = false;
-    int MessageTimer = 0;
-    private double gameTime = 0;
-    BufferedImage heart;
-    BufferedImage cat;
+    private Font myFont;
+    private String message = "";
+    private boolean haveMessage = false;
+    private int messageTimer = 0;
+    private BufferedImage heart;
+    private BufferedImage cat;
     private int countHeart = 9;
-    private int catLeft=4;
-    BufferedImage backgroundImg;
-    cvut.fel.pjv.pimenol1.pages.Button[] buttonUi = new cvut.fel.pjv.pimenol1.pages.Button[5];
+    private int catLeft = 4;
+    private BufferedImage backgroundImg;
+    private Button[] buttonUi = new Button[5];
 
     public UI() {
         try {
+            // Load font
             InputStream is = getClass().getResourceAsStream("/text/vermirVibe.ttf");
             myFont = Font.createFont(Font.TRUETYPE_FONT, is);
 
+            // Load images
             heart = Utils.load_image("objects", "heart");
             heart = Utils.scaleImg(heart, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
-            cat = Utils.load_image("ui_obj","cat");
-            cat=Utils.scaleImg(cat, Constants.TILE_SIZE, Constants.TILE_SIZE);
+            cat = Utils.load_image("ui_obj", "cat");
+            cat = Utils.scaleImg(cat, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
             backgroundImg = ImageIO.read(getClass().getResourceAsStream("/background/gameOver.png"));
             loadButtons();
-
         } catch (Exception e) {
-            System.out.println("Error read font: " + e.getMessage());
+            Felisium.logger.log(Level.SEVERE, "Error loading resources: " + e.getMessage(), e);
         }
     }
 
+    // Load UI buttons
     private void loadButtons() {
-        buttonUi[0] = new cvut.fel.pjv.pimenol1.pages.Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
-        buttonUi[1] = new cvut.fel.pjv.pimenol1.pages.Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
-        buttonUi[2] = new cvut.fel.pjv.pimenol1.pages.Button(400, 600, 2, "pauseButtons", 120, 27, GameState.SAVE);
+        buttonUi[0] = new Button(250, 500, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
+        buttonUi[1] = new Button(550, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
+        buttonUi[2] = new Button(400, 600, 2, "pauseButtons", 120, 27, GameState.SAVE);
 
-        buttonUi[3] = new cvut.fel.pjv.pimenol1.pages.Button(100, 400, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
-        buttonUi[4] = new cvut.fel.pjv.pimenol1.pages.Button(100, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
+        buttonUi[3] = new Button(100, 400, 0, "pauseButtons", 120, 27, GameState.MAINMENU);
+        buttonUi[4] = new Button(100, 500, 1, "pauseButtons", 120, 27, GameState.RESET);
     }
 
+    // Set a message to display on the screen
     public void writeMessage(String text) {
         this.message = text;
         haveMessage = true;
     }
 
+    // Draw the UI during gameplay
     public void drawGame(Graphics2D g2) {
-
         g2.setFont(myFont.deriveFont(Font.PLAIN, 50F));
         g2.setColor(new Color(58, 0, 137));
 
-        gameTime += (double) 1 / Constants.FPS;
         if (haveMessage) {
             g2.drawString(message, 100, 100);
-            MessageTimer++;
-            if (MessageTimer > 200) {
+            messageTimer++;
+            if (messageTimer > 200) {
                 haveMessage = false;
-                MessageTimer = 0;
+                messageTimer = 0;
             }
         }
 
         drawLife(g2, countHeart);
         drawCatLeft(g2, catLeft);
-
     }
 
+    // Draw the remaining cat lives
     private void drawCatLeft(Graphics2D g2, int catLeft) {
         int x = 30;
-        int y = 70* (int) (countHeart/12+1);
+        int y = 70 * (int) (countHeart / 12 + 1);
         int j = 0;
         for (int i = 0; i < catLeft; i++) {
             j++;
@@ -93,6 +97,7 @@ public class UI {
         }
     }
 
+    // Draw the player's remaining lives
     private void drawLife(Graphics2D g2, int life) {
         int x = 30;
         int y = 30;
@@ -109,8 +114,8 @@ public class UI {
         }
     }
 
+    // Draw the pause screen
     public void drawPause(Graphics2D g2) {
-
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         g2.drawImage(backgroundImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
@@ -118,7 +123,7 @@ public class UI {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for (int i=0;i<3;i++)
+        for (int i = 0; i < 3; i++)
             buttonUi[i].draw(g2);
 
         g2.drawString("PAUSE", 270, 200);
@@ -126,8 +131,8 @@ public class UI {
         g2.drawString("press ESC for continue", 360, 250);
     }
 
+    // Draw the game over screen
     public void drawGameOver(Graphics2D g2) {
-
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 0.3f));
         g2.drawImage(backgroundImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
         g2.setComposite(AlphaComposite.getInstance((AlphaComposite.SRC_OVER), 1f));
@@ -135,19 +140,20 @@ public class UI {
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
         g2.setColor(Color.WHITE);
 
-        for (int i=0;i<3;i++)
+        for (int i = 0; i < 3; i++)
             buttonUi[i].draw(g2);
 
         g2.drawString("GAME", 320, 200);
         g2.drawString("OVER", 320, 350);
     }
 
+    // Draw the win screen
     public void drawWin(Graphics2D g2) {
         try {
             BufferedImage pauseImg = ImageIO.read(getClass().getResourceAsStream("/background/catsArm.png"));
             g2.drawImage(pauseImg, 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH, null);
         } catch (Exception e) {
-            System.out.println("Problem with reading pause img: " + e);
+            Felisium.logger.log(Level.SEVERE, "Problem with reading pause img: " + e.getMessage(), e);
         }
         g2.setFont(myFont.deriveFont(Font.PLAIN, 180F));
 
@@ -158,24 +164,28 @@ public class UI {
         g2.drawString("WIN", 110, 270);
     }
 
+    // Update the button states
     public void updateButton() {
-        for (cvut.fel.pjv.pimenol1.pages.Button button : buttonUi)
+        for (Button button : buttonUi)
             button.update();
     }
 
-    public boolean isInButton(MouseEvent e, cvut.fel.pjv.pimenol1.pages.Button mb) {
+    // Check if the mouse is inside a button
+    public boolean isInButton(MouseEvent e, Button mb) {
         return mb.getHitBox().contains(e.getX(), e.getY());
     }
 
+    // Handle mouse pressed event
     public void mousePressed(MouseEvent e) {
-        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi) {
+        for (Button b : buttonUi) {
             if (isInButton(e, b))
                 b.setMousePressed(true);
         }
     }
 
+    // Handle mouse released event
     public void mouseReleased(MouseEvent e) {
-        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi) {
+        for (Button b : buttonUi) {
             if (isInButton(e, b)) {
                 if (b.isMousePressed())
                     b.applyGameStatePlay();
@@ -185,13 +195,15 @@ public class UI {
         resetButtons();
     }
 
+    // Reset button states
     private void resetButtons() {
-        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi)
+        for (Button b : buttonUi)
             b.resetBooleans();
     }
 
+    // Handle mouse moved event
     public void mouseMoved(MouseEvent e) {
-        for (cvut.fel.pjv.pimenol1.pages.Button b : buttonUi)
+        for (Button b : buttonUi)
             b.setMouseOver(false);
 
         for (Button b : buttonUi)
@@ -201,7 +213,7 @@ public class UI {
             }
     }
 
-
+    // Getter and setter methods
     public int getCountHeart() {
         return countHeart;
     }
@@ -218,3 +230,4 @@ public class UI {
         return catLeft;
     }
 }
+
