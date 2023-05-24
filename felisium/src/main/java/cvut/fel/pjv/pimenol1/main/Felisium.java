@@ -11,8 +11,6 @@ import cvut.fel.pjv.pimenol1.utils.MouseHendler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,9 +24,12 @@ public class Felisium extends JPanel implements Runnable {
     private MainMenuPage mainMenuPage;
     private PlayingPage playingPage;
     public static final Logger logger = Logger.getLogger(Felisium.class.getName());
+    public static boolean loggerOff = false;
 
 
     public Felisium() {
+        if (loggerOff) logger.setLevel(Level.OFF);
+
         this.setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HIGH));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -103,7 +104,7 @@ public class Felisium extends JPanel implements Runnable {
             }
             case CONTINUE -> {
                 loadGame();
-                Constants.gameState= GameState.PLAY;
+                Constants.gameState = GameState.PLAY;
                 Constants.gameStatePlay = GameState.PLAY;
             }
             case EXIT -> {
@@ -151,19 +152,8 @@ public class Felisium extends JPanel implements Runnable {
         return mainMenuPage;
     }
 
-    public void setMainMenuPage(MainMenuPage mainMenuPage) {
-        this.mainMenuPage = mainMenuPage;
-    }
-
     public PlayingPage getPlayingPage() {
         return playingPage;
     }
 
-    public void setPlayingPage(PlayingPage playingPage) {
-        this.playingPage = playingPage;
-    }
-
-    public void setGameThread(Thread gameThread) {
-        this.gameThread = gameThread;
-    }
 }

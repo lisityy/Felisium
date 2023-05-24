@@ -8,7 +8,6 @@ import cvut.fel.pjv.pimenol1.main.Constants;
 import cvut.fel.pjv.pimenol1.main.Felisium;
 import cvut.fel.pjv.pimenol1.main.GameState;
 import cvut.fel.pjv.pimenol1.pages.PlayingPage;
-import cvut.fel.pjv.pimenol1.pages.UI;
 import cvut.fel.pjv.pimenol1.utils.KeyHandler;
 
 import org.junit.jupiter.api.Assertions;

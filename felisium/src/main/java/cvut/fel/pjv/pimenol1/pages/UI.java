@@ -275,9 +275,6 @@ public class UI {
     }
 
     // Getter and setter methods
-    public int getCountHeart() {
-        return countHeart;
-    }
 
     public void setCountHeart(int countHeart) {
         this.countHeart = countHeart;
